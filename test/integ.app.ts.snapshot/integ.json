@@ -1,0 +1,20 @@
+{
+  "enableLookups": true,
+  "version": "32.0.0",
+  "testCases": {
+    "integ-tests/DefaultTest": {
+      "stacks": [
+        "BlogAppIntegStage/AppStack"
+      ],
+      "cdkCommandOptions": {
+        "deploy": {
+          "args": {
+            "rollback": true
+          }
+        }
+      },
+      "assertionStack": "BlogAppIntegStage/BlogAppIntegAssertionsStack",
+      "assertionStackName": "BlogAppIntegStage-BlogAppIntegAssertionsStack"
+    }
+  }
+}

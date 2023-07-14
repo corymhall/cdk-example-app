@@ -1,0 +1,20 @@
+{
+  "version": "32.0.0",
+  "files": {
+    "25e94a3819ba7f13ee32f03ad8499d0d3ce7056d81878773abd42287bdb2ddb7": {
+      "source": {
+        "path": "BlogAppIntegStageMonitoringStack8E6402BB.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-us-west-2": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2",
+          "objectKey": "25e94a3819ba7f13ee32f03ad8499d0d3ce7056d81878773abd42287bdb2ddb7.json",
+          "region": "us-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-us-west-2"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

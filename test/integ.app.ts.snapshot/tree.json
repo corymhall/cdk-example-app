@@ -1,0 +1,3051 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "BlogAppIntegStage": {
+        "id": "BlogAppIntegStage",
+        "path": "BlogAppIntegStage",
+        "children": {
+          "MonitoringStack": {
+            "id": "MonitoringStack",
+            "path": "BlogAppIntegStage/MonitoringStack",
+            "children": {
+              "Monitoring": {
+                "id": "Monitoring",
+                "path": "BlogAppIntegStage/MonitoringStack/Monitoring",
+                "children": {
+                  "Monitoring-Dashboards": {
+                    "id": "Monitoring-Dashboards",
+                    "path": "BlogAppIntegStage/MonitoringStack/Monitoring/Monitoring-Dashboards",
+                    "children": {
+                      "Dashboard": {
+                        "id": "Dashboard",
+                        "path": "BlogAppIntegStage/MonitoringStack/Monitoring/Monitoring-Dashboards/Dashboard",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlogAppIntegStage/MonitoringStack/Monitoring/Monitoring-Dashboards/Dashboard/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::CloudWatch::Dashboard",
+                              "aws:cdk:cloudformation:props": {
+                                "dashboardBody": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "{\"start\":\"-PT8H\",\"periodOverride\":\"inherit\",\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"### API Gateway V2 HTTP Endpoint **",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+                                      },
+                                      " $default**\"}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"TPS\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[{\"label\":\"TPS\",\"expression\":\"requests / PERIOD(requests)\"}],[\"AWS/ApiGateway\",\"Count\",\"ApiId\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+                                      },
+                                      "\",\"Stage\",\"$default\",{\"label\":\"Invocations\",\"stat\":\"Sum\",\"visible\":false,\"id\":\"requests\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Rate\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":6,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Latency\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+                                      },
+                                      "\",\"Stage\",\"$default\",{\"label\":\"P50 (avg: ${AVG})\",\"stat\":\"p50\"}],[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+                                      },
+                                      "\",\"Stage\",\"$default\",{\"label\":\"P50 (avg: ${AVG})\",\"stat\":\"p50\"}],[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+                                      },
+                                      "\",\"Stage\",\"$default\",{\"label\":\"P90 (avg: ${AVG})\",\"stat\":\"p90\"}],[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+                                      },
+                                      "\",\"Stage\",\"$default\",{\"label\":\"P90 (avg: ${AVG})\",\"stat\":\"p90\"}],[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+                                      },
+                                      "\",\"Stage\",\"$default\",{\"label\":\"P99 (avg: ${AVG})\",\"stat\":\"p99\"}],[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+                                      },
+                                      "\",\"Stage\",\"$default\",{\"label\":\"P99 (avg: ${AVG})\",\"stat\":\"p99\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"ms\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":12,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[\"AWS/ApiGateway\",\"4xx\",\"ApiId\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+                                      },
+                                      "\",\"Stage\",\"$default\",{\"label\":\"4xx\",\"stat\":\"Sum\"}],[\"AWS/ApiGateway\",\"5xx\",\"ApiId\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+                                      },
+                                      "\",\"Stage\",\"$default\",{\"label\":\"5xx\",\"stat\":\"Sum\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Count\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":18,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors (rate)\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[\"AWS/ApiGateway\",\"4xx\",\"ApiId\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+                                      },
+                                      "\",\"Stage\",\"$default\",{\"label\":\"4xx (avg)\"}],[\"AWS/ApiGateway\",\"5xx\",\"ApiId\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+                                      },
+                                      "\",\"Stage\",\"$default\",{\"label\":\"5xx (avg)\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Rate\",\"showUnits\":false}}}},{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":6,\"properties\":{\"markdown\":\"### Fargate Service **AppService**\"}},{\"type\":\"metric\",\"width\":8,\"height\":5,\"x\":0,\"y\":7,\"properties\":{\"view\":\"timeSeries\",\"title\":\"CPU Utilization\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[\"AWS/ECS\",\"CPUUtilization\",\"ClusterName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkCluster17B54D113FA77A85"
+                                      },
+                                      "\",\"ServiceName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputFnGetAttGetPostAppServiceA50C5323Name6E4CBB98"
+                                      },
+                                      "\",{\"label\":\"Cluster CPU Utilization\"}]],\"yAxis\":{\"left\":{\"min\":0,\"max\":100,\"label\":\"%\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":8,\"height\":5,\"x\":8,\"y\":7,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Memory Utilization\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[\"AWS/ECS\",\"MemoryUtilization\",\"ClusterName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkCluster17B54D113FA77A85"
+                                      },
+                                      "\",\"ServiceName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputFnGetAttGetPostAppServiceA50C5323Name6E4CBB98"
+                                      },
+                                      "\",{\"label\":\"Cluster Memory Utilization\"}]],\"yAxis\":{\"left\":{\"min\":0,\"max\":100,\"label\":\"%\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":8,\"height\":5,\"x\":16,\"y\":7,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Task Count\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[\"ECS/ContainerInsights\",\"RunningTaskCount\",\"ClusterName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkCluster17B54D113FA77A85"
+                                      },
+                                      "\",\"ServiceName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputFnGetAttGetPostAppServiceA50C5323Name6E4CBB98"
+                                      },
+                                      "\",{\"label\":\"Running Tasks\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Count\",\"showUnits\":false}}}},{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":12,\"properties\":{\"markdown\":\"### Lambda Function **[CreatePost](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      ")**\"}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":0,\"y\":13,\"properties\":{\"view\":\"timeSeries\",\"title\":\"TPS\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[{\"label\":\"TPS\",\"expression\":\"FILL(requests,0) / PERIOD(requests)\"}],[\"AWS/Lambda\",\"Invocations\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"Invocations\",\"stat\":\"Sum\",\"visible\":false,\"id\":\"requests\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Rate\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":6,\"y\":13,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Latency\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[\"AWS/Lambda\",\"Duration\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"P50\",\"stat\":\"p50\"}],[\"AWS/Lambda\",\"Duration\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"P90\",\"stat\":\"p90\"}],[\"AWS/Lambda\",\"Duration\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"P99\",\"stat\":\"p99\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"ms\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":12,\"y\":13,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors (rate)\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[\"AWS/Lambda\",\"Errors\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"Faults (avg)\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Rate\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":18,\"y\":13,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Rates\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[\"AWS/Lambda\",\"Throttles\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"Throttles (avg)\"}],[\"AWS/Lambda\",\"ProvisionedConcurrencySpilloverInvocations\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"Provisioned Concurrency Spillovers (avg)\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Rate\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":8,\"height\":5,\"x\":0,\"y\":18,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Invocations\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[\"AWS/Lambda\",\"Invocations\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"Invocations\",\"stat\":\"Sum\"}],[\"AWS/Lambda\",\"Throttles\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"Throttles\",\"stat\":\"Sum\"}],[\"AWS/Lambda\",\"ConcurrentExecutions\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"Concurrent\",\"stat\":\"Maximum\"}],[\"AWS/Lambda\",\"ProvisionedConcurrencySpilloverInvocations\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"Provisioned Concurrency Spillovers\",\"stat\":\"Sum\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Count\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":8,\"height\":5,\"x\":8,\"y\":18,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Iterator\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[\"AWS/Lambda\",\"IteratorAge\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"Iterator Age\",\"stat\":\"Maximum\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"ms\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":8,\"height\":5,\"x\":16,\"y\":18,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors\",\"region\":\"",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      "\",\"metrics\":[[\"AWS/Lambda\",\"Errors\",\"FunctionName\",\"",
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+                                      },
+                                      "\",{\"label\":\"Faults\",\"stat\":\"Sum\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Count\",\"showUnits\":false}}}}]}"
+                                    ]
+                                  ]
+                                },
+                                "dashboardName": "Monitoring"
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_cloudwatch.CfnDashboard",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.Dashboard",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "cdk-monitoring-constructs.DefaultDashboardFactory",
+                      "version": "5.2.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "cdk-monitoring-constructs.MonitoringFacade",
+                  "version": "5.2.2"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "BlogAppIntegStage/MonitoringStack/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.86.0"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "BlogAppIntegStage/MonitoringStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.86.0"
+            }
+          },
+          "DataStack": {
+            "id": "DataStack",
+            "path": "BlogAppIntegStage/DataStack",
+            "children": {
+              "PostsTable": {
+                "id": "PostsTable",
+                "path": "BlogAppIntegStage/DataStack/PostsTable",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "BlogAppIntegStage/DataStack/PostsTable/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                      "aws:cdk:cloudformation:props": {
+                        "keySchema": [
+                          {
+                            "attributeName": "pk",
+                            "keyType": "HASH"
+                          }
+                        ],
+                        "attributeDefinitions": [
+                          {
+                            "attributeName": "pk",
+                            "attributeType": "S"
+                          }
+                        ],
+                        "provisionedThroughput": {
+                          "readCapacityUnits": 5,
+                          "writeCapacityUnits": 5
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "ScalingRole": {
+                    "id": "ScalingRole",
+                    "path": "BlogAppIntegStage/DataStack/PostsTable/ScalingRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+                  "version": "2.86.0"
+                }
+              },
+              "Network": {
+                "id": "Network",
+                "path": "BlogAppIntegStage/DataStack/Network",
+                "children": {
+                  "Vpc": {
+                    "id": "Vpc",
+                    "path": "BlogAppIntegStage/DataStack/Network/Vpc",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlogAppIntegStage/DataStack/Network/Vpc/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                          "aws:cdk:cloudformation:props": {
+                            "cidrBlock": "10.0.0.0/16",
+                            "enableDnsHostnames": true,
+                            "enableDnsSupport": true,
+                            "instanceTenancy": "default",
+                            "tags": [
+                              {
+                                "key": "Name",
+                                "value": "BlogAppIntegStage/DataStack/Network/Vpc"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "PublicSubnet1": {
+                        "id": "PublicSubnet1",
+                        "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1",
+                        "children": {
+                          "Subnet": {
+                            "id": "Subnet",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1/Subnet",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                },
+                                "availabilityZone": "test-region-1a",
+                                "cidrBlock": "10.0.0.0/19",
+                                "mapPublicIpOnLaunch": true,
+                                "tags": [
+                                  {
+                                    "key": "aws-cdk:subnet-name",
+                                    "value": "Public"
+                                  },
+                                  {
+                                    "key": "aws-cdk:subnet-type",
+                                    "value": "Public"
+                                  },
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "Acl": {
+                            "id": "Acl",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1/Acl",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "RouteTable": {
+                            "id": "RouteTable",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1/RouteTable",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "RouteTableAssociation": {
+                            "id": "RouteTableAssociation",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1/RouteTableAssociation",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "NetworkVpcPublicSubnet1RouteTable30235CE2"
+                                },
+                                "subnetId": {
+                                  "Ref": "NetworkVpcPublicSubnet1Subnet36933139"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "DefaultRoute": {
+                            "id": "DefaultRoute",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1/DefaultRoute",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "NetworkVpcPublicSubnet1RouteTable30235CE2"
+                                },
+                                "destinationCidrBlock": "0.0.0.0/0",
+                                "gatewayId": {
+                                  "Ref": "NetworkVpcIGW6BEA7B02"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "EIP": {
+                            "id": "EIP",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1/EIP",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                              "aws:cdk:cloudformation:props": {
+                                "domain": "vpc",
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "NATGateway": {
+                            "id": "NATGateway",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1/NATGateway",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                              "aws:cdk:cloudformation:props": {
+                                "subnetId": {
+                                  "Ref": "NetworkVpcPublicSubnet1Subnet36933139"
+                                },
+                                "allocationId": {
+                                  "Fn::GetAtt": [
+                                    "NetworkVpcPublicSubnet1EIPE0D52090",
+                                    "AllocationId"
+                                  ]
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "PublicSubnet2": {
+                        "id": "PublicSubnet2",
+                        "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2",
+                        "children": {
+                          "Subnet": {
+                            "id": "Subnet",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2/Subnet",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                },
+                                "availabilityZone": "test-region-1b",
+                                "cidrBlock": "10.0.32.0/19",
+                                "mapPublicIpOnLaunch": true,
+                                "tags": [
+                                  {
+                                    "key": "aws-cdk:subnet-name",
+                                    "value": "Public"
+                                  },
+                                  {
+                                    "key": "aws-cdk:subnet-type",
+                                    "value": "Public"
+                                  },
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "Acl": {
+                            "id": "Acl",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2/Acl",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "RouteTable": {
+                            "id": "RouteTable",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2/RouteTable",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "RouteTableAssociation": {
+                            "id": "RouteTableAssociation",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2/RouteTableAssociation",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "NetworkVpcPublicSubnet2RouteTable0FACEBB2"
+                                },
+                                "subnetId": {
+                                  "Ref": "NetworkVpcPublicSubnet2SubnetC427CCE0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "DefaultRoute": {
+                            "id": "DefaultRoute",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2/DefaultRoute",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "NetworkVpcPublicSubnet2RouteTable0FACEBB2"
+                                },
+                                "destinationCidrBlock": "0.0.0.0/0",
+                                "gatewayId": {
+                                  "Ref": "NetworkVpcIGW6BEA7B02"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "EIP": {
+                            "id": "EIP",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2/EIP",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                              "aws:cdk:cloudformation:props": {
+                                "domain": "vpc",
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "NATGateway": {
+                            "id": "NATGateway",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2/NATGateway",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                              "aws:cdk:cloudformation:props": {
+                                "subnetId": {
+                                  "Ref": "NetworkVpcPublicSubnet2SubnetC427CCE0"
+                                },
+                                "allocationId": {
+                                  "Fn::GetAtt": [
+                                    "NetworkVpcPublicSubnet2EIP24F41572",
+                                    "AllocationId"
+                                  ]
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "PublicSubnet3": {
+                        "id": "PublicSubnet3",
+                        "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3",
+                        "children": {
+                          "Subnet": {
+                            "id": "Subnet",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3/Subnet",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                },
+                                "availabilityZone": "test-region-1c",
+                                "cidrBlock": "10.0.64.0/19",
+                                "mapPublicIpOnLaunch": true,
+                                "tags": [
+                                  {
+                                    "key": "aws-cdk:subnet-name",
+                                    "value": "Public"
+                                  },
+                                  {
+                                    "key": "aws-cdk:subnet-type",
+                                    "value": "Public"
+                                  },
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "Acl": {
+                            "id": "Acl",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3/Acl",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "RouteTable": {
+                            "id": "RouteTable",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3/RouteTable",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "RouteTableAssociation": {
+                            "id": "RouteTableAssociation",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3/RouteTableAssociation",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "NetworkVpcPublicSubnet3RouteTable4F517CA2"
+                                },
+                                "subnetId": {
+                                  "Ref": "NetworkVpcPublicSubnet3Subnet4BBF7F47"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "DefaultRoute": {
+                            "id": "DefaultRoute",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3/DefaultRoute",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "NetworkVpcPublicSubnet3RouteTable4F517CA2"
+                                },
+                                "destinationCidrBlock": "0.0.0.0/0",
+                                "gatewayId": {
+                                  "Ref": "NetworkVpcIGW6BEA7B02"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "EIP": {
+                            "id": "EIP",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3/EIP",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                              "aws:cdk:cloudformation:props": {
+                                "domain": "vpc",
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "NATGateway": {
+                            "id": "NATGateway",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3/NATGateway",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                              "aws:cdk:cloudformation:props": {
+                                "subnetId": {
+                                  "Ref": "NetworkVpcPublicSubnet3Subnet4BBF7F47"
+                                },
+                                "allocationId": {
+                                  "Fn::GetAtt": [
+                                    "NetworkVpcPublicSubnet3EIP22F0C93C",
+                                    "AllocationId"
+                                  ]
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "PrivateSubnet1": {
+                        "id": "PrivateSubnet1",
+                        "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet1",
+                        "children": {
+                          "Subnet": {
+                            "id": "Subnet",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet1/Subnet",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                },
+                                "availabilityZone": "test-region-1a",
+                                "cidrBlock": "10.0.96.0/19",
+                                "mapPublicIpOnLaunch": false,
+                                "tags": [
+                                  {
+                                    "key": "aws-cdk:subnet-name",
+                                    "value": "Private"
+                                  },
+                                  {
+                                    "key": "aws-cdk:subnet-type",
+                                    "value": "Private"
+                                  },
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet1"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "Acl": {
+                            "id": "Acl",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet1/Acl",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "RouteTable": {
+                            "id": "RouteTable",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet1/RouteTable",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet1"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "RouteTableAssociation": {
+                            "id": "RouteTableAssociation",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet1/RouteTableAssociation",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "NetworkVpcPrivateSubnet1RouteTable7D7AA3CD"
+                                },
+                                "subnetId": {
+                                  "Ref": "NetworkVpcPrivateSubnet1Subnet6DD86AE6"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "DefaultRoute": {
+                            "id": "DefaultRoute",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet1/DefaultRoute",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "NetworkVpcPrivateSubnet1RouteTable7D7AA3CD"
+                                },
+                                "destinationCidrBlock": "0.0.0.0/0",
+                                "natGatewayId": {
+                                  "Ref": "NetworkVpcPublicSubnet1NATGateway64781A21"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "PrivateSubnet2": {
+                        "id": "PrivateSubnet2",
+                        "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet2",
+                        "children": {
+                          "Subnet": {
+                            "id": "Subnet",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet2/Subnet",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                },
+                                "availabilityZone": "test-region-1b",
+                                "cidrBlock": "10.0.128.0/19",
+                                "mapPublicIpOnLaunch": false,
+                                "tags": [
+                                  {
+                                    "key": "aws-cdk:subnet-name",
+                                    "value": "Private"
+                                  },
+                                  {
+                                    "key": "aws-cdk:subnet-type",
+                                    "value": "Private"
+                                  },
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet2"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "Acl": {
+                            "id": "Acl",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet2/Acl",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "RouteTable": {
+                            "id": "RouteTable",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet2/RouteTable",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet2"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "RouteTableAssociation": {
+                            "id": "RouteTableAssociation",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet2/RouteTableAssociation",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "NetworkVpcPrivateSubnet2RouteTableC48862D1"
+                                },
+                                "subnetId": {
+                                  "Ref": "NetworkVpcPrivateSubnet2Subnet1BDBE877"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "DefaultRoute": {
+                            "id": "DefaultRoute",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet2/DefaultRoute",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "NetworkVpcPrivateSubnet2RouteTableC48862D1"
+                                },
+                                "destinationCidrBlock": "0.0.0.0/0",
+                                "natGatewayId": {
+                                  "Ref": "NetworkVpcPublicSubnet2NATGateway42CB86F5"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "PrivateSubnet3": {
+                        "id": "PrivateSubnet3",
+                        "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet3",
+                        "children": {
+                          "Subnet": {
+                            "id": "Subnet",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet3/Subnet",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                },
+                                "availabilityZone": "test-region-1c",
+                                "cidrBlock": "10.0.160.0/19",
+                                "mapPublicIpOnLaunch": false,
+                                "tags": [
+                                  {
+                                    "key": "aws-cdk:subnet-name",
+                                    "value": "Private"
+                                  },
+                                  {
+                                    "key": "aws-cdk:subnet-type",
+                                    "value": "Private"
+                                  },
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet3"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "Acl": {
+                            "id": "Acl",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet3/Acl",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "RouteTable": {
+                            "id": "RouteTable",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet3/RouteTable",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet3"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "RouteTableAssociation": {
+                            "id": "RouteTableAssociation",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet3/RouteTableAssociation",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "NetworkVpcPrivateSubnet3RouteTable7FC52A8D"
+                                },
+                                "subnetId": {
+                                  "Ref": "NetworkVpcPrivateSubnet3Subnet8ABFAF5C"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "DefaultRoute": {
+                            "id": "DefaultRoute",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet3/DefaultRoute",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "NetworkVpcPrivateSubnet3RouteTable7FC52A8D"
+                                },
+                                "destinationCidrBlock": "0.0.0.0/0",
+                                "natGatewayId": {
+                                  "Ref": "NetworkVpcPublicSubnet3NATGateway5DD3AF93"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "IGW": {
+                        "id": "IGW",
+                        "path": "BlogAppIntegStage/DataStack/Network/Vpc/IGW",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                          "aws:cdk:cloudformation:props": {
+                            "tags": [
+                              {
+                                "key": "Name",
+                                "value": "BlogAppIntegStage/DataStack/Network/Vpc"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "VPCGW": {
+                        "id": "VPCGW",
+                        "path": "BlogAppIntegStage/DataStack/Network/Vpc/VPCGW",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                          "aws:cdk:cloudformation:props": {
+                            "vpcId": {
+                              "Ref": "NetworkVpc7FB7348F"
+                            },
+                            "internetGatewayId": {
+                              "Ref": "NetworkVpcIGW6BEA7B02"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "RestrictDefaultSecurityGroupCustomResource": {
+                        "id": "RestrictDefaultSecurityGroupCustomResource",
+                        "path": "BlogAppIntegStage/DataStack/Network/Vpc/RestrictDefaultSecurityGroupCustomResource",
+                        "children": {
+                          "Default": {
+                            "id": "Default",
+                            "path": "BlogAppIntegStage/DataStack/Network/Vpc/RestrictDefaultSecurityGroupCustomResource/Default",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.CfnResource",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CustomResource",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Cluster": {
+                    "id": "Cluster",
+                    "path": "BlogAppIntegStage/DataStack/Network/Cluster",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlogAppIntegStage/DataStack/Network/Cluster/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ECS::Cluster",
+                          "aws:cdk:cloudformation:props": {}
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.CfnCluster",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "DefaultServiceDiscoveryNamespace": {
+                        "id": "DefaultServiceDiscoveryNamespace",
+                        "path": "BlogAppIntegStage/DataStack/Network/Cluster/DefaultServiceDiscoveryNamespace",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlogAppIntegStage/DataStack/Network/Cluster/DefaultServiceDiscoveryNamespace/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ServiceDiscovery::PrivateDnsNamespace",
+                              "aws:cdk:cloudformation:props": {
+                                "name": "blog-dev.com",
+                                "vpc": {
+                                  "Ref": "NetworkVpc7FB7348F"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_servicediscovery.CfnPrivateDnsNamespace",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_servicediscovery.PrivateDnsNamespace",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "Cluster": {
+                        "id": "Cluster",
+                        "path": "BlogAppIntegStage/DataStack/Network/Cluster/Cluster",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ECS::ClusterCapacityProviderAssociations",
+                          "aws:cdk:cloudformation:props": {
+                            "capacityProviders": [
+                              "FARGATE",
+                              "FARGATE_SPOT"
+                            ],
+                            "cluster": {
+                              "Ref": "NetworkCluster17B54D11"
+                            },
+                            "defaultCapacityProviderStrategy": []
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.CfnClusterCapacityProviderAssociations",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecs.Cluster",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              },
+              "Custom::VpcRestrictDefaultSGCustomResourceProvider": {
+                "id": "Custom::VpcRestrictDefaultSGCustomResourceProvider",
+                "path": "BlogAppIntegStage/DataStack/Custom::VpcRestrictDefaultSGCustomResourceProvider",
+                "children": {
+                  "Staging": {
+                    "id": "Staging",
+                    "path": "BlogAppIntegStage/DataStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Staging",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Role": {
+                    "id": "Role",
+                    "path": "BlogAppIntegStage/DataStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Handler": {
+                    "id": "Handler",
+                    "path": "BlogAppIntegStage/DataStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CustomResourceProvider",
+                  "version": "2.86.0"
+                }
+              },
+              "Exports": {
+                "id": "Exports",
+                "path": "BlogAppIntegStage/DataStack/Exports",
+                "children": {
+                  "Output{\"Ref\":\"NetworkCluster17B54D11\"}": {
+                    "id": "Output{\"Ref\":\"NetworkCluster17B54D11\"}",
+                    "path": "BlogAppIntegStage/DataStack/Exports/Output{\"Ref\":\"NetworkCluster17B54D11\"}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Output{\"Ref\":\"NetworkVpc7FB7348F\"}": {
+                    "id": "Output{\"Ref\":\"NetworkVpc7FB7348F\"}",
+                    "path": "BlogAppIntegStage/DataStack/Exports/Output{\"Ref\":\"NetworkVpc7FB7348F\"}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Output{\"Ref\":\"NetworkVpcPrivateSubnet1Subnet6DD86AE6\"}": {
+                    "id": "Output{\"Ref\":\"NetworkVpcPrivateSubnet1Subnet6DD86AE6\"}",
+                    "path": "BlogAppIntegStage/DataStack/Exports/Output{\"Ref\":\"NetworkVpcPrivateSubnet1Subnet6DD86AE6\"}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Output{\"Ref\":\"NetworkVpcPrivateSubnet2Subnet1BDBE877\"}": {
+                    "id": "Output{\"Ref\":\"NetworkVpcPrivateSubnet2Subnet1BDBE877\"}",
+                    "path": "BlogAppIntegStage/DataStack/Exports/Output{\"Ref\":\"NetworkVpcPrivateSubnet2Subnet1BDBE877\"}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Output{\"Ref\":\"NetworkVpcPrivateSubnet3Subnet8ABFAF5C\"}": {
+                    "id": "Output{\"Ref\":\"NetworkVpcPrivateSubnet3Subnet8ABFAF5C\"}",
+                    "path": "BlogAppIntegStage/DataStack/Exports/Output{\"Ref\":\"NetworkVpcPrivateSubnet3Subnet8ABFAF5C\"}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Output{\"Fn::GetAtt\":[\"PostsTableC82B36F0\",\"Arn\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"PostsTableC82B36F0\",\"Arn\"]}",
+                    "path": "BlogAppIntegStage/DataStack/Exports/Output{\"Fn::GetAtt\":[\"PostsTableC82B36F0\",\"Arn\"]}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Output{\"Ref\":\"PostsTableC82B36F0\"}": {
+                    "id": "Output{\"Ref\":\"PostsTableC82B36F0\"}",
+                    "path": "BlogAppIntegStage/DataStack/Exports/Output{\"Ref\":\"PostsTableC82B36F0\"}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Output{\"Fn::GetAtt\":[\"NetworkClusterDefaultServiceDiscoveryNamespaceD090BA35\",\"Id\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"NetworkClusterDefaultServiceDiscoveryNamespaceD090BA35\",\"Id\"]}",
+                    "path": "BlogAppIntegStage/DataStack/Exports/Output{\"Fn::GetAtt\":[\"NetworkClusterDefaultServiceDiscoveryNamespaceD090BA35\",\"Id\"]}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Output{\"Fn::GetAtt\":[\"NetworkCluster17B54D11\",\"Arn\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"NetworkCluster17B54D11\",\"Arn\"]}",
+                    "path": "BlogAppIntegStage/DataStack/Exports/Output{\"Fn::GetAtt\":[\"NetworkCluster17B54D11\",\"Arn\"]}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "BlogAppIntegStage/DataStack/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.86.0"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "BlogAppIntegStage/DataStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.86.0"
+            }
+          },
+          "AppStack": {
+            "id": "AppStack",
+            "path": "BlogAppIntegStage/AppStack",
+            "children": {
+              "Api": {
+                "id": "Api",
+                "path": "BlogAppIntegStage/AppStack/Api",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "BlogAppIntegStage/AppStack/Api/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Api",
+                      "aws:cdk:cloudformation:props": {
+                        "name": "Api",
+                        "protocolType": "HTTP"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnApi",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "DefaultStage": {
+                    "id": "DefaultStage",
+                    "path": "BlogAppIntegStage/AppStack/Api/DefaultStage",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlogAppIntegStage/AppStack/Api/DefaultStage/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Stage",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "ApiF70053CD"
+                            },
+                            "stageName": "$default",
+                            "autoDeploy": true
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnStage",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpStage",
+                      "version": "2.86.0-alpha.0"
+                    }
+                  },
+                  "VpcLinkSg": {
+                    "id": "VpcLinkSg",
+                    "path": "BlogAppIntegStage/AppStack/Api/VpcLinkSg",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlogAppIntegStage/AppStack/Api/VpcLinkSg/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                          "aws:cdk:cloudformation:props": {
+                            "groupDescription": "Security Group for API Gateway Vpc Link",
+                            "securityGroupEgress": [
+                              {
+                                "cidrIp": "0.0.0.0/0",
+                                "description": "Allow all outbound traffic by default",
+                                "ipProtocol": "-1"
+                              },
+                              {
+                                "ipProtocol": "-1",
+                                "cidrIpv6": "::/0",
+                                "description": "Allow all outbound ipv6 traffic by default"
+                              }
+                            ],
+                            "vpcId": {
+                              "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkVpc7FB7348F649FC110"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "VpcLink": {
+                    "id": "VpcLink",
+                    "path": "BlogAppIntegStage/AppStack/Api/VpcLink",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlogAppIntegStage/AppStack/Api/VpcLink/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::VpcLink",
+                          "aws:cdk:cloudformation:props": {
+                            "name": "BlogAppIntegStageAppStackApiVpcLink1F8DBB58",
+                            "subnetIds": [
+                              {
+                                "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkVpcPrivateSubnet1Subnet6DD86AE62279BBA5"
+                              },
+                              {
+                                "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkVpcPrivateSubnet2Subnet1BDBE87783414D15"
+                              },
+                              {
+                                "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkVpcPrivateSubnet3Subnet8ABFAF5C277BED3A"
+                              }
+                            ],
+                            "securityGroupIds": [
+                              {
+                                "Fn::GetAtt": [
+                                  "ApiVpcLinkSg585A62E1",
+                                  "GroupId"
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnVpcLink",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.VpcLink",
+                      "version": "2.86.0-alpha.0"
+                    }
+                  },
+                  "GET--posts--{id}": {
+                    "id": "GET--posts--{id}",
+                    "path": "BlogAppIntegStage/AppStack/Api/GET--posts--{id}",
+                    "children": {
+                      "getPost": {
+                        "id": "getPost",
+                        "path": "BlogAppIntegStage/AppStack/Api/GET--posts--{id}/getPost",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlogAppIntegStage/AppStack/Api/GET--posts--{id}/getPost/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                              "aws:cdk:cloudformation:props": {
+                                "apiId": {
+                                  "Ref": "ApiF70053CD"
+                                },
+                                "integrationType": "HTTP_PROXY",
+                                "connectionId": {
+                                  "Ref": "ApiVpcLink4F321C68"
+                                },
+                                "connectionType": "VPC_LINK",
+                                "integrationMethod": "ANY",
+                                "integrationUri": {
+                                  "Fn::GetAtt": [
+                                    "GetPostAppServiceCloudmapService52F860BF",
+                                    "Arn"
+                                  ]
+                                },
+                                "payloadFormatVersion": "1.0"
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                          "version": "2.86.0-alpha.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlogAppIntegStage/AppStack/Api/GET--posts--{id}/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "ApiF70053CD"
+                            },
+                            "routeKey": "GET /posts/{id}",
+                            "authorizationType": "NONE",
+                            "target": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "integrations/",
+                                  {
+                                    "Ref": "ApiGETpostsidgetPostB2674F9F"
+                                  }
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                      "version": "2.86.0-alpha.0"
+                    }
+                  },
+                  "POST--posts": {
+                    "id": "POST--posts",
+                    "path": "BlogAppIntegStage/AppStack/Api/POST--posts",
+                    "children": {
+                      "createPost": {
+                        "id": "createPost",
+                        "path": "BlogAppIntegStage/AppStack/Api/POST--posts/createPost",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlogAppIntegStage/AppStack/Api/POST--posts/createPost/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                              "aws:cdk:cloudformation:props": {
+                                "apiId": {
+                                  "Ref": "ApiF70053CD"
+                                },
+                                "integrationType": "AWS_PROXY",
+                                "integrationUri": {
+                                  "Fn::GetAtt": [
+                                    "CreatePostD3E67D61",
+                                    "Arn"
+                                  ]
+                                },
+                                "payloadFormatVersion": "2.0"
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                          "version": "2.86.0-alpha.0"
+                        }
+                      },
+                      "createPost-Permission": {
+                        "id": "createPost-Permission",
+                        "path": "BlogAppIntegStage/AppStack/Api/POST--posts/createPost-Permission",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                          "aws:cdk:cloudformation:props": {
+                            "action": "lambda:InvokeFunction",
+                            "functionName": {
+                              "Fn::GetAtt": [
+                                "CreatePostD3E67D61",
+                                "Arn"
+                              ]
+                            },
+                            "principal": "apigateway.amazonaws.com",
+                            "sourceArn": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:aws:execute-api:us-west-2:",
+                                  {
+                                    "Ref": "AWS::AccountId"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "ApiF70053CD"
+                                  },
+                                  "/*/*/posts"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlogAppIntegStage/AppStack/Api/POST--posts/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "ApiF70053CD"
+                            },
+                            "routeKey": "POST /posts",
+                            "authorizationType": "NONE",
+                            "target": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "integrations/",
+                                  {
+                                    "Ref": "ApiPOSTpostscreatePostF4B703B7"
+                                  }
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                      "version": "2.86.0-alpha.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpApi",
+                  "version": "2.86.0-alpha.0"
+                }
+              },
+              "GetPost": {
+                "id": "GetPost",
+                "path": "BlogAppIntegStage/AppStack/GetPost",
+                "children": {
+                  "GetPost": {
+                    "id": "GetPost",
+                    "path": "BlogAppIntegStage/AppStack/GetPost/GetPost",
+                    "children": {
+                      "LogGroup": {
+                        "id": "LogGroup",
+                        "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/LogGroup",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/LogGroup/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                              "aws:cdk:cloudformation:props": {
+                                "retentionInDays": 30
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "TaskDef": {
+                        "id": "TaskDef",
+                        "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef",
+                        "children": {
+                          "TaskRole": {
+                            "id": "TaskRole",
+                            "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/TaskRole",
+                            "children": {
+                              "ImportTaskRole": {
+                                "id": "ImportTaskRole",
+                                "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/TaskRole/ImportTaskRole",
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.Resource",
+                                  "version": "2.86.0"
+                                }
+                              },
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/TaskRole/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                                  "aws:cdk:cloudformation:props": {
+                                    "assumeRolePolicyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "sts:AssumeRole",
+                                          "Effect": "Allow",
+                                          "Principal": {
+                                            "Service": "ecs-tasks.amazonaws.com"
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "managedPolicyArns": [
+                                      {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":iam::aws:policy/AWSXRayDaemonWriteAccess"
+                                          ]
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                                  "version": "2.86.0"
+                                }
+                              },
+                              "DefaultPolicy": {
+                                "id": "DefaultPolicy",
+                                "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/TaskRole/DefaultPolicy",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/TaskRole/DefaultPolicy/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                      "aws:cdk:cloudformation:props": {
+                                        "policyDocument": {
+                                          "Statement": [
+                                            {
+                                              "Action": "cloudwatch:PutMetricData",
+                                              "Effect": "Allow",
+                                              "Resource": "*"
+                                            },
+                                            {
+                                              "Action": [
+                                                "dynamodb:BatchGetItem",
+                                                "dynamodb:ConditionCheckItem",
+                                                "dynamodb:DescribeTable",
+                                                "dynamodb:GetItem",
+                                                "dynamodb:GetRecords",
+                                                "dynamodb:GetShardIterator",
+                                                "dynamodb:Query",
+                                                "dynamodb:Scan"
+                                              ],
+                                              "Effect": "Allow",
+                                              "Resource": [
+                                                {
+                                                  "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputFnGetAttPostsTableC82B36F0Arn40084DA1"
+                                                },
+                                                {
+                                                  "Ref": "AWS::NoValue"
+                                                }
+                                              ]
+                                            }
+                                          ],
+                                          "Version": "2012-10-17"
+                                        },
+                                        "policyName": "GetPostTaskDefTaskRoleDefaultPolicy48191C35",
+                                        "roles": [
+                                          {
+                                            "Ref": "GetPostTaskDefTaskRoleB6AF59D2"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                      "version": "2.86.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                                  "version": "2.86.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Role",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ECS::TaskDefinition",
+                              "aws:cdk:cloudformation:props": {
+                                "containerDefinitions": [
+                                  {
+                                    "essential": true,
+                                    "image": {
+                                      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.us-west-2.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-us-west-2:75241d35e8dcfd8be5d360bf5443f5daca01fa248211ded949c5cf0e4e085f48"
+                                    },
+                                    "name": "getPost",
+                                    "portMappings": [
+                                      {
+                                        "containerPort": 8080,
+                                        "protocol": "tcp"
+                                      }
+                                    ],
+                                    "logConfiguration": {
+                                      "logDriver": "awslogs",
+                                      "options": {
+                                        "awslogs-group": {
+                                          "Ref": "GetPostLogGroup615A249A"
+                                        },
+                                        "awslogs-stream-prefix": "getPost",
+                                        "awslogs-region": "us-west-2"
+                                      }
+                                    },
+                                    "environment": [
+                                      {
+                                        "name": "TABLE_NAME",
+                                        "value": {
+                                          "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefPostsTableC82B36F06B4D022D"
+                                        }
+                                      },
+                                      {
+                                        "name": "AWS_EMF_AGENT_ENDPOINT",
+                                        "value": "tcp://127.0.0.1:25888"
+                                      },
+                                      {
+                                        "name": "LOG_LEVEL",
+                                        "value": "DEBUG"
+                                      },
+                                      {
+                                        "name": "POWERTOOLS_SERVICE_NAME",
+                                        "value": "GetPostService"
+                                      },
+                                      {
+                                        "name": "POWERTOOLS_METRICS_NAMESPACE",
+                                        "value": "blogApp"
+                                      },
+                                      {
+                                        "name": "ENV",
+                                        "value": "dev"
+                                      }
+                                    ],
+                                    "healthCheck": {
+                                      "command": [
+                                        "CMD-SHELL",
+                                        "curl -s http://127.0.0.1:8080/health"
+                                      ],
+                                      "interval": 5,
+                                      "retries": 1,
+                                      "startPeriod": 10,
+                                      "timeout": 2
+                                    }
+                                  },
+                                  {
+                                    "essential": true,
+                                    "image": "amazon/aws-xray-daemon:latest",
+                                    "memoryReservation": 256,
+                                    "name": "xray",
+                                    "portMappings": [
+                                      {
+                                        "containerPort": 2000,
+                                        "protocol": "udp"
+                                      }
+                                    ],
+                                    "logConfiguration": {
+                                      "logDriver": "awslogs",
+                                      "options": {
+                                        "awslogs-group": {
+                                          "Ref": "GetPostLogGroup615A249A"
+                                        },
+                                        "awslogs-stream-prefix": "xray",
+                                        "awslogs-region": "us-west-2"
+                                      }
+                                    },
+                                    "environment": [
+                                      {
+                                        "name": "AWS_REGION",
+                                        "value": "us-west-2"
+                                      }
+                                    ],
+                                    "healthCheck": {
+                                      "command": [
+                                        "CMD-SHELL",
+                                        "curl -s http://localhost:2000"
+                                      ],
+                                      "interval": 5,
+                                      "retries": 3,
+                                      "startPeriod": 10,
+                                      "timeout": 2
+                                    }
+                                  },
+                                  {
+                                    "essential": true,
+                                    "image": "public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest",
+                                    "memoryReservation": 50,
+                                    "name": "cloudwatch-agent",
+                                    "portMappings": [
+                                      {
+                                        "containerPort": 25888,
+                                        "protocol": "tcp"
+                                      }
+                                    ],
+                                    "logConfiguration": {
+                                      "logDriver": "awslogs",
+                                      "options": {
+                                        "awslogs-group": {
+                                          "Ref": "GetPostLogGroup615A249A"
+                                        },
+                                        "awslogs-stream-prefix": "cloudwatch-agent",
+                                        "awslogs-region": "us-west-2"
+                                      }
+                                    },
+                                    "environment": [
+                                      {
+                                        "name": "CW_CONFIG_CONTENT",
+                                        "value": "{\"logs\":{\"metrics_collected\":{\"emf\":{}}},\"metrics\":{\"metrics_collected\":{\"statsd\":{}}}}"
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "cpu": "256",
+                                "executionRoleArn": {
+                                  "Fn::GetAtt": [
+                                    "GetPostTaskDefExecutionRoleAAEEA792",
+                                    "Arn"
+                                  ]
+                                },
+                                "family": "BlogAppIntegStageAppStackGetPostTaskDef5043EE83",
+                                "memory": "512",
+                                "networkMode": "awsvpc",
+                                "requiresCompatibilities": [
+                                  "FARGATE"
+                                ],
+                                "taskRoleArn": {
+                                  "Fn::GetAtt": [
+                                    "GetPostTaskDefTaskRoleB6AF59D2",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ecs.CfnTaskDefinition",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "getPost": {
+                            "id": "getPost",
+                            "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/getPost",
+                            "children": {
+                              "AssetImage": {
+                                "id": "AssetImage",
+                                "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/getPost/AssetImage",
+                                "children": {
+                                  "Staging": {
+                                    "id": "Staging",
+                                    "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/getPost/AssetImage/Staging",
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.AssetStaging",
+                                      "version": "2.86.0"
+                                    }
+                                  },
+                                  "Repository": {
+                                    "id": "Repository",
+                                    "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/getPost/AssetImage/Repository",
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_ecr.RepositoryBase",
+                                      "version": "2.86.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_ecr_assets.DockerImageAsset",
+                                  "version": "2.86.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ecs.ContainerDefinition",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "ExecutionRole": {
+                            "id": "ExecutionRole",
+                            "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/ExecutionRole",
+                            "children": {
+                              "ImportExecutionRole": {
+                                "id": "ImportExecutionRole",
+                                "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/ExecutionRole/ImportExecutionRole",
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.Resource",
+                                  "version": "2.86.0"
+                                }
+                              },
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/ExecutionRole/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                                  "aws:cdk:cloudformation:props": {
+                                    "assumeRolePolicyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "sts:AssumeRole",
+                                          "Effect": "Allow",
+                                          "Principal": {
+                                            "Service": "ecs-tasks.amazonaws.com"
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                                  "version": "2.86.0"
+                                }
+                              },
+                              "DefaultPolicy": {
+                                "id": "DefaultPolicy",
+                                "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/ExecutionRole/DefaultPolicy",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/ExecutionRole/DefaultPolicy/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                      "aws:cdk:cloudformation:props": {
+                                        "policyDocument": {
+                                          "Statement": [
+                                            {
+                                              "Action": [
+                                                "ecr:BatchCheckLayerAvailability",
+                                                "ecr:BatchGetImage",
+                                                "ecr:GetDownloadUrlForLayer"
+                                              ],
+                                              "Effect": "Allow",
+                                              "Resource": {
+                                                "Fn::Join": [
+                                                  "",
+                                                  [
+                                                    "arn:aws:ecr:us-west-2:",
+                                                    {
+                                                      "Ref": "AWS::AccountId"
+                                                    },
+                                                    ":repository/",
+                                                    {
+                                                      "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-us-west-2"
+                                                    }
+                                                  ]
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "Action": "ecr:GetAuthorizationToken",
+                                              "Effect": "Allow",
+                                              "Resource": "*"
+                                            },
+                                            {
+                                              "Action": [
+                                                "logs:CreateLogStream",
+                                                "logs:PutLogEvents"
+                                              ],
+                                              "Effect": "Allow",
+                                              "Resource": {
+                                                "Fn::GetAtt": [
+                                                  "GetPostLogGroup615A249A",
+                                                  "Arn"
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          "Version": "2012-10-17"
+                                        },
+                                        "policyName": "GetPostTaskDefExecutionRoleDefaultPolicy7D07E747",
+                                        "roles": [
+                                          {
+                                            "Ref": "GetPostTaskDefExecutionRoleAAEEA792"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                      "version": "2.86.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                                  "version": "2.86.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Role",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "xray": {
+                            "id": "xray",
+                            "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/xray",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ecs.ContainerDefinition",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "cloudwatch-agent": {
+                            "id": "cloudwatch-agent",
+                            "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/TaskDef/cloudwatch-agent",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ecs.ContainerDefinition",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.FargateTaskDefinition",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "AppService": {
+                        "id": "AppService",
+                        "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/AppService",
+                        "children": {
+                          "Service": {
+                            "id": "Service",
+                            "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/AppService/Service",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ECS::Service",
+                              "aws:cdk:cloudformation:props": {
+                                "cluster": {
+                                  "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkCluster17B54D113FA77A85"
+                                },
+                                "deploymentConfiguration": {
+                                  "maximumPercent": 200,
+                                  "minimumHealthyPercent": 50,
+                                  "deploymentCircuitBreaker": {
+                                    "enable": true,
+                                    "rollback": true
+                                  }
+                                },
+                                "deploymentController": {
+                                  "type": "ECS"
+                                },
+                                "enableEcsManagedTags": true,
+                                "launchType": "FARGATE",
+                                "networkConfiguration": {
+                                  "awsvpcConfiguration": {
+                                    "assignPublicIp": "DISABLED",
+                                    "subnets": [
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkVpcPrivateSubnet1Subnet6DD86AE62279BBA5"
+                                      },
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkVpcPrivateSubnet2Subnet1BDBE87783414D15"
+                                      },
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkVpcPrivateSubnet3Subnet8ABFAF5C277BED3A"
+                                      }
+                                    ],
+                                    "securityGroups": [
+                                      {
+                                        "Fn::GetAtt": [
+                                          "GetPostAppServiceSecurityGroup04A7E398",
+                                          "GroupId"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                },
+                                "platformVersion": "1.4.0",
+                                "serviceRegistries": [
+                                  {
+                                    "registryArn": {
+                                      "Fn::GetAtt": [
+                                        "GetPostAppServiceCloudmapService52F860BF",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "containerName": "getPost",
+                                    "containerPort": 8080
+                                  }
+                                ],
+                                "taskDefinition": {
+                                  "Ref": "GetPostTaskDef74D442CE"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ecs.CfnService",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "SecurityGroup": {
+                            "id": "SecurityGroup",
+                            "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/AppService/SecurityGroup",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/AppService/SecurityGroup/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                                  "aws:cdk:cloudformation:props": {
+                                    "groupDescription": "BlogAppIntegStage/AppStack/GetPost/GetPost/AppService/SecurityGroup",
+                                    "securityGroupEgress": [
+                                      {
+                                        "cidrIp": "0.0.0.0/0",
+                                        "description": "Allow all outbound traffic by default",
+                                        "ipProtocol": "-1"
+                                      }
+                                    ],
+                                    "vpcId": {
+                                      "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkVpc7FB7348F649FC110"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                                  "version": "2.86.0"
+                                }
+                              },
+                              "from BlogAppIntegStageAppStackApiVpcLinkSg968278FA:8080": {
+                                "id": "from BlogAppIntegStageAppStackApiVpcLinkSg968278FA:8080",
+                                "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/AppService/SecurityGroup/from BlogAppIntegStageAppStackApiVpcLinkSg968278FA:8080",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                                  "aws:cdk:cloudformation:props": {
+                                    "ipProtocol": "tcp",
+                                    "description": "from BlogAppIntegStageAppStackApiVpcLinkSg968278FA:8080",
+                                    "fromPort": 8080,
+                                    "groupId": {
+                                      "Fn::GetAtt": [
+                                        "GetPostAppServiceSecurityGroup04A7E398",
+                                        "GroupId"
+                                      ]
+                                    },
+                                    "sourceSecurityGroupId": {
+                                      "Fn::GetAtt": [
+                                        "ApiVpcLinkSg585A62E1",
+                                        "GroupId"
+                                      ]
+                                    },
+                                    "toPort": 8080
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                                  "version": "2.86.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "CloudmapService": {
+                            "id": "CloudmapService",
+                            "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/AppService/CloudmapService",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/AppService/CloudmapService/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::ServiceDiscovery::Service",
+                                  "aws:cdk:cloudformation:props": {
+                                    "dnsConfig": {
+                                      "dnsRecords": [
+                                        {
+                                          "type": "SRV",
+                                          "ttl": 60
+                                        }
+                                      ],
+                                      "namespaceId": {
+                                        "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputFnGetAttNetworkClusterDefaultServiceDiscoveryNamespaceD090BA35IdBB648353"
+                                      },
+                                      "routingPolicy": "MULTIVALUE"
+                                    },
+                                    "healthCheckCustomConfig": {
+                                      "failureThreshold": 1
+                                    },
+                                    "namespaceId": {
+                                      "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputFnGetAttNetworkClusterDefaultServiceDiscoveryNamespaceD090BA35IdBB648353"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_servicediscovery.CfnService",
+                                  "version": "2.86.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_servicediscovery.Service",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.FargateService",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "Rule": {
+                        "id": "Rule",
+                        "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/Rule",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/Rule/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                              "aws:cdk:cloudformation:props": {
+                                "eventPattern": {
+                                  "detail-type": [
+                                    "ECS Task State Change"
+                                  ],
+                                  "source": [
+                                    "aws.ecs"
+                                  ],
+                                  "detail": {
+                                    "taskDefinitionArn": [
+                                      {
+                                        "Ref": "GetPostTaskDef74D442CE"
+                                      }
+                                    ],
+                                    "clusterArn": [
+                                      {
+                                        "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputFnGetAttNetworkCluster17B54D11Arn1F2D2FE4"
+                                      }
+                                    ],
+                                    "desiredStatus": [
+                                      "STOPPED"
+                                    ],
+                                    "stopCode": [
+                                      "ServiceSchedulerInitiated"
+                                    ],
+                                    "stoppedReason": [
+                                      "Task failed container health checks"
+                                    ],
+                                    "containers": {
+                                      "name": [
+                                        "getPost"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "state": "ENABLED"
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_events.CfnRule",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_events.Rule",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "DeploymentFailing": {
+                        "id": "DeploymentFailing",
+                        "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/DeploymentFailing",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlogAppIntegStage/AppStack/GetPost/GetPost/DeploymentFailing/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                              "aws:cdk:cloudformation:props": {
+                                "comparisonOperator": "GreaterThanOrEqualToThreshold",
+                                "evaluationPeriods": 1,
+                                "dimensions": [
+                                  {
+                                    "name": "RuleName",
+                                    "value": {
+                                      "Ref": "GetPostRule216A33F2"
+                                    }
+                                  }
+                                ],
+                                "metricName": "TriggeredRules",
+                                "namespace": "AWS/Events",
+                                "period": 10,
+                                "statistic": "Average",
+                                "threshold": 1,
+                                "treatMissingData": "notBreaching",
+                                "unit": "Count"
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.2.54"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              },
+              "CreatePost": {
+                "id": "CreatePost",
+                "path": "BlogAppIntegStage/AppStack/CreatePost",
+                "children": {
+                  "PowertoolsLayer": {
+                    "id": "PowertoolsLayer",
+                    "path": "BlogAppIntegStage/AppStack/CreatePost/PowertoolsLayer",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "CreatePost": {
+                    "id": "CreatePost",
+                    "path": "BlogAppIntegStage/AppStack/CreatePost/CreatePost",
+                    "children": {
+                      "ServiceRole": {
+                        "id": "ServiceRole",
+                        "path": "BlogAppIntegStage/AppStack/CreatePost/CreatePost/ServiceRole",
+                        "children": {
+                          "ImportServiceRole": {
+                            "id": "ImportServiceRole",
+                            "path": "BlogAppIntegStage/AppStack/CreatePost/CreatePost/ServiceRole/ImportServiceRole",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlogAppIntegStage/AppStack/CreatePost/CreatePost/ServiceRole/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "lambda.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "managedPolicyArns": [
+                                  {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "DefaultPolicy": {
+                            "id": "DefaultPolicy",
+                            "path": "BlogAppIntegStage/AppStack/CreatePost/CreatePost/ServiceRole/DefaultPolicy",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "BlogAppIntegStage/AppStack/CreatePost/CreatePost/ServiceRole/DefaultPolicy/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                  "aws:cdk:cloudformation:props": {
+                                    "policyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": [
+                                            "xray:PutTelemetryRecords",
+                                            "xray:PutTraceSegments"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": "*"
+                                        },
+                                        {
+                                          "Action": [
+                                            "dynamodb:BatchWriteItem",
+                                            "dynamodb:DeleteItem",
+                                            "dynamodb:DescribeTable",
+                                            "dynamodb:PutItem",
+                                            "dynamodb:UpdateItem"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": [
+                                            {
+                                              "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputFnGetAttPostsTableC82B36F0Arn40084DA1"
+                                            },
+                                            {
+                                              "Ref": "AWS::NoValue"
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "policyName": "CreatePostServiceRoleDefaultPolicy45EA3357",
+                                    "roles": [
+                                      {
+                                        "Ref": "CreatePostServiceRole3F6FFE7F"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                  "version": "2.86.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Policy",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "Code": {
+                        "id": "Code",
+                        "path": "BlogAppIntegStage/AppStack/CreatePost/CreatePost/Code",
+                        "children": {
+                          "Stage": {
+                            "id": "Stage",
+                            "path": "BlogAppIntegStage/AppStack/CreatePost/CreatePost/Code/Stage",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.AssetStaging",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "AssetBucket": {
+                            "id": "AssetBucket",
+                            "path": "BlogAppIntegStage/AppStack/CreatePost/CreatePost/Code/AssetBucket",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlogAppIntegStage/AppStack/CreatePost/CreatePost/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                          "aws:cdk:cloudformation:props": {
+                            "code": {
+                              "s3Bucket": {
+                                "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2"
+                              },
+                              "s3Key": "90bde03fedbc72e74ee34915c43bb9bf93ca6567af040e040d43a117ed6cc6d8.zip"
+                            },
+                            "role": {
+                              "Fn::GetAtt": [
+                                "CreatePostServiceRole3F6FFE7F",
+                                "Arn"
+                              ]
+                            },
+                            "architectures": [
+                              "arm64"
+                            ],
+                            "description": "src/posts/create.lambda.ts",
+                            "environment": {
+                              "variables": {
+                                "LOG_LEVEL": "DEBUG",
+                                "POWERTOOLS_LOGGER_LOG_EVENT": "true",
+                                "POWERTOOLS_SERVICE_NAME": "CreateFunction",
+                                "POWERTOOLS_METRICS_NAMESPACE": "blogApp",
+                                "ENV": "dev",
+                                "TABLE_NAME": {
+                                  "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefPostsTableC82B36F06B4D022D"
+                                },
+                                "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+                              }
+                            },
+                            "handler": "index.handler",
+                            "layers": [
+                              "arn:aws:lambda:us-west-2:094274105915:layer:AWSLambdaPowertoolsTypeScript:15"
+                            ],
+                            "memorySize": 256,
+                            "runtime": "nodejs18.x",
+                            "tracingConfig": {
+                              "mode": "Active"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.Function",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              },
+              "Exports": {
+                "id": "Exports",
+                "path": "BlogAppIntegStage/AppStack/Exports",
+                "children": {
+                  "Output{\"Fn::GetAtt\":[\"ApiF70053CD\",\"ApiEndpoint\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"ApiF70053CD\",\"ApiEndpoint\"]}",
+                    "path": "BlogAppIntegStage/AppStack/Exports/Output{\"Fn::GetAtt\":[\"ApiF70053CD\",\"ApiEndpoint\"]}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Output{\"Ref\":\"ApiF70053CD\"}": {
+                    "id": "Output{\"Ref\":\"ApiF70053CD\"}",
+                    "path": "BlogAppIntegStage/AppStack/Exports/Output{\"Ref\":\"ApiF70053CD\"}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Output{\"Fn::GetAtt\":[\"GetPostAppServiceA50C5323\",\"Name\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"GetPostAppServiceA50C5323\",\"Name\"]}",
+                    "path": "BlogAppIntegStage/AppStack/Exports/Output{\"Fn::GetAtt\":[\"GetPostAppServiceA50C5323\",\"Name\"]}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Output{\"Ref\":\"CreatePostD3E67D61\"}": {
+                    "id": "Output{\"Ref\":\"CreatePostD3E67D61\"}",
+                    "path": "BlogAppIntegStage/AppStack/Exports/Output{\"Ref\":\"CreatePostD3E67D61\"}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "BlogAppIntegStage/AppStack/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.86.0"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "BlogAppIntegStage/AppStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.86.0"
+            }
+          },
+          "BlogAppIntegAssertionsStack": {
+            "id": "BlogAppIntegAssertionsStack",
+            "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack",
+            "children": {
+              "HttpApiCall3c78dbf33e7d6d9e1367bd6006e2f319": {
+                "id": "HttpApiCall3c78dbf33e7d6d9e1367bd6006e2f319",
+                "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/HttpApiCall3c78dbf33e7d6d9e1367bd6006e2f319",
+                "children": {
+                  "HttpProvider": {
+                    "id": "HttpProvider",
+                    "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/HttpApiCall3c78dbf33e7d6d9e1367bd6006e2f319/HttpProvider",
+                    "children": {
+                      "AssertionsProvider": {
+                        "id": "AssertionsProvider",
+                        "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/HttpApiCall3c78dbf33e7d6d9e1367bd6006e2f319/HttpProvider/AssertionsProvider",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.2.54"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/integ-tests-alpha.AssertionsProvider",
+                      "version": "2.86.0-alpha.0"
+                    }
+                  },
+                  "Default": {
+                    "id": "Default",
+                    "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/HttpApiCall3c78dbf33e7d6d9e1367bd6006e2f319/Default",
+                    "children": {
+                      "Default": {
+                        "id": "Default",
+                        "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/HttpApiCall3c78dbf33e7d6d9e1367bd6006e2f319/Default/Default",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnResource",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CustomResource",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/integ-tests-alpha.HttpApiCall",
+                  "version": "2.86.0-alpha.0"
+                }
+              },
+              "SingletonFunction1488541a7b23466481b69b4408076b81": {
+                "id": "SingletonFunction1488541a7b23466481b69b4408076b81",
+                "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/SingletonFunction1488541a7b23466481b69b4408076b81",
+                "children": {
+                  "Staging": {
+                    "id": "Staging",
+                    "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/SingletonFunction1488541a7b23466481b69b4408076b81/Staging",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Role": {
+                    "id": "Role",
+                    "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/SingletonFunction1488541a7b23466481b69b4408076b81/Role",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Handler": {
+                    "id": "Handler",
+                    "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/SingletonFunction1488541a7b23466481b69b4408076b81/Handler",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              },
+              "HttpApiCall0f3a6c67ae6783a36320f3bb44702d30": {
+                "id": "HttpApiCall0f3a6c67ae6783a36320f3bb44702d30",
+                "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/HttpApiCall0f3a6c67ae6783a36320f3bb44702d30",
+                "children": {
+                  "HttpProvider": {
+                    "id": "HttpProvider",
+                    "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/HttpApiCall0f3a6c67ae6783a36320f3bb44702d30/HttpProvider",
+                    "children": {
+                      "AssertionsProvider": {
+                        "id": "AssertionsProvider",
+                        "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/HttpApiCall0f3a6c67ae6783a36320f3bb44702d30/HttpProvider/AssertionsProvider",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.2.54"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/integ-tests-alpha.AssertionsProvider",
+                      "version": "2.86.0-alpha.0"
+                    }
+                  },
+                  "Default": {
+                    "id": "Default",
+                    "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/HttpApiCall0f3a6c67ae6783a36320f3bb44702d30/Default",
+                    "children": {
+                      "Default": {
+                        "id": "Default",
+                        "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/HttpApiCall0f3a6c67ae6783a36320f3bb44702d30/Default/Default",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnResource",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CustomResource",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "AssertionResults": {
+                    "id": "AssertionResults",
+                    "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/HttpApiCall0f3a6c67ae6783a36320f3bb44702d30/AssertionResults",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/integ-tests-alpha.HttpApiCall",
+                  "version": "2.86.0-alpha.0"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.86.0"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "BlogAppIntegStage/BlogAppIntegAssertionsStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.86.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stage",
+          "version": "2.86.0"
+        }
+      },
+      "integ-tests": {
+        "id": "integ-tests",
+        "path": "integ-tests",
+        "children": {
+          "DefaultTest": {
+            "id": "DefaultTest",
+            "path": "integ-tests/DefaultTest",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "integ-tests/DefaultTest/Default",
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/integ-tests-alpha.IntegTestCase",
+              "version": "2.86.0-alpha.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/integ-tests-alpha.IntegTest",
+          "version": "2.86.0-alpha.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.2.54"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "hall-constructs.HallApp",
+      "version": "0.0.2"
+    }
+  }
+}

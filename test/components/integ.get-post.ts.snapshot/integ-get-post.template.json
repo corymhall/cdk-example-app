@@ -1,0 +1,2082 @@
+{
+ "Resources": {
+  "GetPostIntegMonitorDynamicDashboardsInfrastructure33222D47": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"start\":\"-PT8H\",\"periodOverride\":\"inherit\",\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"# ",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       "\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Client Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"4xx\",\"ApiId\",\"",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       "\",{\"label\":\"client error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Integration Latency\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       "\",{\"label\":\"integration latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Latency\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       "\",{\"label\":\"latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":18,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Requests\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"Count\",\"ApiId\",\"",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       "\",{\"label\":\"total requests\",\"stat\":\"SampleCount\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":7,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Server Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"5xx\",\"ApiId\",\"",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       "\",{\"label\":\"server error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":13,\"properties\":{\"markdown\":\"# ",
+       {
+        "Fn::GetAtt": [
+         "GetPostAppServiceA50C5323",
+         "Name"
+        ]
+       },
+       "\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":14,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Cpu Utilization\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ECS\",\"CPUUtilization\",\"ClusterName\",\"",
+       {
+        "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+       },
+       "\",\"ServiceName\",\"",
+       {
+        "Fn::GetAtt": [
+         "GetPostAppServiceA50C5323",
+         "Name"
+        ]
+       },
+       "\",{\"label\":\"cpu\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":14,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Memory Utilization\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ECS\",\"MemoryUtilization\",\"ClusterName\",\"",
+       {
+        "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+       },
+       "\",\"ServiceName\",\"",
+       {
+        "Fn::GetAtt": [
+         "GetPostAppServiceA50C5323",
+         "Name"
+        ]
+       },
+       "\",{\"label\":\"memory\"}]],\"yAxis\":{}}}]}"
+      ]
+     ]
+    },
+    "DashboardName": "BlogAppDashboards-Infrastructure"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegMonitorFacadeFacadeIntegrationLatencyAnomalyCriticalF78D11A8": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "LessThanLowerOrGreaterThanUpperThreshold",
+    "EvaluationPeriods": 3,
+    "ActionsEnabled": true,
+    "AlarmDescription": "Anomaly detection: value is outside of the expected band.",
+    "AlarmName": "Facade--IntegrationLatency-Anomaly-Critical",
+    "DatapointsToAlarm": 3,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(integrationLatency,3)",
+      "Id": "expr_1",
+      "Label": "integrationLatency",
+      "ReturnData": true
+     },
+     {
+      "Id": "integrationLatency",
+      "Label": "integration latency",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiId",
+          "Value": {
+           "Ref": "GetPostIntegApiB404619D"
+          }
+         }
+        ],
+        "MetricName": "IntegrationLatency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": true
+     }
+    ],
+    "ThresholdMetricId": "expr_1",
+    "TreatMissingData": "missing"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegMonitorFacadeApiMonitorDashboard2001904D": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"### IntegrationLatencyAnomalyDetectionAlarm\"}},{\"type\":\"metric\",\"width\":24,\"height\":5,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       " Integration Latency\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[{\"label\":\"integrationLatency\",\"expression\":\"ANOMALY_DETECTION_BAND(integrationLatency,3)\"}],[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       "\",{\"label\":\"integration latency\",\"visible\":false,\"id\":\"integrationLatency\"}]],\"yAxis\":{}}}]}"
+      ]
+     ]
+    },
+    "DashboardName": "BlogAppDashboards-ApiMonitor-Alarms"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegMonitorFacadeApiMonitorDashboardDetail58174ABF": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"widgets\":[{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Client Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"4xx\",\"ApiId\",\"",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       "\",{\"label\":\"client error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Integration Latency\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       "\",{\"label\":\"integration latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Latency\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       "\",{\"label\":\"latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":18,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Requests\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"Count\",\"ApiId\",\"",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       "\",{\"label\":\"total requests\",\"stat\":\"SampleCount\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Server Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"5xx\",\"ApiId\",\"",
+       {
+        "Ref": "GetPostIntegApiB404619D"
+       },
+       "\",{\"label\":\"server error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}}]}"
+      ]
+     ]
+    },
+    "DashboardName": "BlogAppDashboards-ApiMonitor-Detail"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegMonitorFacadeFacadeAppServiceCPUUsageCpu62F439FD": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanThreshold",
+    "EvaluationPeriods": 3,
+    "ActionsEnabled": true,
+    "AlarmDescription": "The CPU usage is too high.",
+    "AlarmName": "Facade-AppService-CPU-Usage-Cpu",
+    "DatapointsToAlarm": 3,
+    "Metrics": [
+     {
+      "Id": "m1",
+      "Label": "Cluster CPU Utilization",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ClusterName",
+          "Value": {
+           "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+          }
+         },
+         {
+          "Name": "ServiceName",
+          "Value": {
+           "Fn::GetAtt": [
+            "GetPostAppServiceA50C5323",
+            "Name"
+           ]
+          }
+         }
+        ],
+        "MetricName": "CPUUtilization",
+        "Namespace": "AWS/ECS"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": true
+     }
+    ],
+    "Threshold": 70,
+    "TreatMissingData": "missing"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegMonitorFacadeFacadeAppServiceMemoryUsageMemoryD4B2D8C4": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanThreshold",
+    "EvaluationPeriods": 3,
+    "ActionsEnabled": true,
+    "AlarmDescription": "The memory usage is too high.",
+    "AlarmName": "Facade-AppService-Memory-Usage-Memory",
+    "DatapointsToAlarm": 3,
+    "Metrics": [
+     {
+      "Id": "m1",
+      "Label": "Cluster Memory Utilization",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ClusterName",
+          "Value": {
+           "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+          }
+         },
+         {
+          "Name": "ServiceName",
+          "Value": {
+           "Fn::GetAtt": [
+            "GetPostAppServiceA50C5323",
+            "Name"
+           ]
+          }
+         }
+        ],
+        "MetricName": "MemoryUtilization",
+        "Namespace": "AWS/ECS"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": true
+     }
+    ],
+    "Threshold": 70,
+    "TreatMissingData": "missing"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegMonitorFacadeFacadeRunningTasksAnomalyCriticalA7B07E01": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "LessThanLowerOrGreaterThanUpperThreshold",
+    "EvaluationPeriods": 3,
+    "ActionsEnabled": true,
+    "AlarmDescription": "Anomaly detection: value is outside of the expected band.",
+    "AlarmName": "Facade--RunningTasks-Anomaly-Critical",
+    "DatapointsToAlarm": 3,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(runningTasks,3)",
+      "Id": "expr_1",
+      "Label": "runningTasks",
+      "ReturnData": true
+     },
+     {
+      "Id": "runningTasks",
+      "Label": "Running Tasks",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ClusterName",
+          "Value": {
+           "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+          }
+         },
+         {
+          "Name": "ServiceName",
+          "Value": {
+           "Fn::GetAtt": [
+            "GetPostAppServiceA50C5323",
+            "Name"
+           ]
+          }
+         }
+        ],
+        "MetricName": "RunningTaskCount",
+        "Namespace": "ECS/ContainerInsights"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": true
+     }
+    ],
+    "ThresholdMetricId": "expr_1",
+    "TreatMissingData": "missing"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegMonitorFacadeGetPostDashboard7937BE6C": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"### RunningTasksAnomalyDetectionAlarm\"}},{\"type\":\"metric\",\"width\":24,\"height\":5,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"",
+       {
+        "Fn::GetAtt": [
+         "GetPostAppServiceA50C5323",
+         "Name"
+        ]
+       },
+       " Running Tasks\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[{\"label\":\"runningTasks\",\"expression\":\"ANOMALY_DETECTION_BAND(runningTasks,3)\"}],[\"ECS/ContainerInsights\",\"RunningTaskCount\",\"ClusterName\",\"",
+       {
+        "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+       },
+       "\",\"ServiceName\",\"",
+       {
+        "Fn::GetAtt": [
+         "GetPostAppServiceA50C5323",
+         "Name"
+        ]
+       },
+       "\",{\"label\":\"Running Tasks\",\"visible\":false,\"id\":\"runningTasks\"}]],\"yAxis\":{}}}]}"
+      ]
+     ]
+    },
+    "DashboardName": "BlogAppDashboards-GetPost-Alarms"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegMonitorFacadeGetPostDashboardDetail82699203": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"widgets\":[{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"blogApp\",\"getItemSuccess\",\"service\",\"GetPost\"]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"blogApp\",\"getItemFailure\",\"service\",\"GetItem\"]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Cpu Utilization\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ECS\",\"CPUUtilization\",\"ClusterName\",\"",
+       {
+        "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+       },
+       "\",\"ServiceName\",\"",
+       {
+        "Fn::GetAtt": [
+         "GetPostAppServiceA50C5323",
+         "Name"
+        ]
+       },
+       "\",{\"label\":\"cpu\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Memory Utilization\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ECS\",\"MemoryUtilization\",\"ClusterName\",\"",
+       {
+        "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+       },
+       "\",\"ServiceName\",\"",
+       {
+        "Fn::GetAtt": [
+         "GetPostAppServiceA50C5323",
+         "Name"
+        ]
+       },
+       "\",{\"label\":\"memory\"}]],\"yAxis\":{}}}]}"
+      ]
+     ]
+    },
+    "DashboardName": "BlogAppDashboards-GetPost-Detail"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpc1B1AA91F": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-get-post/GetPostIntegVpc"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPublicSubnet1SubnetD094D9E3": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "GetPostIntegVpc1B1AA91F"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-get-post/GetPostIntegVpc/PublicSubnet1"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPublicSubnet1RouteTableF3C8CA1D": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "GetPostIntegVpc1B1AA91F"
+    },
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-get-post/GetPostIntegVpc/PublicSubnet1"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPublicSubnet1RouteTableAssociationFA15F9F6": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "GetPostIntegVpcPublicSubnet1RouteTableF3C8CA1D"
+    },
+    "SubnetId": {
+     "Ref": "GetPostIntegVpcPublicSubnet1SubnetD094D9E3"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPublicSubnet1DefaultRoute7BFCCDE4": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "GetPostIntegVpcPublicSubnet1RouteTableF3C8CA1D"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "GetPostIntegVpcIGW8B08AE18"
+    }
+   },
+   "DependsOn": [
+    "GetPostIntegVpcVPCGW833EB035"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPublicSubnet1EIP2AE21DC5": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-get-post/GetPostIntegVpc/PublicSubnet1"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPublicSubnet1NATGateway47B0F078": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "GetPostIntegVpcPublicSubnet1SubnetD094D9E3"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "GetPostIntegVpcPublicSubnet1EIP2AE21DC5",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-get-post/GetPostIntegVpc/PublicSubnet1"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "DependsOn": [
+    "GetPostIntegVpcPublicSubnet1DefaultRoute7BFCCDE4",
+    "GetPostIntegVpcPublicSubnet1RouteTableAssociationFA15F9F6"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPublicSubnet2Subnet2AA95375": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "GetPostIntegVpc1B1AA91F"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-get-post/GetPostIntegVpc/PublicSubnet2"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPublicSubnet2RouteTableF742B02E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "GetPostIntegVpc1B1AA91F"
+    },
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-get-post/GetPostIntegVpc/PublicSubnet2"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPublicSubnet2RouteTableAssociation2B653E68": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "GetPostIntegVpcPublicSubnet2RouteTableF742B02E"
+    },
+    "SubnetId": {
+     "Ref": "GetPostIntegVpcPublicSubnet2Subnet2AA95375"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPublicSubnet2DefaultRoute2C5216AE": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "GetPostIntegVpcPublicSubnet2RouteTableF742B02E"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "GetPostIntegVpcIGW8B08AE18"
+    }
+   },
+   "DependsOn": [
+    "GetPostIntegVpcVPCGW833EB035"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPrivateSubnet1SubnetDE3403A4": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "GetPostIntegVpc1B1AA91F"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-get-post/GetPostIntegVpc/PrivateSubnet1"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPrivateSubnet1RouteTable707196F3": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "GetPostIntegVpc1B1AA91F"
+    },
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-get-post/GetPostIntegVpc/PrivateSubnet1"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPrivateSubnet1RouteTableAssociation3E4373BB": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "GetPostIntegVpcPrivateSubnet1RouteTable707196F3"
+    },
+    "SubnetId": {
+     "Ref": "GetPostIntegVpcPrivateSubnet1SubnetDE3403A4"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPrivateSubnet1DefaultRouteB8D92460": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "GetPostIntegVpcPrivateSubnet1RouteTable707196F3"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "GetPostIntegVpcPublicSubnet1NATGateway47B0F078"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPrivateSubnet2Subnet83E63470": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "GetPostIntegVpc1B1AA91F"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-get-post/GetPostIntegVpc/PrivateSubnet2"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPrivateSubnet2RouteTableECD16254": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "GetPostIntegVpc1B1AA91F"
+    },
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-get-post/GetPostIntegVpc/PrivateSubnet2"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPrivateSubnet2RouteTableAssociationA2ED86C1": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "GetPostIntegVpcPrivateSubnet2RouteTableECD16254"
+    },
+    "SubnetId": {
+     "Ref": "GetPostIntegVpcPrivateSubnet2Subnet83E63470"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcPrivateSubnet2DefaultRouteF7B6CF52": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "GetPostIntegVpcPrivateSubnet2RouteTableECD16254"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "GetPostIntegVpcPublicSubnet1NATGateway47B0F078"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcIGW8B08AE18": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-get-post/GetPostIntegVpc"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcVPCGW833EB035": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "GetPostIntegVpc1B1AA91F"
+    },
+    "InternetGatewayId": {
+     "Ref": "GetPostIntegVpcIGW8B08AE18"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegVpcRestrictDefaultSecurityGroupCustomResource40670E9C": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+      "Arn"
+     ]
+    },
+    "DefaultSecurityGroupId": {
+     "Fn::GetAtt": [
+      "GetPostIntegVpc1B1AA91F",
+      "DefaultSecurityGroup"
+     ]
+    },
+    "Account": {
+     "Ref": "AWS::AccountId"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:",
+             {
+              "Ref": "AWS::Partition"
+             },
+             ":ec2:",
+             {
+              "Ref": "AWS::Region"
+             },
+             ":",
+             {
+              "Ref": "AWS::AccountId"
+             },
+             ":security-group/",
+             {
+              "Fn::GetAtt": [
+               "GetPostIntegVpc1B1AA91F",
+               "DefaultSecurityGroup"
+              ]
+             }
+            ]
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "e77031893275c08bcaa0a774aa8b611727afd045b3b5d8e1e6f0f04063d9d386.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs16.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegNetworkClusterF2A9DE79": {
+   "Type": "AWS::ECS::Cluster",
+   "Properties": {
+    "ClusterSettings": [
+     {
+      "Name": "containerInsights",
+      "Value": "enabled"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegNetworkClusterDefaultServiceDiscoveryNamespaceF6FE4BBB": {
+   "Type": "AWS::ServiceDiscovery::PrivateDnsNamespace",
+   "Properties": {
+    "Name": "blog-dev.com",
+    "Vpc": {
+     "Ref": "GetPostIntegVpc1B1AA91F"
+    },
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegNetworkCluster97470244": {
+   "Type": "AWS::ECS::ClusterCapacityProviderAssociations",
+   "Properties": {
+    "CapacityProviders": [
+     "FARGATE",
+     "FARGATE_SPOT"
+    ],
+    "Cluster": {
+     "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+    },
+    "DefaultCapacityProviderStrategy": []
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegApiB404619D": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "Name": "GetPostIntegApi",
+    "ProtocolType": "HTTP",
+    "Tags": {
+     "dir": "/home/hallcor/personal/cdk-example-app/test/components",
+     "repoName": "cdk-example-app"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegApiDefaultStage3BA9405D": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": {
+     "Ref": "GetPostIntegApiB404619D"
+    },
+    "StageName": "$default",
+    "AutoDeploy": true,
+    "Tags": {
+     "dir": "/home/hallcor/personal/cdk-example-app/test/components",
+     "repoName": "cdk-example-app"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegApiVpcLinkSgEE3DB7FD": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security Group for API Gateway Vpc Link",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     },
+     {
+      "CidrIpv6": "::/0",
+      "Description": "Allow all outbound ipv6 traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ],
+    "VpcId": {
+     "Ref": "GetPostIntegVpc1B1AA91F"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegApiVpcLink7FFBC7CD": {
+   "Type": "AWS::ApiGatewayV2::VpcLink",
+   "Properties": {
+    "Name": "integgetpostGetPostIntegApiVpcLink44415E8F",
+    "SubnetIds": [
+     {
+      "Ref": "GetPostIntegVpcPrivateSubnet1SubnetDE3403A4"
+     },
+     {
+      "Ref": "GetPostIntegVpcPrivateSubnet2Subnet83E63470"
+     }
+    ],
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "GetPostIntegApiVpcLinkSgEE3DB7FD",
+       "GroupId"
+      ]
+     }
+    ],
+    "Tags": {
+     "dir": "/home/hallcor/personal/cdk-example-app/test/components",
+     "repoName": "cdk-example-app"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegApiGETpostsidgetPostB06C46FA": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "GetPostIntegApiB404619D"
+    },
+    "IntegrationType": "HTTP_PROXY",
+    "ConnectionId": {
+     "Ref": "GetPostIntegApiVpcLink7FFBC7CD"
+    },
+    "ConnectionType": "VPC_LINK",
+    "IntegrationMethod": "ANY",
+    "IntegrationUri": {
+     "Fn::GetAtt": [
+      "GetPostAppServiceCloudmapService52F860BF",
+      "Arn"
+     ]
+    },
+    "PayloadFormatVersion": "1.0"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegApiGETpostsid25AFCF1F": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": {
+     "Ref": "GetPostIntegApiB404619D"
+    },
+    "RouteKey": "GET /posts/{id}",
+    "AuthorizationType": "NONE",
+    "Target": {
+     "Fn::Join": [
+      "",
+      [
+       "integrations/",
+       {
+        "Ref": "GetPostIntegApiGETpostsidgetPostB06C46FA"
+       }
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostIntegTable2EC9EDEC": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "KeySchema": [
+     {
+      "AttributeName": "pk",
+      "KeyType": "HASH"
+     }
+    ],
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "pk",
+      "AttributeType": "S"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    },
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostLogGroup615A249A": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 7,
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostTaskDefTaskRoleB6AF59D2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AWSXRayDaemonWriteAccess"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostTaskDefTaskRoleDefaultPolicy48191C35": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "cloudwatch:PutMetricData",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:Query",
+        "dynamodb:Scan"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "GetPostIntegTable2EC9EDEC",
+          "Arn"
+         ]
+        },
+        {
+         "Ref": "AWS::NoValue"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "GetPostTaskDefTaskRoleDefaultPolicy48191C35",
+    "Roles": [
+     {
+      "Ref": "GetPostTaskDefTaskRoleB6AF59D2"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostTaskDef74D442CE": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Environment": [
+       {
+        "Name": "TABLE_NAME",
+        "Value": {
+         "Ref": "GetPostIntegTable2EC9EDEC"
+        }
+       },
+       {
+        "Name": "AWS_EMF_AGENT_ENDPOINT",
+        "Value": "tcp://127.0.0.1:25888"
+       },
+       {
+        "Name": "LOG_LEVEL",
+        "Value": "DEBUG"
+       },
+       {
+        "Name": "POWERTOOLS_SERVICE_NAME",
+        "Value": "GetPostService"
+       },
+       {
+        "Name": "POWERTOOLS_METRICS_NAMESPACE",
+        "Value": "blogApp"
+       },
+       {
+        "Name": "ENV",
+        "Value": "dev"
+       }
+      ],
+      "Essential": true,
+      "HealthCheck": {
+       "Command": [
+        "CMD-SHELL",
+        "curl -s http://127.0.0.1:8080/health"
+       ],
+       "Interval": 5,
+       "Retries": 1,
+       "StartPeriod": 10,
+       "Timeout": 2
+      },
+      "Image": {
+       "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:35ac023697345b75378e0c7cc99d3f6fb6ae7c08ac790906aece6919fe151bbd"
+      },
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": {
+         "Ref": "GetPostLogGroup615A249A"
+        },
+        "awslogs-stream-prefix": "getPost",
+        "awslogs-region": {
+         "Ref": "AWS::Region"
+        }
+       }
+      },
+      "Name": "getPost",
+      "PortMappings": [
+       {
+        "ContainerPort": 8080,
+        "Protocol": "tcp"
+       }
+      ]
+     },
+     {
+      "Environment": [
+       {
+        "Name": "AWS_REGION",
+        "Value": {
+         "Ref": "AWS::Region"
+        }
+       }
+      ],
+      "Essential": true,
+      "HealthCheck": {
+       "Command": [
+        "CMD-SHELL",
+        "curl -s http://localhost:2000"
+       ],
+       "Interval": 5,
+       "Retries": 3,
+       "StartPeriod": 10,
+       "Timeout": 2
+      },
+      "Image": "amazon/aws-xray-daemon:latest",
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": {
+         "Ref": "GetPostLogGroup615A249A"
+        },
+        "awslogs-stream-prefix": "xray",
+        "awslogs-region": {
+         "Ref": "AWS::Region"
+        }
+       }
+      },
+      "MemoryReservation": 256,
+      "Name": "xray",
+      "PortMappings": [
+       {
+        "ContainerPort": 2000,
+        "Protocol": "udp"
+       }
+      ]
+     },
+     {
+      "Environment": [
+       {
+        "Name": "CW_CONFIG_CONTENT",
+        "Value": "{\"logs\":{\"metrics_collected\":{\"emf\":{}}},\"metrics\":{\"metrics_collected\":{\"statsd\":{}}}}"
+       }
+      ],
+      "Essential": true,
+      "Image": "public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest",
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": {
+         "Ref": "GetPostLogGroup615A249A"
+        },
+        "awslogs-stream-prefix": "cloudwatch-agent",
+        "awslogs-region": {
+         "Ref": "AWS::Region"
+        }
+       }
+      },
+      "MemoryReservation": 50,
+      "Name": "cloudwatch-agent",
+      "PortMappings": [
+       {
+        "ContainerPort": 25888,
+        "Protocol": "tcp"
+       }
+      ]
+     }
+    ],
+    "Cpu": "256",
+    "ExecutionRoleArn": {
+     "Fn::GetAtt": [
+      "GetPostTaskDefExecutionRoleAAEEA792",
+      "Arn"
+     ]
+    },
+    "Family": "integgetpostGetPostTaskDefD0B47C5A",
+    "Memory": "512",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ],
+    "TaskRoleArn": {
+     "Fn::GetAtt": [
+      "GetPostTaskDefTaskRoleB6AF59D2",
+      "Arn"
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostTaskDefExecutionRoleAAEEA792": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostTaskDefExecutionRoleDefaultPolicy7D07E747": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ecr:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":repository/",
+          {
+           "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+          }
+         ]
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "GetPostLogGroup615A249A",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "GetPostTaskDefExecutionRoleDefaultPolicy7D07E747",
+    "Roles": [
+     {
+      "Ref": "GetPostTaskDefExecutionRoleAAEEA792"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostAppServiceA50C5323": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+    },
+    "DeploymentConfiguration": {
+     "Alarms": {
+      "AlarmNames": [
+       {
+        "Ref": "GetPostDeploymentFailingFEBE5482"
+       }
+      ],
+      "Enable": true,
+      "Rollback": true
+     },
+     "DeploymentCircuitBreaker": {
+      "Enable": true,
+      "Rollback": true
+     },
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "DeploymentController": {
+     "Type": "ECS"
+    },
+    "EnableECSManagedTags": true,
+    "LaunchType": "FARGATE",
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "DISABLED",
+      "SecurityGroups": [
+       {
+        "Fn::GetAtt": [
+         "GetPostAppServiceSecurityGroup04A7E398",
+         "GroupId"
+        ]
+       }
+      ],
+      "Subnets": [
+       {
+        "Ref": "GetPostIntegVpcPrivateSubnet1SubnetDE3403A4"
+       },
+       {
+        "Ref": "GetPostIntegVpcPrivateSubnet2Subnet83E63470"
+       }
+      ]
+     }
+    },
+    "PlatformVersion": "1.4.0",
+    "ServiceRegistries": [
+     {
+      "ContainerName": "getPost",
+      "ContainerPort": 8080,
+      "RegistryArn": {
+       "Fn::GetAtt": [
+        "GetPostAppServiceCloudmapService52F860BF",
+        "Arn"
+       ]
+      }
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ],
+    "TaskDefinition": {
+     "Ref": "GetPostTaskDef74D442CE"
+    }
+   },
+   "DependsOn": [
+    "GetPostTaskDefTaskRoleDefaultPolicy48191C35",
+    "GetPostTaskDefTaskRoleB6AF59D2"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostAppServiceSecurityGroup04A7E398": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "integ-get-post/GetPost/GetPost/AppService/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ],
+    "VpcId": {
+     "Ref": "GetPostIntegVpc1B1AA91F"
+    }
+   },
+   "DependsOn": [
+    "GetPostTaskDefTaskRoleDefaultPolicy48191C35",
+    "GetPostTaskDefTaskRoleB6AF59D2"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostAppServiceSecurityGroupfrominteggetpostGetPostIntegApiVpcLinkSg833BF15080805CC11113": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "from integgetpostGetPostIntegApiVpcLinkSg833BF150:8080",
+    "FromPort": 8080,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "GetPostAppServiceSecurityGroup04A7E398",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "GetPostIntegApiVpcLinkSgEE3DB7FD",
+      "GroupId"
+     ]
+    },
+    "ToPort": 8080
+   },
+   "DependsOn": [
+    "GetPostTaskDefTaskRoleDefaultPolicy48191C35",
+    "GetPostTaskDefTaskRoleB6AF59D2"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostAppServiceCloudmapService52F860BF": {
+   "Type": "AWS::ServiceDiscovery::Service",
+   "Properties": {
+    "DnsConfig": {
+     "DnsRecords": [
+      {
+       "TTL": 60,
+       "Type": "SRV"
+      }
+     ],
+     "NamespaceId": {
+      "Fn::GetAtt": [
+       "GetPostIntegNetworkClusterDefaultServiceDiscoveryNamespaceF6FE4BBB",
+       "Id"
+      ]
+     },
+     "RoutingPolicy": "MULTIVALUE"
+    },
+    "HealthCheckCustomConfig": {
+     "FailureThreshold": 1
+    },
+    "NamespaceId": {
+     "Fn::GetAtt": [
+      "GetPostIntegNetworkClusterDefaultServiceDiscoveryNamespaceF6FE4BBB",
+      "Id"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "DependsOn": [
+    "GetPostTaskDefTaskRoleDefaultPolicy48191C35",
+    "GetPostTaskDefTaskRoleB6AF59D2"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostAppServiceTaskCountTarget29996380": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 10,
+    "MinCapacity": 1,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "service/",
+       {
+        "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+       },
+       "/",
+       {
+        "Fn::GetAtt": [
+         "GetPostAppServiceA50C5323",
+         "Name"
+        ]
+       }
+      ]
+     ]
+    },
+    "ScalableDimension": "ecs:service:DesiredCount",
+    "ServiceNamespace": "ecs",
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService"
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "GetPostTaskDefTaskRoleDefaultPolicy48191C35",
+    "GetPostTaskDefTaskRoleB6AF59D2"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostAppServiceTaskCountTargetMemoryScaling89AB958B": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "integgetpostGetPostAppServiceTaskCountTargetMemoryScaling9C4AD672",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "GetPostAppServiceTaskCountTarget29996380"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "ECSServiceAverageMemoryUtilization"
+     },
+     "TargetValue": 60
+    }
+   },
+   "DependsOn": [
+    "GetPostTaskDefTaskRoleDefaultPolicy48191C35",
+    "GetPostTaskDefTaskRoleB6AF59D2"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostAppServiceTaskCountTargetCpuScalingB0620444": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "integgetpostGetPostAppServiceTaskCountTargetCpuScaling7371BAA9",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "GetPostAppServiceTaskCountTarget29996380"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "ECSServiceAverageCPUUtilization"
+     },
+     "TargetValue": 60
+    }
+   },
+   "DependsOn": [
+    "GetPostTaskDefTaskRoleDefaultPolicy48191C35",
+    "GetPostTaskDefTaskRoleB6AF59D2"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostRule216A33F2": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "EventPattern": {
+     "detail-type": [
+      "ECS Task State Change"
+     ],
+     "source": [
+      "aws.ecs"
+     ],
+     "detail": {
+      "clusterArn": [
+       {
+        "Fn::GetAtt": [
+         "GetPostIntegNetworkClusterF2A9DE79",
+         "Arn"
+        ]
+       }
+      ],
+      "desiredStatus": [
+       "STOPPED"
+      ],
+      "stopCode": [
+       "ServiceSchedulerInitiated"
+      ],
+      "stoppedReason": [
+       "Task failed container health checks"
+      ],
+      "containers": {
+       "name": [
+        "getPost"
+       ]
+      }
+     }
+    },
+    "State": "ENABLED"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetPostDeploymentFailingFEBE5482": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "EvaluationPeriods": 1,
+    "Dimensions": [
+     {
+      "Name": "RuleName",
+      "Value": {
+       "Ref": "GetPostRule216A33F2"
+      }
+     }
+    ],
+    "MetricName": "TriggeredRules",
+    "Namespace": "AWS/Events",
+    "Period": 10,
+    "Statistic": "Average",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching",
+    "Unit": "Count"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "Outputs": {
+  "ExportsOutputRefGetPostIntegTable2EC9EDEC816E7C10": {
+   "Value": {
+    "Ref": "GetPostIntegTable2EC9EDEC"
+   },
+   "Export": {
+    "Name": "integ-get-post:ExportsOutputRefGetPostIntegTable2EC9EDEC816E7C10"
+   }
+  },
+  "ExportsOutputRefGetPostIntegApiB404619D2FE1F90C": {
+   "Value": {
+    "Ref": "GetPostIntegApiB404619D"
+   },
+   "Export": {
+    "Name": "integ-get-post:ExportsOutputRefGetPostIntegApiB404619D2FE1F90C"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

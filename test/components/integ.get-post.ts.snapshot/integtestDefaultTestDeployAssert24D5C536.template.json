@@ -1,0 +1,195 @@
+{
+ "Resources": {
+  "AwsApiCallDynamoDBputItem6a90464b4533e04b0a6541d139a49371": {
+   "Type": "Custom::DeployAssert@SdkCallDynamoDBputItem",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "SingletonFunction1488541a7b23466481b69b4408076b81HandlerCD40AE9F",
+      "Arn"
+     ]
+    },
+    "service": "DynamoDB",
+    "api": "putItem",
+    "parameters": {
+     "Item": {
+      "author": {
+       "S": "corymhall"
+      },
+      "content": {
+       "S": "This is a test post"
+      },
+      "createdAt": {
+       "S": "2023-07-14T14:44:11.780Z"
+      },
+      "pk": {
+       "S": "1"
+      },
+      "status": {
+       "S": "PUBLISHED"
+      },
+      "summary": {
+       "S": "Summary"
+      }
+     },
+     "TableName": {
+      "Fn::ImportValue": "integ-get-post:ExportsOutputRefGetPostIntegTable2EC9EDEC816E7C10"
+     }
+    },
+    "flattenResponse": "false",
+    "salt": "1689345852240"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "SingletonFunction1488541a7b23466481b69b4408076b81Role37ABCE73": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Action": [
+          "dynamodb:PutItem"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          "*"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "SingletonFunction1488541a7b23466481b69b4408076b81HandlerCD40AE9F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Runtime": "nodejs14.x",
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "44e68c347b9032ac8ebe7132bf54bfb131857ca6c23e2f0d5fc4dab9c64aa887.zip"
+    },
+    "Timeout": 120,
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "SingletonFunction1488541a7b23466481b69b4408076b81Role37ABCE73",
+      "Arn"
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "HttpApiCalle7735bda26d0269db5e0a251f60760dd": {
+   "Type": "Custom::DeployAssert@HttpCall",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "SingletonFunction1488541a7b23466481b69b4408076b81HandlerCD40AE9F",
+      "Arn"
+     ]
+    },
+    "parameters": {
+     "url": {
+      "Fn::Join": [
+       "",
+       [
+        "https://",
+        {
+         "Fn::ImportValue": "integ-get-post:ExportsOutputRefGetPostIntegApiB404619D2FE1F90C"
+        },
+        ".execute-api.",
+        {
+         "Ref": "AWS::Region"
+        },
+        ".",
+        {
+         "Ref": "AWS::URLSuffix"
+        },
+        "/posts/1"
+       ]
+      ]
+     }
+    },
+    "expected": "{\"$ObjectLike\":{\"body\":{\"author\":\"corymhall\",\"content\":\"This is a test post\",\"createdAt\":\"2023-07-14T14:44:11.780Z\",\"pk\":\"1\",\"status\":\"PUBLISHED\",\"summary\":\"Summary\"}}}",
+    "salt": "1689345852241"
+   },
+   "DependsOn": [
+    "AwsApiCallDynamoDBputItem6a90464b4533e04b0a6541d139a49371"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "Outputs": {
+  "AssertionResultsHttpApiCalle7735bda26d0269db5e0a251f60760dd": {
+   "Value": {
+    "Fn::GetAtt": [
+     "HttpApiCalle7735bda26d0269db5e0a251f60760dd",
+     "assertion"
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

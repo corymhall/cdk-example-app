@@ -1,0 +1,236 @@
+{
+ "Resources": {
+  "MonitoringMonitoringDashboardsDashboard5649A1D9": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"start\":\"-PT8H\",\"periodOverride\":\"inherit\",\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"### API Gateway V2 HTTP Endpoint **",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+       },
+       " $default**\"}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"TPS\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[{\"label\":\"TPS\",\"expression\":\"requests / PERIOD(requests)\"}],[\"AWS/ApiGateway\",\"Count\",\"ApiId\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+       },
+       "\",\"Stage\",\"$default\",{\"label\":\"Invocations\",\"stat\":\"Sum\",\"visible\":false,\"id\":\"requests\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Rate\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":6,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Latency\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+       },
+       "\",\"Stage\",\"$default\",{\"label\":\"P50 (avg: ${AVG})\",\"stat\":\"p50\"}],[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+       },
+       "\",\"Stage\",\"$default\",{\"label\":\"P50 (avg: ${AVG})\",\"stat\":\"p50\"}],[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+       },
+       "\",\"Stage\",\"$default\",{\"label\":\"P90 (avg: ${AVG})\",\"stat\":\"p90\"}],[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+       },
+       "\",\"Stage\",\"$default\",{\"label\":\"P90 (avg: ${AVG})\",\"stat\":\"p90\"}],[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+       },
+       "\",\"Stage\",\"$default\",{\"label\":\"P99 (avg: ${AVG})\",\"stat\":\"p99\"}],[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+       },
+       "\",\"Stage\",\"$default\",{\"label\":\"P99 (avg: ${AVG})\",\"stat\":\"p99\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"ms\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":12,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"4xx\",\"ApiId\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+       },
+       "\",\"Stage\",\"$default\",{\"label\":\"4xx\",\"stat\":\"Sum\"}],[\"AWS/ApiGateway\",\"5xx\",\"ApiId\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+       },
+       "\",\"Stage\",\"$default\",{\"label\":\"5xx\",\"stat\":\"Sum\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Count\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":18,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors (rate)\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"4xx\",\"ApiId\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+       },
+       "\",\"Stage\",\"$default\",{\"label\":\"4xx (avg)\"}],[\"AWS/ApiGateway\",\"5xx\",\"ApiId\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefApiF70053CD5653BA4D"
+       },
+       "\",\"Stage\",\"$default\",{\"label\":\"5xx (avg)\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Rate\",\"showUnits\":false}}}},{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":6,\"properties\":{\"markdown\":\"### Fargate Service **AppService**\"}},{\"type\":\"metric\",\"width\":8,\"height\":5,\"x\":0,\"y\":7,\"properties\":{\"view\":\"timeSeries\",\"title\":\"CPU Utilization\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ECS\",\"CPUUtilization\",\"ClusterName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkCluster17B54D113FA77A85"
+       },
+       "\",\"ServiceName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputFnGetAttGetPostAppServiceA50C5323Name6E4CBB98"
+       },
+       "\",{\"label\":\"Cluster CPU Utilization\"}]],\"yAxis\":{\"left\":{\"min\":0,\"max\":100,\"label\":\"%\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":8,\"height\":5,\"x\":8,\"y\":7,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Memory Utilization\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ECS\",\"MemoryUtilization\",\"ClusterName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkCluster17B54D113FA77A85"
+       },
+       "\",\"ServiceName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputFnGetAttGetPostAppServiceA50C5323Name6E4CBB98"
+       },
+       "\",{\"label\":\"Cluster Memory Utilization\"}]],\"yAxis\":{\"left\":{\"min\":0,\"max\":100,\"label\":\"%\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":8,\"height\":5,\"x\":16,\"y\":7,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Task Count\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"ECS/ContainerInsights\",\"RunningTaskCount\",\"ClusterName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkCluster17B54D113FA77A85"
+       },
+       "\",\"ServiceName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputFnGetAttGetPostAppServiceA50C5323Name6E4CBB98"
+       },
+       "\",{\"label\":\"Running Tasks\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Count\",\"showUnits\":false}}}},{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":12,\"properties\":{\"markdown\":\"### Lambda Function **[CreatePost](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       ")**\"}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":0,\"y\":13,\"properties\":{\"view\":\"timeSeries\",\"title\":\"TPS\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[{\"label\":\"TPS\",\"expression\":\"FILL(requests,0) / PERIOD(requests)\"}],[\"AWS/Lambda\",\"Invocations\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"Invocations\",\"stat\":\"Sum\",\"visible\":false,\"id\":\"requests\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Rate\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":6,\"y\":13,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Latency\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"Duration\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"P50\",\"stat\":\"p50\"}],[\"AWS/Lambda\",\"Duration\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"P90\",\"stat\":\"p90\"}],[\"AWS/Lambda\",\"Duration\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"P99\",\"stat\":\"p99\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"ms\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":12,\"y\":13,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors (rate)\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"Errors\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"Faults (avg)\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Rate\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":6,\"height\":5,\"x\":18,\"y\":13,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Rates\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"Throttles\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"Throttles (avg)\"}],[\"AWS/Lambda\",\"ProvisionedConcurrencySpilloverInvocations\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"Provisioned Concurrency Spillovers (avg)\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Rate\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":8,\"height\":5,\"x\":0,\"y\":18,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Invocations\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"Invocations\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"Invocations\",\"stat\":\"Sum\"}],[\"AWS/Lambda\",\"Throttles\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"Throttles\",\"stat\":\"Sum\"}],[\"AWS/Lambda\",\"ConcurrentExecutions\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"Concurrent\",\"stat\":\"Maximum\"}],[\"AWS/Lambda\",\"ProvisionedConcurrencySpilloverInvocations\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"Provisioned Concurrency Spillovers\",\"stat\":\"Sum\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Count\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":8,\"height\":5,\"x\":8,\"y\":18,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Iterator\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"IteratorAge\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"Iterator Age\",\"stat\":\"Maximum\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"ms\",\"showUnits\":false}}}},{\"type\":\"metric\",\"width\":8,\"height\":5,\"x\":16,\"y\":18,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"Errors\",\"FunctionName\",\"",
+       {
+        "Fn::ImportValue": "BlogAppIntegStage-AppStack:ExportsOutputRefCreatePostD3E67D61CCFCD440"
+       },
+       "\",{\"label\":\"Faults\",\"stat\":\"Sum\"}]],\"yAxis\":{\"left\":{\"min\":0,\"label\":\"Count\",\"showUnits\":false}}}}]}"
+      ]
+     ]
+    },
+    "DashboardName": "Monitoring"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

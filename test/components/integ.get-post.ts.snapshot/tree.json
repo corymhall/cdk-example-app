@@ -1,0 +1,3058 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "integ-get-post": {
+        "id": "integ-get-post",
+        "path": "integ-get-post",
+        "children": {
+          "GetPostIntegMonitor": {
+            "id": "GetPostIntegMonitor",
+            "path": "integ-get-post/GetPostIntegMonitor",
+            "children": {
+              "DynamicDashboards": {
+                "id": "DynamicDashboards",
+                "path": "integ-get-post/GetPostIntegMonitor/DynamicDashboards",
+                "children": {
+                  "Infrastructure": {
+                    "id": "Infrastructure",
+                    "path": "integ-get-post/GetPostIntegMonitor/DynamicDashboards/Infrastructure",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPostIntegMonitor/DynamicDashboards/Infrastructure/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Dashboard",
+                          "aws:cdk:cloudformation:props": {
+                            "dashboardBody": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "{\"start\":\"-PT8H\",\"periodOverride\":\"inherit\",\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"# ",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  "\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Client Errors\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"4xx\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  "\",{\"label\":\"client error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Integration Latency\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  "\",{\"label\":\"integration latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Latency\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  "\",{\"label\":\"latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":18,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Requests\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"Count\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  "\",{\"label\":\"total requests\",\"stat\":\"SampleCount\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":7,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Server Errors\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"5xx\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  "\",{\"label\":\"server error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":13,\"properties\":{\"markdown\":\"# ",
+                                  {
+                                    "Fn::GetAtt": [
+                                      "GetPostAppServiceA50C5323",
+                                      "Name"
+                                    ]
+                                  },
+                                  "\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":14,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Cpu Utilization\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ECS\",\"CPUUtilization\",\"ClusterName\",\"",
+                                  {
+                                    "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+                                  },
+                                  "\",\"ServiceName\",\"",
+                                  {
+                                    "Fn::GetAtt": [
+                                      "GetPostAppServiceA50C5323",
+                                      "Name"
+                                    ]
+                                  },
+                                  "\",{\"label\":\"cpu\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":14,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Memory Utilization\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ECS\",\"MemoryUtilization\",\"ClusterName\",\"",
+                                  {
+                                    "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+                                  },
+                                  "\",\"ServiceName\",\"",
+                                  {
+                                    "Fn::GetAtt": [
+                                      "GetPostAppServiceA50C5323",
+                                      "Name"
+                                    ]
+                                  },
+                                  "\",{\"label\":\"memory\"}]],\"yAxis\":{}}}]}"
+                                ]
+                              ]
+                            },
+                            "dashboardName": "BlogAppDashboards-Infrastructure"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnDashboard",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Dashboard",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "cdk-monitoring-constructs.DynamicDashboardFactory",
+                  "version": "5.2.2"
+                }
+              },
+              "Facade": {
+                "id": "Facade",
+                "path": "integ-get-post/GetPostIntegMonitor/Facade",
+                "children": {
+                  "Facade--IntegrationLatency-Anomaly-Critical": {
+                    "id": "Facade--IntegrationLatency-Anomaly-Critical",
+                    "path": "integ-get-post/GetPostIntegMonitor/Facade/Facade--IntegrationLatency-Anomaly-Critical",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPostIntegMonitor/Facade/Facade--IntegrationLatency-Anomaly-Critical/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                          "aws:cdk:cloudformation:props": {
+                            "comparisonOperator": "LessThanLowerOrGreaterThanUpperThreshold",
+                            "evaluationPeriods": 3,
+                            "actionsEnabled": true,
+                            "alarmDescription": "Anomaly detection: value is outside of the expected band.",
+                            "alarmName": "Facade--IntegrationLatency-Anomaly-Critical",
+                            "datapointsToAlarm": 3,
+                            "metrics": [
+                              {
+                                "expression": "ANOMALY_DETECTION_BAND(integrationLatency,3)",
+                                "id": "expr_1",
+                                "label": "integrationLatency"
+                              },
+                              {
+                                "metricStat": {
+                                  "metric": {
+                                    "metricName": "IntegrationLatency",
+                                    "namespace": "AWS/ApiGateway",
+                                    "dimensions": [
+                                      {
+                                        "name": "ApiId",
+                                        "value": {
+                                          "Ref": "GetPostIntegApiB404619D"
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "period": 300,
+                                  "stat": "Average"
+                                },
+                                "id": "integrationLatency",
+                                "label": "integration latency",
+                                "returnData": false
+                              }
+                            ],
+                            "threshold": 0,
+                            "thresholdMetricId": "expr_1",
+                            "treatMissingData": "missing"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "ApiMonitorDashboard": {
+                    "id": "ApiMonitorDashboard",
+                    "path": "integ-get-post/GetPostIntegMonitor/Facade/ApiMonitorDashboard",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPostIntegMonitor/Facade/ApiMonitorDashboard/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Dashboard",
+                          "aws:cdk:cloudformation:props": {
+                            "dashboardBody": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "{\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"### IntegrationLatencyAnomalyDetectionAlarm\"}},{\"type\":\"metric\",\"width\":24,\"height\":5,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  " Integration Latency\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[{\"label\":\"integrationLatency\",\"expression\":\"ANOMALY_DETECTION_BAND(integrationLatency,3)\"}],[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  "\",{\"label\":\"integration latency\",\"visible\":false,\"id\":\"integrationLatency\"}]],\"yAxis\":{}}}]}"
+                                ]
+                              ]
+                            },
+                            "dashboardName": "BlogAppDashboards-ApiMonitor-Alarms"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnDashboard",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Dashboard",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "ApiMonitorDashboardDetail": {
+                    "id": "ApiMonitorDashboardDetail",
+                    "path": "integ-get-post/GetPostIntegMonitor/Facade/ApiMonitorDashboardDetail",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPostIntegMonitor/Facade/ApiMonitorDashboardDetail/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Dashboard",
+                          "aws:cdk:cloudformation:props": {
+                            "dashboardBody": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "{\"widgets\":[{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Client Errors\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"4xx\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  "\",{\"label\":\"client error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Integration Latency\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  "\",{\"label\":\"integration latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Latency\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  "\",{\"label\":\"latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":18,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Requests\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"Count\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  "\",{\"label\":\"total requests\",\"stat\":\"SampleCount\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Server Errors\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"5xx\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "GetPostIntegApiB404619D"
+                                  },
+                                  "\",{\"label\":\"server error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}}]}"
+                                ]
+                              ]
+                            },
+                            "dashboardName": "BlogAppDashboards-ApiMonitor-Detail"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnDashboard",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Dashboard",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Facade-AppService-CPU-Usage-Cpu": {
+                    "id": "Facade-AppService-CPU-Usage-Cpu",
+                    "path": "integ-get-post/GetPostIntegMonitor/Facade/Facade-AppService-CPU-Usage-Cpu",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPostIntegMonitor/Facade/Facade-AppService-CPU-Usage-Cpu/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                          "aws:cdk:cloudformation:props": {
+                            "comparisonOperator": "GreaterThanThreshold",
+                            "evaluationPeriods": 3,
+                            "actionsEnabled": true,
+                            "alarmDescription": "The CPU usage is too high.",
+                            "alarmName": "Facade-AppService-CPU-Usage-Cpu",
+                            "datapointsToAlarm": 3,
+                            "metrics": [
+                              {
+                                "metricStat": {
+                                  "metric": {
+                                    "metricName": "CPUUtilization",
+                                    "namespace": "AWS/ECS",
+                                    "dimensions": [
+                                      {
+                                        "name": "ClusterName",
+                                        "value": {
+                                          "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+                                        }
+                                      },
+                                      {
+                                        "name": "ServiceName",
+                                        "value": {
+                                          "Fn::GetAtt": [
+                                            "GetPostAppServiceA50C5323",
+                                            "Name"
+                                          ]
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "period": 300,
+                                  "stat": "Average"
+                                },
+                                "id": "m1",
+                                "label": "Cluster CPU Utilization",
+                                "returnData": true
+                              }
+                            ],
+                            "threshold": 70,
+                            "treatMissingData": "missing"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Facade-AppService-Memory-Usage-Memory": {
+                    "id": "Facade-AppService-Memory-Usage-Memory",
+                    "path": "integ-get-post/GetPostIntegMonitor/Facade/Facade-AppService-Memory-Usage-Memory",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPostIntegMonitor/Facade/Facade-AppService-Memory-Usage-Memory/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                          "aws:cdk:cloudformation:props": {
+                            "comparisonOperator": "GreaterThanThreshold",
+                            "evaluationPeriods": 3,
+                            "actionsEnabled": true,
+                            "alarmDescription": "The memory usage is too high.",
+                            "alarmName": "Facade-AppService-Memory-Usage-Memory",
+                            "datapointsToAlarm": 3,
+                            "metrics": [
+                              {
+                                "metricStat": {
+                                  "metric": {
+                                    "metricName": "MemoryUtilization",
+                                    "namespace": "AWS/ECS",
+                                    "dimensions": [
+                                      {
+                                        "name": "ClusterName",
+                                        "value": {
+                                          "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+                                        }
+                                      },
+                                      {
+                                        "name": "ServiceName",
+                                        "value": {
+                                          "Fn::GetAtt": [
+                                            "GetPostAppServiceA50C5323",
+                                            "Name"
+                                          ]
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "period": 300,
+                                  "stat": "Average"
+                                },
+                                "id": "m1",
+                                "label": "Cluster Memory Utilization",
+                                "returnData": true
+                              }
+                            ],
+                            "threshold": 70,
+                            "treatMissingData": "missing"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Facade--RunningTasks-Anomaly-Critical": {
+                    "id": "Facade--RunningTasks-Anomaly-Critical",
+                    "path": "integ-get-post/GetPostIntegMonitor/Facade/Facade--RunningTasks-Anomaly-Critical",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPostIntegMonitor/Facade/Facade--RunningTasks-Anomaly-Critical/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                          "aws:cdk:cloudformation:props": {
+                            "comparisonOperator": "LessThanLowerOrGreaterThanUpperThreshold",
+                            "evaluationPeriods": 3,
+                            "actionsEnabled": true,
+                            "alarmDescription": "Anomaly detection: value is outside of the expected band.",
+                            "alarmName": "Facade--RunningTasks-Anomaly-Critical",
+                            "datapointsToAlarm": 3,
+                            "metrics": [
+                              {
+                                "expression": "ANOMALY_DETECTION_BAND(runningTasks,3)",
+                                "id": "expr_1",
+                                "label": "runningTasks"
+                              },
+                              {
+                                "metricStat": {
+                                  "metric": {
+                                    "metricName": "RunningTaskCount",
+                                    "namespace": "ECS/ContainerInsights",
+                                    "dimensions": [
+                                      {
+                                        "name": "ClusterName",
+                                        "value": {
+                                          "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+                                        }
+                                      },
+                                      {
+                                        "name": "ServiceName",
+                                        "value": {
+                                          "Fn::GetAtt": [
+                                            "GetPostAppServiceA50C5323",
+                                            "Name"
+                                          ]
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "period": 300,
+                                  "stat": "Average"
+                                },
+                                "id": "runningTasks",
+                                "label": "Running Tasks",
+                                "returnData": false
+                              }
+                            ],
+                            "threshold": 0,
+                            "thresholdMetricId": "expr_1",
+                            "treatMissingData": "missing"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "GetPostDashboard": {
+                    "id": "GetPostDashboard",
+                    "path": "integ-get-post/GetPostIntegMonitor/Facade/GetPostDashboard",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPostIntegMonitor/Facade/GetPostDashboard/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Dashboard",
+                          "aws:cdk:cloudformation:props": {
+                            "dashboardBody": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "{\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"### RunningTasksAnomalyDetectionAlarm\"}},{\"type\":\"metric\",\"width\":24,\"height\":5,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"",
+                                  {
+                                    "Fn::GetAtt": [
+                                      "GetPostAppServiceA50C5323",
+                                      "Name"
+                                    ]
+                                  },
+                                  " Running Tasks\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[{\"label\":\"runningTasks\",\"expression\":\"ANOMALY_DETECTION_BAND(runningTasks,3)\"}],[\"ECS/ContainerInsights\",\"RunningTaskCount\",\"ClusterName\",\"",
+                                  {
+                                    "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+                                  },
+                                  "\",\"ServiceName\",\"",
+                                  {
+                                    "Fn::GetAtt": [
+                                      "GetPostAppServiceA50C5323",
+                                      "Name"
+                                    ]
+                                  },
+                                  "\",{\"label\":\"Running Tasks\",\"visible\":false,\"id\":\"runningTasks\"}]],\"yAxis\":{}}}]}"
+                                ]
+                              ]
+                            },
+                            "dashboardName": "BlogAppDashboards-GetPost-Alarms"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnDashboard",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Dashboard",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "GetPostDashboardDetail": {
+                    "id": "GetPostDashboardDetail",
+                    "path": "integ-get-post/GetPostIntegMonitor/Facade/GetPostDashboardDetail",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPostIntegMonitor/Facade/GetPostDashboardDetail/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Dashboard",
+                          "aws:cdk:cloudformation:props": {
+                            "dashboardBody": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "{\"widgets\":[{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"blogApp\",\"getItemSuccess\",\"service\",\"GetPost\"]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"blogApp\",\"getItemFailure\",\"service\",\"GetItem\"]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Cpu Utilization\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ECS\",\"CPUUtilization\",\"ClusterName\",\"",
+                                  {
+                                    "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+                                  },
+                                  "\",\"ServiceName\",\"",
+                                  {
+                                    "Fn::GetAtt": [
+                                      "GetPostAppServiceA50C5323",
+                                      "Name"
+                                    ]
+                                  },
+                                  "\",{\"label\":\"cpu\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Memory Utilization\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ECS\",\"MemoryUtilization\",\"ClusterName\",\"",
+                                  {
+                                    "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+                                  },
+                                  "\",\"ServiceName\",\"",
+                                  {
+                                    "Fn::GetAtt": [
+                                      "GetPostAppServiceA50C5323",
+                                      "Name"
+                                    ]
+                                  },
+                                  "\",{\"label\":\"memory\"}]],\"yAxis\":{}}}]}"
+                                ]
+                              ]
+                            },
+                            "dashboardName": "BlogAppDashboards-GetPost-Detail"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnDashboard",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Dashboard",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "cdk-monitoring-constructs.MonitoringFacade",
+                  "version": "5.2.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.54"
+            }
+          },
+          "GetPostIntegVpc": {
+            "id": "GetPostIntegVpc",
+            "path": "integ-get-post/GetPostIntegVpc",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "integ-get-post/GetPostIntegVpc/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                  "aws:cdk:cloudformation:props": {
+                    "cidrBlock": "10.0.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": [
+                      {
+                        "key": "dir",
+                        "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                      },
+                      {
+                        "key": "Name",
+                        "value": "integ-get-post/GetPostIntegVpc"
+                      },
+                      {
+                        "key": "repoName",
+                        "value": "cdk-example-app"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                  "version": "2.86.0"
+                }
+              },
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "integ-get-post/GetPostIntegVpc/PublicSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "integ-get-post/GetPostIntegVpc/PublicSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "GetPostIntegVpc1B1AA91F"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.0.0/18",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "integ-get-post/GetPostIntegVpc/PublicSubnet1"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "integ-get-post/GetPostIntegVpc/PublicSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "integ-get-post/GetPostIntegVpc/PublicSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "GetPostIntegVpc1B1AA91F"
+                        },
+                        "tags": [
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "integ-get-post/GetPostIntegVpc/PublicSubnet1"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "integ-get-post/GetPostIntegVpc/PublicSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "GetPostIntegVpcPublicSubnet1RouteTableF3C8CA1D"
+                        },
+                        "subnetId": {
+                          "Ref": "GetPostIntegVpcPublicSubnet1SubnetD094D9E3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "integ-get-post/GetPostIntegVpc/PublicSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "GetPostIntegVpcPublicSubnet1RouteTableF3C8CA1D"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "GetPostIntegVpcIGW8B08AE18"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "integ-get-post/GetPostIntegVpc/PublicSubnet1/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "integ-get-post/GetPostIntegVpc/PublicSubnet1"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "integ-get-post/GetPostIntegVpc/PublicSubnet1/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "subnetId": {
+                          "Ref": "GetPostIntegVpcPublicSubnet1SubnetD094D9E3"
+                        },
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "GetPostIntegVpcPublicSubnet1EIP2AE21DC5",
+                            "AllocationId"
+                          ]
+                        },
+                        "tags": [
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "integ-get-post/GetPostIntegVpc/PublicSubnet1"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.86.0"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "integ-get-post/GetPostIntegVpc/PublicSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "integ-get-post/GetPostIntegVpc/PublicSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "GetPostIntegVpc1B1AA91F"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.64.0/18",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "integ-get-post/GetPostIntegVpc/PublicSubnet2"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "integ-get-post/GetPostIntegVpc/PublicSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "integ-get-post/GetPostIntegVpc/PublicSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "GetPostIntegVpc1B1AA91F"
+                        },
+                        "tags": [
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "integ-get-post/GetPostIntegVpc/PublicSubnet2"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "integ-get-post/GetPostIntegVpc/PublicSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "GetPostIntegVpcPublicSubnet2RouteTableF742B02E"
+                        },
+                        "subnetId": {
+                          "Ref": "GetPostIntegVpcPublicSubnet2Subnet2AA95375"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "integ-get-post/GetPostIntegVpc/PublicSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "GetPostIntegVpcPublicSubnet2RouteTableF742B02E"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "GetPostIntegVpcIGW8B08AE18"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.86.0"
+                }
+              },
+              "PrivateSubnet1": {
+                "id": "PrivateSubnet1",
+                "path": "integ-get-post/GetPostIntegVpc/PrivateSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "integ-get-post/GetPostIntegVpc/PrivateSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "GetPostIntegVpc1B1AA91F"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.128.0/18",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "integ-get-post/GetPostIntegVpc/PrivateSubnet1"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "integ-get-post/GetPostIntegVpc/PrivateSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "integ-get-post/GetPostIntegVpc/PrivateSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "GetPostIntegVpc1B1AA91F"
+                        },
+                        "tags": [
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "integ-get-post/GetPostIntegVpc/PrivateSubnet1"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "integ-get-post/GetPostIntegVpc/PrivateSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "GetPostIntegVpcPrivateSubnet1RouteTable707196F3"
+                        },
+                        "subnetId": {
+                          "Ref": "GetPostIntegVpcPrivateSubnet1SubnetDE3403A4"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "integ-get-post/GetPostIntegVpc/PrivateSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "GetPostIntegVpcPrivateSubnet1RouteTable707196F3"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "GetPostIntegVpcPublicSubnet1NATGateway47B0F078"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.86.0"
+                }
+              },
+              "PrivateSubnet2": {
+                "id": "PrivateSubnet2",
+                "path": "integ-get-post/GetPostIntegVpc/PrivateSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "integ-get-post/GetPostIntegVpc/PrivateSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "GetPostIntegVpc1B1AA91F"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.192.0/18",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "integ-get-post/GetPostIntegVpc/PrivateSubnet2"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "integ-get-post/GetPostIntegVpc/PrivateSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "integ-get-post/GetPostIntegVpc/PrivateSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "GetPostIntegVpc1B1AA91F"
+                        },
+                        "tags": [
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "integ-get-post/GetPostIntegVpc/PrivateSubnet2"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "integ-get-post/GetPostIntegVpc/PrivateSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "GetPostIntegVpcPrivateSubnet2RouteTableECD16254"
+                        },
+                        "subnetId": {
+                          "Ref": "GetPostIntegVpcPrivateSubnet2Subnet83E63470"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "integ-get-post/GetPostIntegVpc/PrivateSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "GetPostIntegVpcPrivateSubnet2RouteTableECD16254"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "GetPostIntegVpcPublicSubnet1NATGateway47B0F078"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.86.0"
+                }
+              },
+              "IGW": {
+                "id": "IGW",
+                "path": "integ-get-post/GetPostIntegVpc/IGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "dir",
+                        "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                      },
+                      {
+                        "key": "Name",
+                        "value": "integ-get-post/GetPostIntegVpc"
+                      },
+                      {
+                        "key": "repoName",
+                        "value": "cdk-example-app"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                  "version": "2.86.0"
+                }
+              },
+              "VPCGW": {
+                "id": "VPCGW",
+                "path": "integ-get-post/GetPostIntegVpc/VPCGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "vpcId": {
+                      "Ref": "GetPostIntegVpc1B1AA91F"
+                    },
+                    "internetGatewayId": {
+                      "Ref": "GetPostIntegVpcIGW8B08AE18"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                  "version": "2.86.0"
+                }
+              },
+              "RestrictDefaultSecurityGroupCustomResource": {
+                "id": "RestrictDefaultSecurityGroupCustomResource",
+                "path": "integ-get-post/GetPostIntegVpc/RestrictDefaultSecurityGroupCustomResource",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "integ-get-post/GetPostIntegVpc/RestrictDefaultSecurityGroupCustomResource/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CustomResource",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+              "version": "2.86.0"
+            }
+          },
+          "Custom::VpcRestrictDefaultSGCustomResourceProvider": {
+            "id": "Custom::VpcRestrictDefaultSGCustomResourceProvider",
+            "path": "integ-get-post/Custom::VpcRestrictDefaultSGCustomResourceProvider",
+            "children": {
+              "Staging": {
+                "id": "Staging",
+                "path": "integ-get-post/Custom::VpcRestrictDefaultSGCustomResourceProvider/Staging",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.AssetStaging",
+                  "version": "2.86.0"
+                }
+              },
+              "Role": {
+                "id": "Role",
+                "path": "integ-get-post/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.86.0"
+                }
+              },
+              "Handler": {
+                "id": "Handler",
+                "path": "integ-get-post/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CustomResourceProvider",
+              "version": "2.86.0"
+            }
+          },
+          "GetPostIntegNetwork": {
+            "id": "GetPostIntegNetwork",
+            "path": "integ-get-post/GetPostIntegNetwork",
+            "children": {
+              "Cluster": {
+                "id": "Cluster",
+                "path": "integ-get-post/GetPostIntegNetwork/Cluster",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "integ-get-post/GetPostIntegNetwork/Cluster/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ECS::Cluster",
+                      "aws:cdk:cloudformation:props": {
+                        "clusterSettings": [
+                          {
+                            "name": "containerInsights",
+                            "value": "enabled"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecs.CfnCluster",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "DefaultServiceDiscoveryNamespace": {
+                    "id": "DefaultServiceDiscoveryNamespace",
+                    "path": "integ-get-post/GetPostIntegNetwork/Cluster/DefaultServiceDiscoveryNamespace",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPostIntegNetwork/Cluster/DefaultServiceDiscoveryNamespace/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ServiceDiscovery::PrivateDnsNamespace",
+                          "aws:cdk:cloudformation:props": {
+                            "name": "blog-dev.com",
+                            "vpc": {
+                              "Ref": "GetPostIntegVpc1B1AA91F"
+                            },
+                            "tags": [
+                              {
+                                "key": "dir",
+                                "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                              },
+                              {
+                                "key": "repoName",
+                                "value": "cdk-example-app"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_servicediscovery.CfnPrivateDnsNamespace",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_servicediscovery.PrivateDnsNamespace",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Cluster": {
+                    "id": "Cluster",
+                    "path": "integ-get-post/GetPostIntegNetwork/Cluster/Cluster",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ECS::ClusterCapacityProviderAssociations",
+                      "aws:cdk:cloudformation:props": {
+                        "capacityProviders": [
+                          "FARGATE",
+                          "FARGATE_SPOT"
+                        ],
+                        "cluster": {
+                          "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+                        },
+                        "defaultCapacityProviderStrategy": []
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecs.CfnClusterCapacityProviderAssociations",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.Cluster",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.54"
+            }
+          },
+          "GetPostIntegApi": {
+            "id": "GetPostIntegApi",
+            "path": "integ-get-post/GetPostIntegApi",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "integ-get-post/GetPostIntegApi/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Api",
+                  "aws:cdk:cloudformation:props": {
+                    "name": "GetPostIntegApi",
+                    "protocolType": "HTTP",
+                    "tags": {
+                      "dir": "/home/hallcor/personal/cdk-example-app/test/components",
+                      "repoName": "cdk-example-app"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnApi",
+                  "version": "2.86.0"
+                }
+              },
+              "DefaultStage": {
+                "id": "DefaultStage",
+                "path": "integ-get-post/GetPostIntegApi/DefaultStage",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "integ-get-post/GetPostIntegApi/DefaultStage/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "GetPostIntegApiB404619D"
+                        },
+                        "stageName": "$default",
+                        "autoDeploy": true,
+                        "tags": {
+                          "dir": "/home/hallcor/personal/cdk-example-app/test/components",
+                          "repoName": "cdk-example-app"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnStage",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpStage",
+                  "version": "2.86.0-alpha.0"
+                }
+              },
+              "VpcLinkSg": {
+                "id": "VpcLinkSg",
+                "path": "integ-get-post/GetPostIntegApi/VpcLinkSg",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "integ-get-post/GetPostIntegApi/VpcLinkSg/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "Security Group for API Gateway Vpc Link",
+                        "securityGroupEgress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "description": "Allow all outbound traffic by default",
+                            "ipProtocol": "-1"
+                          },
+                          {
+                            "ipProtocol": "-1",
+                            "cidrIpv6": "::/0",
+                            "description": "Allow all outbound ipv6 traffic by default"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "GetPostIntegVpc1B1AA91F"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.86.0"
+                }
+              },
+              "VpcLink": {
+                "id": "VpcLink",
+                "path": "integ-get-post/GetPostIntegApi/VpcLink",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "integ-get-post/GetPostIntegApi/VpcLink/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::VpcLink",
+                      "aws:cdk:cloudformation:props": {
+                        "name": "integgetpostGetPostIntegApiVpcLink44415E8F",
+                        "subnetIds": [
+                          {
+                            "Ref": "GetPostIntegVpcPrivateSubnet1SubnetDE3403A4"
+                          },
+                          {
+                            "Ref": "GetPostIntegVpcPrivateSubnet2Subnet83E63470"
+                          }
+                        ],
+                        "securityGroupIds": [
+                          {
+                            "Fn::GetAtt": [
+                              "GetPostIntegApiVpcLinkSgEE3DB7FD",
+                              "GroupId"
+                            ]
+                          }
+                        ],
+                        "tags": {
+                          "dir": "/home/hallcor/personal/cdk-example-app/test/components",
+                          "repoName": "cdk-example-app"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnVpcLink",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.VpcLink",
+                  "version": "2.86.0-alpha.0"
+                }
+              },
+              "GET--posts--{id}": {
+                "id": "GET--posts--{id}",
+                "path": "integ-get-post/GetPostIntegApi/GET--posts--{id}",
+                "children": {
+                  "getPost": {
+                    "id": "getPost",
+                    "path": "integ-get-post/GetPostIntegApi/GET--posts--{id}/getPost",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPostIntegApi/GET--posts--{id}/getPost/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "GetPostIntegApiB404619D"
+                            },
+                            "integrationType": "HTTP_PROXY",
+                            "connectionId": {
+                              "Ref": "GetPostIntegApiVpcLink7FFBC7CD"
+                            },
+                            "connectionType": "VPC_LINK",
+                            "integrationMethod": "ANY",
+                            "integrationUri": {
+                              "Fn::GetAtt": [
+                                "GetPostAppServiceCloudmapService52F860BF",
+                                "Arn"
+                              ]
+                            },
+                            "payloadFormatVersion": "1.0"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                      "version": "2.86.0-alpha.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "integ-get-post/GetPostIntegApi/GET--posts--{id}/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "GetPostIntegApiB404619D"
+                        },
+                        "routeKey": "GET /posts/{id}",
+                        "authorizationType": "NONE",
+                        "target": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "integrations/",
+                              {
+                                "Ref": "GetPostIntegApiGETpostsidgetPostB06C46FA"
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                  "version": "2.86.0-alpha.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpApi",
+              "version": "2.86.0-alpha.0"
+            }
+          },
+          "GetPostIntegTable": {
+            "id": "GetPostIntegTable",
+            "path": "integ-get-post/GetPostIntegTable",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "integ-get-post/GetPostIntegTable/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "keySchema": [
+                      {
+                        "attributeName": "pk",
+                        "keyType": "HASH"
+                      }
+                    ],
+                    "attributeDefinitions": [
+                      {
+                        "attributeName": "pk",
+                        "attributeType": "S"
+                      }
+                    ],
+                    "provisionedThroughput": {
+                      "readCapacityUnits": 5,
+                      "writeCapacityUnits": 5
+                    },
+                    "tags": [
+                      {
+                        "key": "dir",
+                        "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                      },
+                      {
+                        "key": "repoName",
+                        "value": "cdk-example-app"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                  "version": "2.86.0"
+                }
+              },
+              "ScalingRole": {
+                "id": "ScalingRole",
+                "path": "integ-get-post/GetPostIntegTable/ScalingRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+              "version": "2.86.0"
+            }
+          },
+          "GetPost": {
+            "id": "GetPost",
+            "path": "integ-get-post/GetPost",
+            "children": {
+              "GetPost": {
+                "id": "GetPost",
+                "path": "integ-get-post/GetPost/GetPost",
+                "children": {
+                  "LogGroup": {
+                    "id": "LogGroup",
+                    "path": "integ-get-post/GetPost/GetPost/LogGroup",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPost/GetPost/LogGroup/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                          "aws:cdk:cloudformation:props": {
+                            "retentionInDays": 7,
+                            "tags": [
+                              {
+                                "key": "dir",
+                                "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                              },
+                              {
+                                "key": "repoName",
+                                "value": "cdk-example-app"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "TaskDef": {
+                    "id": "TaskDef",
+                    "path": "integ-get-post/GetPost/GetPost/TaskDef",
+                    "children": {
+                      "TaskRole": {
+                        "id": "TaskRole",
+                        "path": "integ-get-post/GetPost/GetPost/TaskDef/TaskRole",
+                        "children": {
+                          "ImportTaskRole": {
+                            "id": "ImportTaskRole",
+                            "path": "integ-get-post/GetPost/GetPost/TaskDef/TaskRole/ImportTaskRole",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "integ-get-post/GetPost/GetPost/TaskDef/TaskRole/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "ecs-tasks.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "managedPolicyArns": [
+                                  {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::aws:policy/AWSXRayDaemonWriteAccess"
+                                      ]
+                                    ]
+                                  }
+                                ],
+                                "tags": [
+                                  {
+                                    "key": "dir",
+                                    "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                                  },
+                                  {
+                                    "key": "repoName",
+                                    "value": "cdk-example-app"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "DefaultPolicy": {
+                            "id": "DefaultPolicy",
+                            "path": "integ-get-post/GetPost/GetPost/TaskDef/TaskRole/DefaultPolicy",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "integ-get-post/GetPost/GetPost/TaskDef/TaskRole/DefaultPolicy/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                  "aws:cdk:cloudformation:props": {
+                                    "policyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "cloudwatch:PutMetricData",
+                                          "Effect": "Allow",
+                                          "Resource": "*"
+                                        },
+                                        {
+                                          "Action": [
+                                            "dynamodb:BatchGetItem",
+                                            "dynamodb:ConditionCheckItem",
+                                            "dynamodb:DescribeTable",
+                                            "dynamodb:GetItem",
+                                            "dynamodb:GetRecords",
+                                            "dynamodb:GetShardIterator",
+                                            "dynamodb:Query",
+                                            "dynamodb:Scan"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": [
+                                            {
+                                              "Fn::GetAtt": [
+                                                "GetPostIntegTable2EC9EDEC",
+                                                "Arn"
+                                              ]
+                                            },
+                                            {
+                                              "Ref": "AWS::NoValue"
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "policyName": "GetPostTaskDefTaskRoleDefaultPolicy48191C35",
+                                    "roles": [
+                                      {
+                                        "Ref": "GetPostTaskDefTaskRoleB6AF59D2"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                  "version": "2.86.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Policy",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPost/GetPost/TaskDef/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ECS::TaskDefinition",
+                          "aws:cdk:cloudformation:props": {
+                            "containerDefinitions": [
+                              {
+                                "essential": true,
+                                "image": {
+                                  "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:35ac023697345b75378e0c7cc99d3f6fb6ae7c08ac790906aece6919fe151bbd"
+                                },
+                                "name": "getPost",
+                                "portMappings": [
+                                  {
+                                    "containerPort": 8080,
+                                    "protocol": "tcp"
+                                  }
+                                ],
+                                "logConfiguration": {
+                                  "logDriver": "awslogs",
+                                  "options": {
+                                    "awslogs-group": {
+                                      "Ref": "GetPostLogGroup615A249A"
+                                    },
+                                    "awslogs-stream-prefix": "getPost",
+                                    "awslogs-region": {
+                                      "Ref": "AWS::Region"
+                                    }
+                                  }
+                                },
+                                "environment": [
+                                  {
+                                    "name": "TABLE_NAME",
+                                    "value": {
+                                      "Ref": "GetPostIntegTable2EC9EDEC"
+                                    }
+                                  },
+                                  {
+                                    "name": "AWS_EMF_AGENT_ENDPOINT",
+                                    "value": "tcp://127.0.0.1:25888"
+                                  },
+                                  {
+                                    "name": "LOG_LEVEL",
+                                    "value": "DEBUG"
+                                  },
+                                  {
+                                    "name": "POWERTOOLS_SERVICE_NAME",
+                                    "value": "GetPostService"
+                                  },
+                                  {
+                                    "name": "POWERTOOLS_METRICS_NAMESPACE",
+                                    "value": "blogApp"
+                                  },
+                                  {
+                                    "name": "ENV",
+                                    "value": "dev"
+                                  }
+                                ],
+                                "healthCheck": {
+                                  "command": [
+                                    "CMD-SHELL",
+                                    "curl -s http://127.0.0.1:8080/health"
+                                  ],
+                                  "interval": 5,
+                                  "retries": 1,
+                                  "startPeriod": 10,
+                                  "timeout": 2
+                                }
+                              },
+                              {
+                                "essential": true,
+                                "image": "amazon/aws-xray-daemon:latest",
+                                "memoryReservation": 256,
+                                "name": "xray",
+                                "portMappings": [
+                                  {
+                                    "containerPort": 2000,
+                                    "protocol": "udp"
+                                  }
+                                ],
+                                "logConfiguration": {
+                                  "logDriver": "awslogs",
+                                  "options": {
+                                    "awslogs-group": {
+                                      "Ref": "GetPostLogGroup615A249A"
+                                    },
+                                    "awslogs-stream-prefix": "xray",
+                                    "awslogs-region": {
+                                      "Ref": "AWS::Region"
+                                    }
+                                  }
+                                },
+                                "environment": [
+                                  {
+                                    "name": "AWS_REGION",
+                                    "value": {
+                                      "Ref": "AWS::Region"
+                                    }
+                                  }
+                                ],
+                                "healthCheck": {
+                                  "command": [
+                                    "CMD-SHELL",
+                                    "curl -s http://localhost:2000"
+                                  ],
+                                  "interval": 5,
+                                  "retries": 3,
+                                  "startPeriod": 10,
+                                  "timeout": 2
+                                }
+                              },
+                              {
+                                "essential": true,
+                                "image": "public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest",
+                                "memoryReservation": 50,
+                                "name": "cloudwatch-agent",
+                                "portMappings": [
+                                  {
+                                    "containerPort": 25888,
+                                    "protocol": "tcp"
+                                  }
+                                ],
+                                "logConfiguration": {
+                                  "logDriver": "awslogs",
+                                  "options": {
+                                    "awslogs-group": {
+                                      "Ref": "GetPostLogGroup615A249A"
+                                    },
+                                    "awslogs-stream-prefix": "cloudwatch-agent",
+                                    "awslogs-region": {
+                                      "Ref": "AWS::Region"
+                                    }
+                                  }
+                                },
+                                "environment": [
+                                  {
+                                    "name": "CW_CONFIG_CONTENT",
+                                    "value": "{\"logs\":{\"metrics_collected\":{\"emf\":{}}},\"metrics\":{\"metrics_collected\":{\"statsd\":{}}}}"
+                                  }
+                                ]
+                              }
+                            ],
+                            "cpu": "256",
+                            "executionRoleArn": {
+                              "Fn::GetAtt": [
+                                "GetPostTaskDefExecutionRoleAAEEA792",
+                                "Arn"
+                              ]
+                            },
+                            "family": "integgetpostGetPostTaskDefD0B47C5A",
+                            "memory": "512",
+                            "networkMode": "awsvpc",
+                            "requiresCompatibilities": [
+                              "FARGATE"
+                            ],
+                            "tags": [
+                              {
+                                "key": "dir",
+                                "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                              },
+                              {
+                                "key": "repoName",
+                                "value": "cdk-example-app"
+                              }
+                            ],
+                            "taskRoleArn": {
+                              "Fn::GetAtt": [
+                                "GetPostTaskDefTaskRoleB6AF59D2",
+                                "Arn"
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.CfnTaskDefinition",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "getPost": {
+                        "id": "getPost",
+                        "path": "integ-get-post/GetPost/GetPost/TaskDef/getPost",
+                        "children": {
+                          "AssetImage": {
+                            "id": "AssetImage",
+                            "path": "integ-get-post/GetPost/GetPost/TaskDef/getPost/AssetImage",
+                            "children": {
+                              "Staging": {
+                                "id": "Staging",
+                                "path": "integ-get-post/GetPost/GetPost/TaskDef/getPost/AssetImage/Staging",
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.AssetStaging",
+                                  "version": "2.86.0"
+                                }
+                              },
+                              "Repository": {
+                                "id": "Repository",
+                                "path": "integ-get-post/GetPost/GetPost/TaskDef/getPost/AssetImage/Repository",
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_ecr.RepositoryBase",
+                                  "version": "2.86.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ecr_assets.DockerImageAsset",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.ContainerDefinition",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "ExecutionRole": {
+                        "id": "ExecutionRole",
+                        "path": "integ-get-post/GetPost/GetPost/TaskDef/ExecutionRole",
+                        "children": {
+                          "ImportExecutionRole": {
+                            "id": "ImportExecutionRole",
+                            "path": "integ-get-post/GetPost/GetPost/TaskDef/ExecutionRole/ImportExecutionRole",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "integ-get-post/GetPost/GetPost/TaskDef/ExecutionRole/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "ecs-tasks.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "dir",
+                                    "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                                  },
+                                  {
+                                    "key": "repoName",
+                                    "value": "cdk-example-app"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "DefaultPolicy": {
+                            "id": "DefaultPolicy",
+                            "path": "integ-get-post/GetPost/GetPost/TaskDef/ExecutionRole/DefaultPolicy",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "integ-get-post/GetPost/GetPost/TaskDef/ExecutionRole/DefaultPolicy/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                  "aws:cdk:cloudformation:props": {
+                                    "policyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": [
+                                            "ecr:BatchCheckLayerAvailability",
+                                            "ecr:BatchGetImage",
+                                            "ecr:GetDownloadUrlForLayer"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Fn::Join": [
+                                              "",
+                                              [
+                                                "arn:",
+                                                {
+                                                  "Ref": "AWS::Partition"
+                                                },
+                                                ":ecr:",
+                                                {
+                                                  "Ref": "AWS::Region"
+                                                },
+                                                ":",
+                                                {
+                                                  "Ref": "AWS::AccountId"
+                                                },
+                                                ":repository/",
+                                                {
+                                                  "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+                                                }
+                                              ]
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "Action": "ecr:GetAuthorizationToken",
+                                          "Effect": "Allow",
+                                          "Resource": "*"
+                                        },
+                                        {
+                                          "Action": [
+                                            "logs:CreateLogStream",
+                                            "logs:PutLogEvents"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Fn::GetAtt": [
+                                              "GetPostLogGroup615A249A",
+                                              "Arn"
+                                            ]
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "policyName": "GetPostTaskDefExecutionRoleDefaultPolicy7D07E747",
+                                    "roles": [
+                                      {
+                                        "Ref": "GetPostTaskDefExecutionRoleAAEEA792"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                  "version": "2.86.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Policy",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "xray": {
+                        "id": "xray",
+                        "path": "integ-get-post/GetPost/GetPost/TaskDef/xray",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.ContainerDefinition",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "cloudwatch-agent": {
+                        "id": "cloudwatch-agent",
+                        "path": "integ-get-post/GetPost/GetPost/TaskDef/cloudwatch-agent",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.ContainerDefinition",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecs.FargateTaskDefinition",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "AppService": {
+                    "id": "AppService",
+                    "path": "integ-get-post/GetPost/GetPost/AppService",
+                    "children": {
+                      "Service": {
+                        "id": "Service",
+                        "path": "integ-get-post/GetPost/GetPost/AppService/Service",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ECS::Service",
+                          "aws:cdk:cloudformation:props": {
+                            "cluster": {
+                              "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+                            },
+                            "deploymentConfiguration": {
+                              "maximumPercent": 200,
+                              "minimumHealthyPercent": 50,
+                              "deploymentCircuitBreaker": {
+                                "enable": true,
+                                "rollback": true
+                              }
+                            },
+                            "deploymentController": {
+                              "type": "ECS"
+                            },
+                            "enableEcsManagedTags": true,
+                            "launchType": "FARGATE",
+                            "networkConfiguration": {
+                              "awsvpcConfiguration": {
+                                "assignPublicIp": "DISABLED",
+                                "subnets": [
+                                  {
+                                    "Ref": "GetPostIntegVpcPrivateSubnet1SubnetDE3403A4"
+                                  },
+                                  {
+                                    "Ref": "GetPostIntegVpcPrivateSubnet2Subnet83E63470"
+                                  }
+                                ],
+                                "securityGroups": [
+                                  {
+                                    "Fn::GetAtt": [
+                                      "GetPostAppServiceSecurityGroup04A7E398",
+                                      "GroupId"
+                                    ]
+                                  }
+                                ]
+                              }
+                            },
+                            "platformVersion": "1.4.0",
+                            "serviceRegistries": [
+                              {
+                                "registryArn": {
+                                  "Fn::GetAtt": [
+                                    "GetPostAppServiceCloudmapService52F860BF",
+                                    "Arn"
+                                  ]
+                                },
+                                "containerName": "getPost",
+                                "containerPort": 8080
+                              }
+                            ],
+                            "tags": [
+                              {
+                                "key": "dir",
+                                "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                              },
+                              {
+                                "key": "repoName",
+                                "value": "cdk-example-app"
+                              }
+                            ],
+                            "taskDefinition": {
+                              "Ref": "GetPostTaskDef74D442CE"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.CfnService",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "SecurityGroup": {
+                        "id": "SecurityGroup",
+                        "path": "integ-get-post/GetPost/GetPost/AppService/SecurityGroup",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "integ-get-post/GetPost/GetPost/AppService/SecurityGroup/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                              "aws:cdk:cloudformation:props": {
+                                "groupDescription": "integ-get-post/GetPost/GetPost/AppService/SecurityGroup",
+                                "securityGroupEgress": [
+                                  {
+                                    "cidrIp": "0.0.0.0/0",
+                                    "description": "Allow all outbound traffic by default",
+                                    "ipProtocol": "-1"
+                                  }
+                                ],
+                                "tags": [
+                                  {
+                                    "key": "dir",
+                                    "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                                  },
+                                  {
+                                    "key": "repoName",
+                                    "value": "cdk-example-app"
+                                  }
+                                ],
+                                "vpcId": {
+                                  "Ref": "GetPostIntegVpc1B1AA91F"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                              "version": "2.86.0"
+                            }
+                          },
+                          "from integgetpostGetPostIntegApiVpcLinkSg833BF150:8080": {
+                            "id": "from integgetpostGetPostIntegApiVpcLinkSg833BF150:8080",
+                            "path": "integ-get-post/GetPost/GetPost/AppService/SecurityGroup/from integgetpostGetPostIntegApiVpcLinkSg833BF150:8080",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                              "aws:cdk:cloudformation:props": {
+                                "ipProtocol": "tcp",
+                                "description": "from integgetpostGetPostIntegApiVpcLinkSg833BF150:8080",
+                                "fromPort": 8080,
+                                "groupId": {
+                                  "Fn::GetAtt": [
+                                    "GetPostAppServiceSecurityGroup04A7E398",
+                                    "GroupId"
+                                  ]
+                                },
+                                "sourceSecurityGroupId": {
+                                  "Fn::GetAtt": [
+                                    "GetPostIntegApiVpcLinkSgEE3DB7FD",
+                                    "GroupId"
+                                  ]
+                                },
+                                "toPort": 8080
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "CloudmapService": {
+                        "id": "CloudmapService",
+                        "path": "integ-get-post/GetPost/GetPost/AppService/CloudmapService",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "integ-get-post/GetPost/GetPost/AppService/CloudmapService/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ServiceDiscovery::Service",
+                              "aws:cdk:cloudformation:props": {
+                                "dnsConfig": {
+                                  "dnsRecords": [
+                                    {
+                                      "type": "SRV",
+                                      "ttl": 60
+                                    }
+                                  ],
+                                  "namespaceId": {
+                                    "Fn::GetAtt": [
+                                      "GetPostIntegNetworkClusterDefaultServiceDiscoveryNamespaceF6FE4BBB",
+                                      "Id"
+                                    ]
+                                  },
+                                  "routingPolicy": "MULTIVALUE"
+                                },
+                                "healthCheckCustomConfig": {
+                                  "failureThreshold": 1
+                                },
+                                "namespaceId": {
+                                  "Fn::GetAtt": [
+                                    "GetPostIntegNetworkClusterDefaultServiceDiscoveryNamespaceF6FE4BBB",
+                                    "Id"
+                                  ]
+                                },
+                                "tags": [
+                                  {
+                                    "key": "dir",
+                                    "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                                  },
+                                  {
+                                    "key": "repoName",
+                                    "value": "cdk-example-app"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_servicediscovery.CfnService",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_servicediscovery.Service",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "ScalingRole": {
+                        "id": "ScalingRole",
+                        "path": "integ-get-post/GetPost/GetPost/AppService/ScalingRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "TaskCount": {
+                        "id": "TaskCount",
+                        "path": "integ-get-post/GetPost/GetPost/AppService/TaskCount",
+                        "children": {
+                          "Target": {
+                            "id": "Target",
+                            "path": "integ-get-post/GetPost/GetPost/AppService/TaskCount/Target",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "integ-get-post/GetPost/GetPost/AppService/TaskCount/Target/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::ApplicationAutoScaling::ScalableTarget",
+                                  "aws:cdk:cloudformation:props": {
+                                    "maxCapacity": 10,
+                                    "minCapacity": 1,
+                                    "resourceId": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "service/",
+                                          {
+                                            "Ref": "GetPostIntegNetworkClusterF2A9DE79"
+                                          },
+                                          "/",
+                                          {
+                                            "Fn::GetAtt": [
+                                              "GetPostAppServiceA50C5323",
+                                              "Name"
+                                            ]
+                                          }
+                                        ]
+                                      ]
+                                    },
+                                    "scalableDimension": "ecs:service:DesiredCount",
+                                    "serviceNamespace": "ecs",
+                                    "roleArn": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":iam::",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService"
+                                        ]
+                                      ]
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_applicationautoscaling.CfnScalableTarget",
+                                  "version": "2.86.0"
+                                }
+                              },
+                              "MemoryScaling": {
+                                "id": "MemoryScaling",
+                                "path": "integ-get-post/GetPost/GetPost/AppService/TaskCount/Target/MemoryScaling",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "integ-get-post/GetPost/GetPost/AppService/TaskCount/Target/MemoryScaling/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+                                      "aws:cdk:cloudformation:props": {
+                                        "policyName": "integgetpostGetPostAppServiceTaskCountTargetMemoryScaling9C4AD672",
+                                        "policyType": "TargetTrackingScaling",
+                                        "scalingTargetId": {
+                                          "Ref": "GetPostAppServiceTaskCountTarget29996380"
+                                        },
+                                        "targetTrackingScalingPolicyConfiguration": {
+                                          "predefinedMetricSpecification": {
+                                            "predefinedMetricType": "ECSServiceAverageMemoryUtilization"
+                                          },
+                                          "targetValue": 60
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_applicationautoscaling.CfnScalingPolicy",
+                                      "version": "2.86.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_applicationautoscaling.TargetTrackingScalingPolicy",
+                                  "version": "2.86.0"
+                                }
+                              },
+                              "CpuScaling": {
+                                "id": "CpuScaling",
+                                "path": "integ-get-post/GetPost/GetPost/AppService/TaskCount/Target/CpuScaling",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "integ-get-post/GetPost/GetPost/AppService/TaskCount/Target/CpuScaling/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+                                      "aws:cdk:cloudformation:props": {
+                                        "policyName": "integgetpostGetPostAppServiceTaskCountTargetCpuScaling7371BAA9",
+                                        "policyType": "TargetTrackingScaling",
+                                        "scalingTargetId": {
+                                          "Ref": "GetPostAppServiceTaskCountTarget29996380"
+                                        },
+                                        "targetTrackingScalingPolicyConfiguration": {
+                                          "predefinedMetricSpecification": {
+                                            "predefinedMetricType": "ECSServiceAverageCPUUtilization"
+                                          },
+                                          "targetValue": 60
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_applicationautoscaling.CfnScalingPolicy",
+                                      "version": "2.86.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_applicationautoscaling.TargetTrackingScalingPolicy",
+                                  "version": "2.86.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_applicationautoscaling.ScalableTarget",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.ScalableTaskCount",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecs.FargateService",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Rule": {
+                    "id": "Rule",
+                    "path": "integ-get-post/GetPost/GetPost/Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPost/GetPost/Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                          "aws:cdk:cloudformation:props": {
+                            "eventPattern": {
+                              "detail-type": [
+                                "ECS Task State Change"
+                              ],
+                              "source": [
+                                "aws.ecs"
+                              ],
+                              "detail": {
+                                "clusterArn": [
+                                  {
+                                    "Fn::GetAtt": [
+                                      "GetPostIntegNetworkClusterF2A9DE79",
+                                      "Arn"
+                                    ]
+                                  }
+                                ],
+                                "desiredStatus": [
+                                  "STOPPED"
+                                ],
+                                "stopCode": [
+                                  "ServiceSchedulerInitiated"
+                                ],
+                                "stoppedReason": [
+                                  "Task failed container health checks"
+                                ],
+                                "containers": {
+                                  "name": [
+                                    "getPost"
+                                  ]
+                                }
+                              }
+                            },
+                            "state": "ENABLED"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_events.CfnRule",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_events.Rule",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "DeploymentFailing": {
+                    "id": "DeploymentFailing",
+                    "path": "integ-get-post/GetPost/GetPost/DeploymentFailing",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-get-post/GetPost/GetPost/DeploymentFailing/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                          "aws:cdk:cloudformation:props": {
+                            "comparisonOperator": "GreaterThanOrEqualToThreshold",
+                            "evaluationPeriods": 1,
+                            "dimensions": [
+                              {
+                                "name": "RuleName",
+                                "value": {
+                                  "Ref": "GetPostRule216A33F2"
+                                }
+                              }
+                            ],
+                            "metricName": "TriggeredRules",
+                            "namespace": "AWS/Events",
+                            "period": 10,
+                            "statistic": "Average",
+                            "threshold": 1,
+                            "treatMissingData": "notBreaching",
+                            "unit": "Count"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.54"
+            }
+          },
+          "Exports": {
+            "id": "Exports",
+            "path": "integ-get-post/Exports",
+            "children": {
+              "Output{\"Ref\":\"GetPostIntegTable2EC9EDEC\"}": {
+                "id": "Output{\"Ref\":\"GetPostIntegTable2EC9EDEC\"}",
+                "path": "integ-get-post/Exports/Output{\"Ref\":\"GetPostIntegTable2EC9EDEC\"}",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.86.0"
+                }
+              },
+              "Output{\"Ref\":\"GetPostIntegApiB404619D\"}": {
+                "id": "Output{\"Ref\":\"GetPostIntegApiB404619D\"}",
+                "path": "integ-get-post/Exports/Output{\"Ref\":\"GetPostIntegApiB404619D\"}",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.54"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "integ-get-post/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.86.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "integ-get-post/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.86.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.86.0"
+        }
+      },
+      "integ-test": {
+        "id": "integ-test",
+        "path": "integ-test",
+        "children": {
+          "DefaultTest": {
+            "id": "DefaultTest",
+            "path": "integ-test/DefaultTest",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "integ-test/DefaultTest/Default",
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              },
+              "DeployAssert": {
+                "id": "DeployAssert",
+                "path": "integ-test/DefaultTest/DeployAssert",
+                "children": {
+                  "AwsApiCallDynamoDBputItem6a90464b4533e04b0a6541d139a49371": {
+                    "id": "AwsApiCallDynamoDBputItem6a90464b4533e04b0a6541d139a49371",
+                    "path": "integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBputItem6a90464b4533e04b0a6541d139a49371",
+                    "children": {
+                      "SdkProvider": {
+                        "id": "SdkProvider",
+                        "path": "integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBputItem6a90464b4533e04b0a6541d139a49371/SdkProvider",
+                        "children": {
+                          "AssertionsProvider": {
+                            "id": "AssertionsProvider",
+                            "path": "integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBputItem6a90464b4533e04b0a6541d139a49371/SdkProvider/AssertionsProvider",
+                            "constructInfo": {
+                              "fqn": "constructs.Construct",
+                              "version": "10.2.54"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/integ-tests-alpha.AssertionsProvider",
+                          "version": "2.86.0-alpha.0"
+                        }
+                      },
+                      "Default": {
+                        "id": "Default",
+                        "path": "integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBputItem6a90464b4533e04b0a6541d139a49371/Default",
+                        "children": {
+                          "Default": {
+                            "id": "Default",
+                            "path": "integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBputItem6a90464b4533e04b0a6541d139a49371/Default/Default",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.CfnResource",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CustomResource",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/integ-tests-alpha.AwsApiCall",
+                      "version": "2.86.0-alpha.0"
+                    }
+                  },
+                  "SingletonFunction1488541a7b23466481b69b4408076b81": {
+                    "id": "SingletonFunction1488541a7b23466481b69b4408076b81",
+                    "path": "integ-test/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81",
+                    "children": {
+                      "Staging": {
+                        "id": "Staging",
+                        "path": "integ-test/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Staging",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "Role": {
+                        "id": "Role",
+                        "path": "integ-test/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Role",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnResource",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "Handler": {
+                        "id": "Handler",
+                        "path": "integ-test/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Handler",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnResource",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.2.54"
+                    }
+                  },
+                  "HttpApiCalle7735bda26d0269db5e0a251f60760dd": {
+                    "id": "HttpApiCalle7735bda26d0269db5e0a251f60760dd",
+                    "path": "integ-test/DefaultTest/DeployAssert/HttpApiCalle7735bda26d0269db5e0a251f60760dd",
+                    "children": {
+                      "HttpProvider": {
+                        "id": "HttpProvider",
+                        "path": "integ-test/DefaultTest/DeployAssert/HttpApiCalle7735bda26d0269db5e0a251f60760dd/HttpProvider",
+                        "children": {
+                          "AssertionsProvider": {
+                            "id": "AssertionsProvider",
+                            "path": "integ-test/DefaultTest/DeployAssert/HttpApiCalle7735bda26d0269db5e0a251f60760dd/HttpProvider/AssertionsProvider",
+                            "constructInfo": {
+                              "fqn": "constructs.Construct",
+                              "version": "10.2.54"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/integ-tests-alpha.AssertionsProvider",
+                          "version": "2.86.0-alpha.0"
+                        }
+                      },
+                      "Default": {
+                        "id": "Default",
+                        "path": "integ-test/DefaultTest/DeployAssert/HttpApiCalle7735bda26d0269db5e0a251f60760dd/Default",
+                        "children": {
+                          "Default": {
+                            "id": "Default",
+                            "path": "integ-test/DefaultTest/DeployAssert/HttpApiCalle7735bda26d0269db5e0a251f60760dd/Default/Default",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.CfnResource",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CustomResource",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "AssertionResults": {
+                        "id": "AssertionResults",
+                        "path": "integ-test/DefaultTest/DeployAssert/HttpApiCalle7735bda26d0269db5e0a251f60760dd/AssertionResults",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnOutput",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/integ-tests-alpha.HttpApiCall",
+                      "version": "2.86.0-alpha.0"
+                    }
+                  },
+                  "BootstrapVersion": {
+                    "id": "BootstrapVersion",
+                    "path": "integ-test/DefaultTest/DeployAssert/BootstrapVersion",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnParameter",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "CheckBootstrapVersion": {
+                    "id": "CheckBootstrapVersion",
+                    "path": "integ-test/DefaultTest/DeployAssert/CheckBootstrapVersion",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnRule",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Stack",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/integ-tests-alpha.IntegTestCase",
+              "version": "2.86.0-alpha.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/integ-tests-alpha.IntegTest",
+          "version": "2.86.0-alpha.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.2.54"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "hall-constructs.HallApp",
+      "version": "0.0.2"
+    }
+  }
+}

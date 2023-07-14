@@ -1,0 +1,20 @@
+{
+  "version": "32.0.0",
+  "testCases": {
+    "integ-test/DefaultTest": {
+      "stacks": [
+        "integ-create-post"
+      ],
+      "diffAssets": true,
+      "cdkCommandOptions": {
+        "deploy": {
+          "args": {
+            "rollback": true
+          }
+        }
+      },
+      "assertionStack": "integ-test/DefaultTest/DeployAssert",
+      "assertionStackName": "integtestDefaultTestDeployAssert24D5C536"
+    }
+  }
+}

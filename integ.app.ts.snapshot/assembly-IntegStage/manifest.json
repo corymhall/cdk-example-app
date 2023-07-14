@@ -1,0 +1,486 @@
+{
+  "version": "32.0.0",
+  "artifacts": {
+    "IntegStageAppStack0A3FDF01.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "IntegStageAppStack0A3FDF01.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "IntegStageAppStack0A3FDF01": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/us-east-2",
+      "properties": {
+        "templateFile": "IntegStageAppStack0A3FDF01.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-us-east-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-us-east-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-us-east-2/da15c4df4bc7ef99a6be344cc3c506a0e9dccd0604a475ab7198ad98e2d0e228.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "IntegStageAppStack0A3FDF01.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-us-east-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "IntegStage-AppStack"
+      },
+      "dependencies": [
+        "IntegStageAppStack0A3FDF01.assets"
+      ],
+      "metadata": {
+        "/IntegStage/AppStack/Api/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiF70053CD"
+          }
+        ],
+        "/IntegStage/AppStack/Api/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiDeploymentB17BE62D3528be9b91ea465a1a8c9a8d462b7702"
+          }
+        ],
+        "/IntegStage/AppStack/Api/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiDeploymentStageprod3EB9684E"
+          }
+        ],
+        "/IntegStage/AppStack/Api/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiEndpoint4F160690"
+          }
+        ],
+        "/IntegStage/AppStack/Api/Default/dogs/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Apidogs69626E87"
+          }
+        ],
+        "/IntegStage/AppStack/Api/Default/dogs/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApidogsGET80BC30C5"
+          }
+        ],
+        "/IntegStage/AppStack/Api/Default/cats/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApicatsC0DF3637"
+          }
+        ],
+        "/IntegStage/AppStack/Api/Default/cats/GET/ApiPermission.IntegStageAppStackApi27B3D87B.GET..cats": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApicatsGETApiPermissionIntegStageAppStackApi27B3D87BGETcats2C579167"
+          }
+        ],
+        "/IntegStage/AppStack/Api/Default/cats/GET/ApiPermission.Test.IntegStageAppStackApi27B3D87B.GET..cats": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApicatsGETApiPermissionTestIntegStageAppStackApi27B3D87BGETcatsA030A1AB"
+          }
+        ],
+        "/IntegStage/AppStack/Api/Default/cats/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApicatsGET3EEB7C45"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpc38F99C35"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet1SubnetB325755A"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet1RouteTable3FF7F73D"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet1RouteTableAssociation1A0DF621"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet1DefaultRoute2E8DE636"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet1EIPDE531ACB"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet1NATGateway7B6A309A"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet2Subnet1252E6FC"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet2RouteTable32F15A8E"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet2RouteTableAssociation60232721"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet2DefaultRoute88F038FC"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet3SubnetED10EC9E"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet3RouteTable56D38303"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet3RouteTableAssociation834016AA"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PublicSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPublicSubnet3DefaultRouteC914967F"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPrivateSubnet1Subnet07B12260"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPrivateSubnet1RouteTable5FD5F134"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPrivateSubnet1RouteTableAssociationB002D11F"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPrivateSubnet1DefaultRoute87C26ADA"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPrivateSubnet2SubnetAFAE28F5"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPrivateSubnet2RouteTable7CEA1B20"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPrivateSubnet2RouteTableAssociationF4B1236A"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPrivateSubnet2DefaultRouteE96860F3"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PrivateSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPrivateSubnet3Subnet05A4329C"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PrivateSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPrivateSubnet3RouteTable7A3D2FC4"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PrivateSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPrivateSubnet3RouteTableAssociation54D890B9"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/PrivateSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcPrivateSubnet3DefaultRoute4D6A6F28"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcIGW1D454B1F"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcVPCGW62DB7B71"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Vpc/RestrictDefaultSecurityGroupCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceVpcRestrictDefaultSecurityGroupCustomResourceB098C7C1"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/NLB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceNLB07D1DCE0"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/NLB/app/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceNLBapp53BAE0A1"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/NLB/app/serviceGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceNLBappserviceGroup80D6F9C8"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Cluster/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceCluster50DB5F75"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Cluster/Cluster": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceCluster3D74FE87"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/TaskDef/TaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceTaskDefTaskRole52A5D426"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/TaskDef/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceTaskDefBC18B6C7"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/TaskDef/app/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceTaskDefappLogGroup7D0EBCAA"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/TaskDef/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceTaskDefExecutionRoleEF8541E7"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/TaskDef/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceTaskDefExecutionRoleDefaultPolicy3A99609A"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Service/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceCAC66A7D"
+          }
+        ],
+        "/IntegStage/AppStack/DogsService/Service/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DogsServiceSecurityGroup32CFF59D"
+          }
+        ],
+        "/IntegStage/AppStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+          }
+        ],
+        "/IntegStage/AppStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+          }
+        ],
+        "/IntegStage/AppStack/VpcLink/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcLink42ED6FF0"
+          }
+        ],
+        "/IntegStage/AppStack/CatsService/Handler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CatsServiceHandlerServiceRole03686F1F"
+          }
+        ],
+        "/IntegStage/AppStack/CatsService/Handler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CatsServiceHandler5509C977"
+          }
+        ],
+        "/IntegStage/AppStack/Exports/Output{\"Ref\":\"ApiF70053CD\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefApiF70053CD5653BA4D"
+          }
+        ],
+        "/IntegStage/AppStack/Exports/Output{\"Ref\":\"ApiDeploymentStageprod3EB9684E\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefApiDeploymentStageprod3EB9684E9290AA51"
+          }
+        ],
+        "/IntegStage/AppStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/IntegStage/AppStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "IntegStage/AppStack"
+    },
+    "IntegStageIntegAssertionsStack608D6AA8.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "IntegStageIntegAssertionsStack608D6AA8.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "IntegStageIntegAssertionsStack608D6AA8": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/us-east-2",
+      "properties": {
+        "templateFile": "IntegStageIntegAssertionsStack608D6AA8.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-us-east-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-us-east-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-us-east-2/88cb936a85bb0b1d2296cd5b981d2eda11a5a21139e664f87c53bed38680b0ec.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "IntegStageIntegAssertionsStack608D6AA8.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-us-east-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "IntegStage-IntegAssertionsStack"
+      },
+      "dependencies": [
+        "IntegStageAppStack0A3FDF01",
+        "IntegStageIntegAssertionsStack608D6AA8.assets"
+      ],
+      "metadata": {
+        "/IntegStage/IntegAssertionsStack/Call/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Call"
+          }
+        ],
+        "/IntegStage/IntegAssertionsStack/SingletonFunction1488541a7b23466481b69b4408076b81/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction1488541a7b23466481b69b4408076b81Role37ABCE73"
+          }
+        ],
+        "/IntegStage/IntegAssertionsStack/SingletonFunction1488541a7b23466481b69b4408076b81/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction1488541a7b23466481b69b4408076b81HandlerCD40AE9F"
+          }
+        ],
+        "/IntegStage/IntegAssertionsStack/SingletonLambda1488541a7b23466481b69b4408076b82/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda1488541a7b23466481b69b4408076b82ServiceRoleE7F690E5"
+          }
+        ],
+        "/IntegStage/IntegAssertionsStack/SingletonLambda1488541a7b23466481b69b4408076b82/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda1488541a7b23466481b69b4408076b8224EEACAA"
+          }
+        ],
+        "/IntegStage/IntegAssertionsStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/IntegStage/IntegAssertionsStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "IntegStage/IntegAssertionsStack"
+    }
+  }
+}

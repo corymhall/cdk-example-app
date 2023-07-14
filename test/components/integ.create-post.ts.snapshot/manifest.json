@@ -1,0 +1,382 @@
+{
+  "version": "32.0.0",
+  "artifacts": {
+    "integ-create-post.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "integ-create-post.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "integ-create-post": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "integ-create-post.template.json",
+        "tags": {
+          "dir": "/home/hallcor/personal/cdk-example-app/test/components",
+          "repoName": "cdk-example-app"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6fa93b6f08a3e8c6058299c6223e2bc147c49546ba508e8327ede4cc2ccffacb.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "integ-create-post.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "integ-create-post.assets"
+      ],
+      "metadata": {
+        "/integ-create-post": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "dir",
+                "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+              },
+              {
+                "Key": "repoName",
+                "Value": "cdk-example-app"
+              }
+            ]
+          }
+        ],
+        "/integ-create-post/CreatePostMonitor/DynamicDashboards/Infrastructure/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostMonitorDynamicDashboardsInfrastructure02391B6B"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostMonitor/Facade/Facade--IntegrationLatency-Anomaly-Critical/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostMonitorFacadeFacadeIntegrationLatencyAnomalyCriticalBAB7FA0C"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostMonitor/Facade/ApiMonitorDashboard/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostMonitorFacadeApiMonitorDashboardFE2D0748"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostMonitor/Facade/ApiMonitorDashboardDetail/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostMonitorFacadeApiMonitorDashboardDetail4D343F7A"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostMonitor/Facade/Facade--Invocations-Anomaly-Critical/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostMonitorFacadeFacadeInvocationsAnomalyCriticalC8D1BBC4"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostMonitor/Facade/Facade--Duration-Anomaly-Critical/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostMonitorFacadeFacadeDurationAnomalyCritical617D006B"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostMonitor/Facade/CreateFunctionDashboard/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostMonitorFacadeCreateFunctionDashboardA139E851"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostMonitor/Facade/CreateFunctionDashboardDetail/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostMonitorFacadeCreateFunctionDashboardDetailAEA91289"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostMonitor/Facade/Facade-ErrorsAlarm-errors-Critical/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostMonitorFacadeFacadeErrorsAlarmerrorsCritical532B1169"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostIntegApi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostIntegApi110FE779"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostIntegApi/DefaultStage/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostIntegApiDefaultStageE7A19C67"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostIntegApi/POST--posts/createPost/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostIntegApiPOSTpostscreatePost6009CEC0"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostIntegApi/POST--posts/createPost-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostIntegApiPOSTpostscreatePostPermissionDD2DF568"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostIntegApi/POST--posts/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostIntegApiPOSTposts5E2393BF"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePostIntegTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostIntegTable49E0F01B"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePost/CreatePost/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostServiceRole3F6FFE7F"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePost/CreatePost/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostServiceRoleDefaultPolicy45EA3357"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/CreatePost/CreatePost/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePostD3E67D61"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-create-post/Exports/Output{\"Ref\":\"CreatePostIntegApi110FE779\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefCreatePostIntegApi110FE779854A30CF"
+          }
+        ],
+        "/integ-create-post/Exports/Output{\"Ref\":\"CreatePostIntegTable49E0F01B\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefCreatePostIntegTable49E0F01B8F88BF13"
+          }
+        ],
+        "/integ-create-post/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/integ-create-post/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "integ-create-post"
+    },
+    "integtestDefaultTestDeployAssert24D5C536.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "integtestDefaultTestDeployAssert24D5C536.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "integtestDefaultTestDeployAssert24D5C536": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "integtestDefaultTestDeployAssert24D5C536.template.json",
+        "tags": {
+          "dir": "/home/hallcor/personal/cdk-example-app/test/components",
+          "repoName": "cdk-example-app"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/342733d86905a9a8847818c57152971ef5b359e5df6b417a609632fb21366b75.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "integtestDefaultTestDeployAssert24D5C536.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "integ-create-post",
+        "integtestDefaultTestDeployAssert24D5C536.assets"
+      ],
+      "metadata": {
+        "/integ-test/DefaultTest/DeployAssert": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "dir",
+                "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+              },
+              {
+                "Key": "repoName",
+                "Value": "cdk-example-app"
+              }
+            ]
+          }
+        ],
+        "/integ-test/DefaultTest/DeployAssert/HttpApiCall8252f3a02d209ef8430bc3c6ac20aca7/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HttpApiCall8252f3a02d209ef8430bc3c6ac20aca7"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-test/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction1488541a7b23466481b69b4408076b81Role37ABCE73"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-test/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction1488541a7b23466481b69b4408076b81HandlerCD40AE9F"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBgetItem4ac8f8b5adf699f07b0bcbba84b9ab77/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsApiCallDynamoDBgetItem4ac8f8b5adf699f07b0bcbba84b9ab77"
+          },
+          {
+            "type": "aws:cdk:info",
+            "data": "\nResource Retention FAILED: Ensures retention is set to DESTROY - https://github.com/corymhall/cdk-dev-aspects#resource-retention\n\nupdating removal policy to DELETE"
+          }
+        ],
+        "/integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBgetItem4ac8f8b5adf699f07b0bcbba84b9ab77/AssertionResults": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssertionResultsAwsApiCallDynamoDBgetItem4ac8f8b5adf699f07b0bcbba84b9ab77"
+          }
+        ],
+        "/integ-test/DefaultTest/DeployAssert/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/integ-test/DefaultTest/DeployAssert/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "integ-test/DefaultTest/DeployAssert"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

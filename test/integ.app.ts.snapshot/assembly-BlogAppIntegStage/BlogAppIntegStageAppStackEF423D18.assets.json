@@ -1,0 +1,48 @@
+{
+  "version": "32.0.0",
+  "files": {
+    "90bde03fedbc72e74ee34915c43bb9bf93ca6567af040e040d43a117ed6cc6d8": {
+      "source": {
+        "path": "../asset.90bde03fedbc72e74ee34915c43bb9bf93ca6567af040e040d43a117ed6cc6d8.lambda",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-us-west-2": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2",
+          "objectKey": "90bde03fedbc72e74ee34915c43bb9bf93ca6567af040e040d43a117ed6cc6d8.zip",
+          "region": "us-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-us-west-2"
+        }
+      }
+    },
+    "536519a8b7b2d5e71d2e8404264c2d4c9183b5078f09f1cae1c7c12c24f70ba1": {
+      "source": {
+        "path": "BlogAppIntegStageAppStackEF423D18.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-us-west-2": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2",
+          "objectKey": "536519a8b7b2d5e71d2e8404264c2d4c9183b5078f09f1cae1c7c12c24f70ba1.json",
+          "region": "us-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-us-west-2"
+        }
+      }
+    }
+  },
+  "dockerImages": {
+    "75241d35e8dcfd8be5d360bf5443f5daca01fa248211ded949c5cf0e4e085f48": {
+      "source": {
+        "directory": "../asset.75241d35e8dcfd8be5d360bf5443f5daca01fa248211ded949c5cf0e4e085f48.server"
+      },
+      "destinations": {
+        "current_account-us-west-2": {
+          "repositoryName": "cdk-hnb659fds-container-assets-${AWS::AccountId}-us-west-2",
+          "imageTag": "75241d35e8dcfd8be5d360bf5443f5daca01fa248211ded949c5cf0e4e085f48",
+          "region": "us-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-image-publishing-role-${AWS::AccountId}-us-west-2"
+        }
+      }
+    }
+  }
+}

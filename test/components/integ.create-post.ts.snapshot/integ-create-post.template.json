@@ -1,0 +1,808 @@
+{
+ "Resources": {
+  "CreatePostMonitorDynamicDashboardsInfrastructure02391B6B": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"start\":\"-PT8H\",\"periodOverride\":\"inherit\",\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"# ",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Client Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"4xx\",\"ApiId\",\"",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "\",{\"label\":\"client error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Integration Latency\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "\",{\"label\":\"integration latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Latency\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "\",{\"label\":\"latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":18,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Requests\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"Count\",\"ApiId\",\"",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "\",{\"label\":\"total requests\",\"stat\":\"SampleCount\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":7,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Server Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"5xx\",\"ApiId\",\"",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "\",{\"label\":\"server error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":13,\"properties\":{\"markdown\":\"# ",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       "\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":14,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Invocations\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"Invocations\",\"FunctionName\",\"",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       "\",{\"label\":\"invocations\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":14,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Duration\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"Duration\",\"FunctionName\",\"",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       "\",{\"label\":\"duration\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":14,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"Errors\",\"FunctionName\",\"",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       "\",{\"label\":\"errors\",\"stat\":\"Sum\"}]],\"yAxis\":{}}}]}"
+      ]
+     ]
+    },
+    "DashboardName": "BlogAppDashboards-Infrastructure"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostMonitorFacadeFacadeIntegrationLatencyAnomalyCriticalBAB7FA0C": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "LessThanLowerOrGreaterThanUpperThreshold",
+    "EvaluationPeriods": 3,
+    "ActionsEnabled": true,
+    "AlarmDescription": "Anomaly detection: value is outside of the expected band.",
+    "AlarmName": "Facade--IntegrationLatency-Anomaly-Critical",
+    "DatapointsToAlarm": 3,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(integrationLatency,3)",
+      "Id": "expr_1",
+      "Label": "integrationLatency",
+      "ReturnData": true
+     },
+     {
+      "Id": "integrationLatency",
+      "Label": "integration latency",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiId",
+          "Value": {
+           "Ref": "CreatePostIntegApi110FE779"
+          }
+         }
+        ],
+        "MetricName": "IntegrationLatency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": true
+     }
+    ],
+    "ThresholdMetricId": "expr_1",
+    "TreatMissingData": "missing"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostMonitorFacadeApiMonitorDashboardFE2D0748": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"### IntegrationLatencyAnomalyDetectionAlarm\"}},{\"type\":\"metric\",\"width\":24,\"height\":5,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       " Integration Latency\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[{\"label\":\"integrationLatency\",\"expression\":\"ANOMALY_DETECTION_BAND(integrationLatency,3)\"}],[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "\",{\"label\":\"integration latency\",\"visible\":false,\"id\":\"integrationLatency\"}]],\"yAxis\":{}}}]}"
+      ]
+     ]
+    },
+    "DashboardName": "BlogAppDashboards-ApiMonitor-Alarms"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostMonitorFacadeApiMonitorDashboardDetail4D343F7A": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"widgets\":[{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Client Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"4xx\",\"ApiId\",\"",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "\",{\"label\":\"client error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Integration Latency\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "\",{\"label\":\"integration latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Latency\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "\",{\"label\":\"latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":18,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Requests\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"Count\",\"ApiId\",\"",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "\",{\"label\":\"total requests\",\"stat\":\"SampleCount\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Server Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/ApiGateway\",\"5xx\",\"ApiId\",\"",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "\",{\"label\":\"server error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}}]}"
+      ]
+     ]
+    },
+    "DashboardName": "BlogAppDashboards-ApiMonitor-Detail"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostMonitorFacadeFacadeInvocationsAnomalyCriticalC8D1BBC4": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "LessThanLowerOrGreaterThanUpperThreshold",
+    "EvaluationPeriods": 3,
+    "ActionsEnabled": true,
+    "AlarmDescription": "Anomaly detection: value is outside of the expected band.",
+    "AlarmName": "Facade--Invocations-Anomaly-Critical",
+    "DatapointsToAlarm": 3,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(invocations,3)",
+      "Id": "expr_1",
+      "Label": "invocations",
+      "ReturnData": true
+     },
+     {
+      "Id": "invocations",
+      "Label": "invocations",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "FunctionName",
+          "Value": {
+           "Ref": "CreatePostD3E67D61"
+          }
+         }
+        ],
+        "MetricName": "Invocations",
+        "Namespace": "AWS/Lambda"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": true
+     }
+    ],
+    "ThresholdMetricId": "expr_1",
+    "TreatMissingData": "missing"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostMonitorFacadeFacadeDurationAnomalyCritical617D006B": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "LessThanLowerOrGreaterThanUpperThreshold",
+    "EvaluationPeriods": 3,
+    "ActionsEnabled": true,
+    "AlarmDescription": "Anomaly detection: value is outside of the expected band.",
+    "AlarmName": "Facade--Duration-Anomaly-Critical",
+    "DatapointsToAlarm": 3,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(duration,3)",
+      "Id": "expr_1",
+      "Label": "duration",
+      "ReturnData": true
+     },
+     {
+      "Id": "duration",
+      "Label": "duration",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "FunctionName",
+          "Value": {
+           "Ref": "CreatePostD3E67D61"
+          }
+         }
+        ],
+        "MetricName": "Duration",
+        "Namespace": "AWS/Lambda"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": true
+     }
+    ],
+    "ThresholdMetricId": "expr_1",
+    "TreatMissingData": "missing"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostMonitorFacadeCreateFunctionDashboardA139E851": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"### DurationAnomalyDetectionAlarm\"}},{\"type\":\"metric\",\"width\":24,\"height\":5,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       " Duration\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[{\"label\":\"duration\",\"expression\":\"ANOMALY_DETECTION_BAND(duration,3)\"}],[\"AWS/Lambda\",\"Duration\",\"FunctionName\",\"",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       "\",{\"label\":\"duration\",\"visible\":false,\"id\":\"duration\"}]],\"yAxis\":{}}},{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":6,\"properties\":{\"markdown\":\"### ErrorsAlarm\"}},{\"type\":\"metric\",\"width\":24,\"height\":5,\"x\":0,\"y\":7,\"properties\":{\"view\":\"timeSeries\",\"title\":\"",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       " Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"Errors\",\"FunctionName\",\"",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       "\",{\"label\":\"errors\",\"stat\":\"Sum\"}]],\"annotations\":{\"horizontal\":[{\"label\":\"errors >= 3 for 3 datapoints within 15 minutes\",\"value\":3,\"yAxis\":\"left\"}]},\"yAxis\":{}}},{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":12,\"properties\":{\"markdown\":\"### InvocationsAnomalyDetectionAlarm\"}},{\"type\":\"metric\",\"width\":24,\"height\":5,\"x\":0,\"y\":13,\"properties\":{\"view\":\"timeSeries\",\"title\":\"",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       " Invocations\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[{\"label\":\"invocations\",\"expression\":\"ANOMALY_DETECTION_BAND(invocations,3)\"}],[\"AWS/Lambda\",\"Invocations\",\"FunctionName\",\"",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       "\",{\"label\":\"invocations\",\"stat\":\"Sum\",\"visible\":false,\"id\":\"invocations\"}]],\"yAxis\":{}}}]}"
+      ]
+     ]
+    },
+    "DashboardName": "BlogAppDashboards-CreateFunction-Alarms"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostMonitorFacadeCreateFunctionDashboardDetailAEA91289": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"widgets\":[{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"blogApp\",\"ColdStart\",\"service\",\"CreateFunction\"]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"blogApp\",\"createPostFailure\",\"service\",\"CreateFunction\"]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"blogApp\",\"createPostSuccess\",\"service\",\"CreateFunction\"]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Invocations\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"Invocations\",\"FunctionName\",\"",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       "\",{\"label\":\"invocations\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Duration\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"Duration\",\"FunctionName\",\"",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       "\",{\"label\":\"duration\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/Lambda\",\"Errors\",\"FunctionName\",\"",
+       {
+        "Ref": "CreatePostD3E67D61"
+       },
+       "\",{\"label\":\"errors\",\"stat\":\"Sum\"}]],\"yAxis\":{}}}]}"
+      ]
+     ]
+    },
+    "DashboardName": "BlogAppDashboards-CreateFunction-Detail"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostMonitorFacadeFacadeErrorsAlarmerrorsCritical532B1169": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "EvaluationPeriods": 3,
+    "ActionsEnabled": true,
+    "AlarmDescription": "Threshold of 3 has been breached.",
+    "AlarmName": "Facade-ErrorsAlarm-errors-Critical",
+    "DatapointsToAlarm": 3,
+    "Metrics": [
+     {
+      "Id": "m1",
+      "Label": "errors",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "FunctionName",
+          "Value": {
+           "Ref": "CreatePostD3E67D61"
+          }
+         }
+        ],
+        "MetricName": "Errors",
+        "Namespace": "AWS/Lambda"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": true
+     }
+    ],
+    "Threshold": 3,
+    "TreatMissingData": "missing"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostIntegApi110FE779": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "Name": "CreatePostIntegApi",
+    "ProtocolType": "HTTP",
+    "Tags": {
+     "dir": "/home/hallcor/personal/cdk-example-app/test/components",
+     "repoName": "cdk-example-app"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostIntegApiDefaultStageE7A19C67": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": {
+     "Ref": "CreatePostIntegApi110FE779"
+    },
+    "StageName": "$default",
+    "AutoDeploy": true,
+    "Tags": {
+     "dir": "/home/hallcor/personal/cdk-example-app/test/components",
+     "repoName": "cdk-example-app"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostIntegApiPOSTpostscreatePost6009CEC0": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "CreatePostIntegApi110FE779"
+    },
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": {
+     "Fn::GetAtt": [
+      "CreatePostD3E67D61",
+      "Arn"
+     ]
+    },
+    "PayloadFormatVersion": "2.0"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostIntegApiPOSTpostscreatePostPermissionDD2DF568": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CreatePostD3E67D61",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "CreatePostIntegApi110FE779"
+       },
+       "/*/*/posts"
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostIntegApiPOSTposts5E2393BF": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": {
+     "Ref": "CreatePostIntegApi110FE779"
+    },
+    "RouteKey": "POST /posts",
+    "AuthorizationType": "NONE",
+    "Target": {
+     "Fn::Join": [
+      "",
+      [
+       "integrations/",
+       {
+        "Ref": "CreatePostIntegApiPOSTpostscreatePost6009CEC0"
+       }
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostIntegTable49E0F01B": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "KeySchema": [
+     {
+      "AttributeName": "pk",
+      "KeyType": "HASH"
+     }
+    ],
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "pk",
+      "AttributeType": "S"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    },
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostServiceRole3F6FFE7F": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostServiceRoleDefaultPolicy45EA3357": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "xray:PutTelemetryRecords",
+        "xray:PutTraceSegments"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "dynamodb:BatchWriteItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "CreatePostIntegTable49E0F01B",
+          "Arn"
+         ]
+        },
+        {
+         "Ref": "AWS::NoValue"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CreatePostServiceRoleDefaultPolicy45EA3357",
+    "Roles": [
+     {
+      "Ref": "CreatePostServiceRole3F6FFE7F"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CreatePostD3E67D61": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "b01ecc79cf0ed2f5b2a3eb3b398a15d441568ef55e73cf86bd3bbe69db266e08.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "CreatePostServiceRole3F6FFE7F",
+      "Arn"
+     ]
+    },
+    "Architectures": [
+     "arm64"
+    ],
+    "Description": "src/posts/create.lambda.ts",
+    "Environment": {
+     "Variables": {
+      "LOG_LEVEL": "DEBUG",
+      "POWERTOOLS_LOGGER_LOG_EVENT": "true",
+      "POWERTOOLS_SERVICE_NAME": "CreateFunction",
+      "POWERTOOLS_METRICS_NAMESPACE": "blogApp",
+      "ENV": "dev",
+      "TABLE_NAME": {
+       "Ref": "CreatePostIntegTable49E0F01B"
+      },
+      "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+     }
+    },
+    "Handler": "index.handler",
+    "Layers": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":lambda:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":094274105915:layer:AWSLambdaPowertoolsTypeScript:15"
+       ]
+      ]
+     }
+    ],
+    "MemorySize": 256,
+    "Runtime": "nodejs18.x",
+    "Tags": [
+     {
+      "Key": "dir",
+      "Value": "/home/hallcor/personal/cdk-example-app/test/components"
+     },
+     {
+      "Key": "repoName",
+      "Value": "cdk-example-app"
+     }
+    ],
+    "TracingConfig": {
+     "Mode": "Active"
+    }
+   },
+   "DependsOn": [
+    "CreatePostServiceRoleDefaultPolicy45EA3357",
+    "CreatePostServiceRole3F6FFE7F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "Outputs": {
+  "ExportsOutputRefCreatePostIntegApi110FE779854A30CF": {
+   "Value": {
+    "Ref": "CreatePostIntegApi110FE779"
+   },
+   "Export": {
+    "Name": "integ-create-post:ExportsOutputRefCreatePostIntegApi110FE779854A30CF"
+   }
+  },
+  "ExportsOutputRefCreatePostIntegTable49E0F01B8F88BF13": {
+   "Value": {
+    "Ref": "CreatePostIntegTable49E0F01B"
+   },
+   "Export": {
+    "Name": "integ-create-post:ExportsOutputRefCreatePostIntegTable49E0F01B8F88BF13"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

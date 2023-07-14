@@ -1,0 +1,803 @@
+{
+ "Resources": {
+  "PostsTableC82B36F0": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "KeySchema": [
+     {
+      "AttributeName": "pk",
+      "KeyType": "HASH"
+     }
+    ],
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "pk",
+      "AttributeType": "S"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "NetworkVpc7FB7348F": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPublicSubnet1Subnet36933139": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "AvailabilityZone": "test-region-1a",
+    "CidrBlock": "10.0.0.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPublicSubnet1RouteTable30235CE2": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPublicSubnet1RouteTableAssociation643926C7": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkVpcPublicSubnet1RouteTable30235CE2"
+    },
+    "SubnetId": {
+     "Ref": "NetworkVpcPublicSubnet1Subnet36933139"
+    }
+   }
+  },
+  "NetworkVpcPublicSubnet1DefaultRoute31EC04EC": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkVpcPublicSubnet1RouteTable30235CE2"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "NetworkVpcIGW6BEA7B02"
+    }
+   },
+   "DependsOn": [
+    "NetworkVpcVPCGW8F3799B5"
+   ]
+  },
+  "NetworkVpcPublicSubnet1EIPE0D52090": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPublicSubnet1NATGateway64781A21": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "NetworkVpcPublicSubnet1Subnet36933139"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "NetworkVpcPublicSubnet1EIPE0D52090",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "NetworkVpcPublicSubnet1DefaultRoute31EC04EC",
+    "NetworkVpcPublicSubnet1RouteTableAssociation643926C7"
+   ]
+  },
+  "NetworkVpcPublicSubnet2SubnetC427CCE0": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "AvailabilityZone": "test-region-1b",
+    "CidrBlock": "10.0.32.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPublicSubnet2RouteTable0FACEBB2": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPublicSubnet2RouteTableAssociationC662643B": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkVpcPublicSubnet2RouteTable0FACEBB2"
+    },
+    "SubnetId": {
+     "Ref": "NetworkVpcPublicSubnet2SubnetC427CCE0"
+    }
+   }
+  },
+  "NetworkVpcPublicSubnet2DefaultRoute0CF082AB": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkVpcPublicSubnet2RouteTable0FACEBB2"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "NetworkVpcIGW6BEA7B02"
+    }
+   },
+   "DependsOn": [
+    "NetworkVpcVPCGW8F3799B5"
+   ]
+  },
+  "NetworkVpcPublicSubnet2EIP24F41572": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPublicSubnet2NATGateway42CB86F5": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "NetworkVpcPublicSubnet2SubnetC427CCE0"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "NetworkVpcPublicSubnet2EIP24F41572",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "NetworkVpcPublicSubnet2DefaultRoute0CF082AB",
+    "NetworkVpcPublicSubnet2RouteTableAssociationC662643B"
+   ]
+  },
+  "NetworkVpcPublicSubnet3Subnet4BBF7F47": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "AvailabilityZone": "test-region-1c",
+    "CidrBlock": "10.0.64.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPublicSubnet3RouteTable4F517CA2": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPublicSubnet3RouteTableAssociationDBCF32A1": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkVpcPublicSubnet3RouteTable4F517CA2"
+    },
+    "SubnetId": {
+     "Ref": "NetworkVpcPublicSubnet3Subnet4BBF7F47"
+    }
+   }
+  },
+  "NetworkVpcPublicSubnet3DefaultRoute320997B4": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkVpcPublicSubnet3RouteTable4F517CA2"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "NetworkVpcIGW6BEA7B02"
+    }
+   },
+   "DependsOn": [
+    "NetworkVpcVPCGW8F3799B5"
+   ]
+  },
+  "NetworkVpcPublicSubnet3EIP22F0C93C": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPublicSubnet3NATGateway5DD3AF93": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "NetworkVpcPublicSubnet3Subnet4BBF7F47"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "NetworkVpcPublicSubnet3EIP22F0C93C",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PublicSubnet3"
+     }
+    ]
+   },
+   "DependsOn": [
+    "NetworkVpcPublicSubnet3DefaultRoute320997B4",
+    "NetworkVpcPublicSubnet3RouteTableAssociationDBCF32A1"
+   ]
+  },
+  "NetworkVpcPrivateSubnet1Subnet6DD86AE6": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "AvailabilityZone": "test-region-1a",
+    "CidrBlock": "10.0.96.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet1"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPrivateSubnet1RouteTable7D7AA3CD": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet1"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPrivateSubnet1RouteTableAssociation327CA62F": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkVpcPrivateSubnet1RouteTable7D7AA3CD"
+    },
+    "SubnetId": {
+     "Ref": "NetworkVpcPrivateSubnet1Subnet6DD86AE6"
+    }
+   }
+  },
+  "NetworkVpcPrivateSubnet1DefaultRoute08635105": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkVpcPrivateSubnet1RouteTable7D7AA3CD"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "NetworkVpcPublicSubnet1NATGateway64781A21"
+    }
+   }
+  },
+  "NetworkVpcPrivateSubnet2Subnet1BDBE877": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "AvailabilityZone": "test-region-1b",
+    "CidrBlock": "10.0.128.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet2"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPrivateSubnet2RouteTableC48862D1": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet2"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPrivateSubnet2RouteTableAssociation89A2F1E8": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkVpcPrivateSubnet2RouteTableC48862D1"
+    },
+    "SubnetId": {
+     "Ref": "NetworkVpcPrivateSubnet2Subnet1BDBE877"
+    }
+   }
+  },
+  "NetworkVpcPrivateSubnet2DefaultRouteA15DC6D5": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkVpcPrivateSubnet2RouteTableC48862D1"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "NetworkVpcPublicSubnet2NATGateway42CB86F5"
+    }
+   }
+  },
+  "NetworkVpcPrivateSubnet3Subnet8ABFAF5C": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "AvailabilityZone": "test-region-1c",
+    "CidrBlock": "10.0.160.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet3"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPrivateSubnet3RouteTable7FC52A8D": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc/PrivateSubnet3"
+     }
+    ]
+   }
+  },
+  "NetworkVpcPrivateSubnet3RouteTableAssociation616B0E34": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkVpcPrivateSubnet3RouteTable7FC52A8D"
+    },
+    "SubnetId": {
+     "Ref": "NetworkVpcPrivateSubnet3Subnet8ABFAF5C"
+    }
+   }
+  },
+  "NetworkVpcPrivateSubnet3DefaultRouteFE7FEBED": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkVpcPrivateSubnet3RouteTable7FC52A8D"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "NetworkVpcPublicSubnet3NATGateway5DD3AF93"
+    }
+   }
+  },
+  "NetworkVpcIGW6BEA7B02": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BlogAppIntegStage/DataStack/Network/Vpc"
+     }
+    ]
+   }
+  },
+  "NetworkVpcVPCGW8F3799B5": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NetworkVpc7FB7348F"
+    },
+    "InternetGatewayId": {
+     "Ref": "NetworkVpcIGW6BEA7B02"
+    }
+   }
+  },
+  "NetworkVpcRestrictDefaultSecurityGroupCustomResource491E144D": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+      "Arn"
+     ]
+    },
+    "DefaultSecurityGroupId": {
+     "Fn::GetAtt": [
+      "NetworkVpc7FB7348F",
+      "DefaultSecurityGroup"
+     ]
+    },
+    "Account": {
+     "Ref": "AWS::AccountId"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "NetworkCluster17B54D11": {
+   "Type": "AWS::ECS::Cluster"
+  },
+  "NetworkClusterDefaultServiceDiscoveryNamespaceD090BA35": {
+   "Type": "AWS::ServiceDiscovery::PrivateDnsNamespace",
+   "Properties": {
+    "Name": "blog-dev.com",
+    "Vpc": {
+     "Ref": "NetworkVpc7FB7348F"
+    }
+   }
+  },
+  "NetworkCluster237516A5": {
+   "Type": "AWS::ECS::ClusterCapacityProviderAssociations",
+   "Properties": {
+    "CapacityProviders": [
+     "FARGATE",
+     "FARGATE_SPOT"
+    ],
+    "Cluster": {
+     "Ref": "NetworkCluster17B54D11"
+    },
+    "DefaultCapacityProviderStrategy": []
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:aws:ec2:us-west-2:",
+             {
+              "Ref": "AWS::AccountId"
+             },
+             ":security-group/",
+             {
+              "Fn::GetAtt": [
+               "NetworkVpc7FB7348F",
+               "DefaultSecurityGroup"
+              ]
+             }
+            ]
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2"
+     },
+     "S3Key": "e77031893275c08bcaa0a774aa8b611727afd045b3b5d8e1e6f0f04063d9d386.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs16.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ]
+  }
+ },
+ "Outputs": {
+  "ExportsOutputRefNetworkCluster17B54D113FA77A85": {
+   "Value": {
+    "Ref": "NetworkCluster17B54D11"
+   },
+   "Export": {
+    "Name": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkCluster17B54D113FA77A85"
+   }
+  },
+  "ExportsOutputRefNetworkVpc7FB7348F649FC110": {
+   "Value": {
+    "Ref": "NetworkVpc7FB7348F"
+   },
+   "Export": {
+    "Name": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkVpc7FB7348F649FC110"
+   }
+  },
+  "ExportsOutputRefNetworkVpcPrivateSubnet1Subnet6DD86AE62279BBA5": {
+   "Value": {
+    "Ref": "NetworkVpcPrivateSubnet1Subnet6DD86AE6"
+   },
+   "Export": {
+    "Name": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkVpcPrivateSubnet1Subnet6DD86AE62279BBA5"
+   }
+  },
+  "ExportsOutputRefNetworkVpcPrivateSubnet2Subnet1BDBE87783414D15": {
+   "Value": {
+    "Ref": "NetworkVpcPrivateSubnet2Subnet1BDBE877"
+   },
+   "Export": {
+    "Name": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkVpcPrivateSubnet2Subnet1BDBE87783414D15"
+   }
+  },
+  "ExportsOutputRefNetworkVpcPrivateSubnet3Subnet8ABFAF5C277BED3A": {
+   "Value": {
+    "Ref": "NetworkVpcPrivateSubnet3Subnet8ABFAF5C"
+   },
+   "Export": {
+    "Name": "BlogAppIntegStage-DataStack:ExportsOutputRefNetworkVpcPrivateSubnet3Subnet8ABFAF5C277BED3A"
+   }
+  },
+  "ExportsOutputFnGetAttPostsTableC82B36F0Arn40084DA1": {
+   "Value": {
+    "Fn::GetAtt": [
+     "PostsTableC82B36F0",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "BlogAppIntegStage-DataStack:ExportsOutputFnGetAttPostsTableC82B36F0Arn40084DA1"
+   }
+  },
+  "ExportsOutputRefPostsTableC82B36F06B4D022D": {
+   "Value": {
+    "Ref": "PostsTableC82B36F0"
+   },
+   "Export": {
+    "Name": "BlogAppIntegStage-DataStack:ExportsOutputRefPostsTableC82B36F06B4D022D"
+   }
+  },
+  "ExportsOutputFnGetAttNetworkClusterDefaultServiceDiscoveryNamespaceD090BA35IdBB648353": {
+   "Value": {
+    "Fn::GetAtt": [
+     "NetworkClusterDefaultServiceDiscoveryNamespaceD090BA35",
+     "Id"
+    ]
+   },
+   "Export": {
+    "Name": "BlogAppIntegStage-DataStack:ExportsOutputFnGetAttNetworkClusterDefaultServiceDiscoveryNamespaceD090BA35IdBB648353"
+   }
+  },
+  "ExportsOutputFnGetAttNetworkCluster17B54D11Arn1F2D2FE4": {
+   "Value": {
+    "Fn::GetAtt": [
+     "NetworkCluster17B54D11",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "BlogAppIntegStage-DataStack:ExportsOutputFnGetAttNetworkCluster17B54D11Arn1F2D2FE4"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

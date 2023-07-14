@@ -1,0 +1,1377 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "integ-create-post": {
+        "id": "integ-create-post",
+        "path": "integ-create-post",
+        "children": {
+          "CreatePostMonitor": {
+            "id": "CreatePostMonitor",
+            "path": "integ-create-post/CreatePostMonitor",
+            "children": {
+              "DynamicDashboards": {
+                "id": "DynamicDashboards",
+                "path": "integ-create-post/CreatePostMonitor/DynamicDashboards",
+                "children": {
+                  "Infrastructure": {
+                    "id": "Infrastructure",
+                    "path": "integ-create-post/CreatePostMonitor/DynamicDashboards/Infrastructure",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-create-post/CreatePostMonitor/DynamicDashboards/Infrastructure/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Dashboard",
+                          "aws:cdk:cloudformation:props": {
+                            "dashboardBody": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "{\"start\":\"-PT8H\",\"periodOverride\":\"inherit\",\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"# ",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  "\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Client Errors\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"4xx\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  "\",{\"label\":\"client error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Integration Latency\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  "\",{\"label\":\"integration latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Latency\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  "\",{\"label\":\"latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":18,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Requests\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"Count\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  "\",{\"label\":\"total requests\",\"stat\":\"SampleCount\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":7,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Server Errors\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"5xx\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  "\",{\"label\":\"server error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":13,\"properties\":{\"markdown\":\"# ",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  "\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":14,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Invocations\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/Lambda\",\"Invocations\",\"FunctionName\",\"",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  "\",{\"label\":\"invocations\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":14,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Duration\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/Lambda\",\"Duration\",\"FunctionName\",\"",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  "\",{\"label\":\"duration\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":14,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/Lambda\",\"Errors\",\"FunctionName\",\"",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  "\",{\"label\":\"errors\",\"stat\":\"Sum\"}]],\"yAxis\":{}}}]}"
+                                ]
+                              ]
+                            },
+                            "dashboardName": "BlogAppDashboards-Infrastructure"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnDashboard",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Dashboard",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "cdk-monitoring-constructs.DynamicDashboardFactory",
+                  "version": "5.2.2"
+                }
+              },
+              "Facade": {
+                "id": "Facade",
+                "path": "integ-create-post/CreatePostMonitor/Facade",
+                "children": {
+                  "Facade--IntegrationLatency-Anomaly-Critical": {
+                    "id": "Facade--IntegrationLatency-Anomaly-Critical",
+                    "path": "integ-create-post/CreatePostMonitor/Facade/Facade--IntegrationLatency-Anomaly-Critical",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-create-post/CreatePostMonitor/Facade/Facade--IntegrationLatency-Anomaly-Critical/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                          "aws:cdk:cloudformation:props": {
+                            "comparisonOperator": "LessThanLowerOrGreaterThanUpperThreshold",
+                            "evaluationPeriods": 3,
+                            "actionsEnabled": true,
+                            "alarmDescription": "Anomaly detection: value is outside of the expected band.",
+                            "alarmName": "Facade--IntegrationLatency-Anomaly-Critical",
+                            "datapointsToAlarm": 3,
+                            "metrics": [
+                              {
+                                "expression": "ANOMALY_DETECTION_BAND(integrationLatency,3)",
+                                "id": "expr_1",
+                                "label": "integrationLatency"
+                              },
+                              {
+                                "metricStat": {
+                                  "metric": {
+                                    "metricName": "IntegrationLatency",
+                                    "namespace": "AWS/ApiGateway",
+                                    "dimensions": [
+                                      {
+                                        "name": "ApiId",
+                                        "value": {
+                                          "Ref": "CreatePostIntegApi110FE779"
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "period": 300,
+                                  "stat": "Average"
+                                },
+                                "id": "integrationLatency",
+                                "label": "integration latency",
+                                "returnData": false
+                              }
+                            ],
+                            "threshold": 0,
+                            "thresholdMetricId": "expr_1",
+                            "treatMissingData": "missing"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "ApiMonitorDashboard": {
+                    "id": "ApiMonitorDashboard",
+                    "path": "integ-create-post/CreatePostMonitor/Facade/ApiMonitorDashboard",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-create-post/CreatePostMonitor/Facade/ApiMonitorDashboard/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Dashboard",
+                          "aws:cdk:cloudformation:props": {
+                            "dashboardBody": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "{\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"### IntegrationLatencyAnomalyDetectionAlarm\"}},{\"type\":\"metric\",\"width\":24,\"height\":5,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  " Integration Latency\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[{\"label\":\"integrationLatency\",\"expression\":\"ANOMALY_DETECTION_BAND(integrationLatency,3)\"}],[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  "\",{\"label\":\"integration latency\",\"visible\":false,\"id\":\"integrationLatency\"}]],\"yAxis\":{}}}]}"
+                                ]
+                              ]
+                            },
+                            "dashboardName": "BlogAppDashboards-ApiMonitor-Alarms"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnDashboard",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Dashboard",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "ApiMonitorDashboardDetail": {
+                    "id": "ApiMonitorDashboardDetail",
+                    "path": "integ-create-post/CreatePostMonitor/Facade/ApiMonitorDashboardDetail",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-create-post/CreatePostMonitor/Facade/ApiMonitorDashboardDetail/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Dashboard",
+                          "aws:cdk:cloudformation:props": {
+                            "dashboardBody": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "{\"widgets\":[{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Client Errors\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"4xx\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  "\",{\"label\":\"client error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Integration Latency\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"IntegrationLatency\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  "\",{\"label\":\"integration latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Latency\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"Latency\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  "\",{\"label\":\"latency\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":18,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Requests\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"Count\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  "\",{\"label\":\"total requests\",\"stat\":\"SampleCount\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Server Errors\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/ApiGateway\",\"5xx\",\"ApiId\",\"",
+                                  {
+                                    "Ref": "CreatePostIntegApi110FE779"
+                                  },
+                                  "\",{\"label\":\"server error\",\"stat\":\"Sum\"}]],\"yAxis\":{}}}]}"
+                                ]
+                              ]
+                            },
+                            "dashboardName": "BlogAppDashboards-ApiMonitor-Detail"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnDashboard",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Dashboard",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Facade--Invocations-Anomaly-Critical": {
+                    "id": "Facade--Invocations-Anomaly-Critical",
+                    "path": "integ-create-post/CreatePostMonitor/Facade/Facade--Invocations-Anomaly-Critical",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-create-post/CreatePostMonitor/Facade/Facade--Invocations-Anomaly-Critical/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                          "aws:cdk:cloudformation:props": {
+                            "comparisonOperator": "LessThanLowerOrGreaterThanUpperThreshold",
+                            "evaluationPeriods": 3,
+                            "actionsEnabled": true,
+                            "alarmDescription": "Anomaly detection: value is outside of the expected band.",
+                            "alarmName": "Facade--Invocations-Anomaly-Critical",
+                            "datapointsToAlarm": 3,
+                            "metrics": [
+                              {
+                                "expression": "ANOMALY_DETECTION_BAND(invocations,3)",
+                                "id": "expr_1",
+                                "label": "invocations"
+                              },
+                              {
+                                "metricStat": {
+                                  "metric": {
+                                    "metricName": "Invocations",
+                                    "namespace": "AWS/Lambda",
+                                    "dimensions": [
+                                      {
+                                        "name": "FunctionName",
+                                        "value": {
+                                          "Ref": "CreatePostD3E67D61"
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "period": 300,
+                                  "stat": "Sum"
+                                },
+                                "id": "invocations",
+                                "label": "invocations",
+                                "returnData": false
+                              }
+                            ],
+                            "threshold": 0,
+                            "thresholdMetricId": "expr_1",
+                            "treatMissingData": "missing"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Facade--Duration-Anomaly-Critical": {
+                    "id": "Facade--Duration-Anomaly-Critical",
+                    "path": "integ-create-post/CreatePostMonitor/Facade/Facade--Duration-Anomaly-Critical",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-create-post/CreatePostMonitor/Facade/Facade--Duration-Anomaly-Critical/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                          "aws:cdk:cloudformation:props": {
+                            "comparisonOperator": "LessThanLowerOrGreaterThanUpperThreshold",
+                            "evaluationPeriods": 3,
+                            "actionsEnabled": true,
+                            "alarmDescription": "Anomaly detection: value is outside of the expected band.",
+                            "alarmName": "Facade--Duration-Anomaly-Critical",
+                            "datapointsToAlarm": 3,
+                            "metrics": [
+                              {
+                                "expression": "ANOMALY_DETECTION_BAND(duration,3)",
+                                "id": "expr_1",
+                                "label": "duration"
+                              },
+                              {
+                                "metricStat": {
+                                  "metric": {
+                                    "metricName": "Duration",
+                                    "namespace": "AWS/Lambda",
+                                    "dimensions": [
+                                      {
+                                        "name": "FunctionName",
+                                        "value": {
+                                          "Ref": "CreatePostD3E67D61"
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "period": 300,
+                                  "stat": "Average"
+                                },
+                                "id": "duration",
+                                "label": "duration",
+                                "returnData": false
+                              }
+                            ],
+                            "threshold": 0,
+                            "thresholdMetricId": "expr_1",
+                            "treatMissingData": "missing"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "CreateFunctionDashboard": {
+                    "id": "CreateFunctionDashboard",
+                    "path": "integ-create-post/CreatePostMonitor/Facade/CreateFunctionDashboard",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-create-post/CreatePostMonitor/Facade/CreateFunctionDashboard/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Dashboard",
+                          "aws:cdk:cloudformation:props": {
+                            "dashboardBody": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "{\"widgets\":[{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"### DurationAnomalyDetectionAlarm\"}},{\"type\":\"metric\",\"width\":24,\"height\":5,\"x\":0,\"y\":1,\"properties\":{\"view\":\"timeSeries\",\"title\":\"",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  " Duration\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[{\"label\":\"duration\",\"expression\":\"ANOMALY_DETECTION_BAND(duration,3)\"}],[\"AWS/Lambda\",\"Duration\",\"FunctionName\",\"",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  "\",{\"label\":\"duration\",\"visible\":false,\"id\":\"duration\"}]],\"yAxis\":{}}},{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":6,\"properties\":{\"markdown\":\"### ErrorsAlarm\"}},{\"type\":\"metric\",\"width\":24,\"height\":5,\"x\":0,\"y\":7,\"properties\":{\"view\":\"timeSeries\",\"title\":\"",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  " Errors\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/Lambda\",\"Errors\",\"FunctionName\",\"",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  "\",{\"label\":\"errors\",\"stat\":\"Sum\"}]],\"annotations\":{\"horizontal\":[{\"label\":\"errors >= 3 for 3 datapoints within 15 minutes\",\"value\":3,\"yAxis\":\"left\"}]},\"yAxis\":{}}},{\"type\":\"text\",\"width\":24,\"height\":1,\"x\":0,\"y\":12,\"properties\":{\"markdown\":\"### InvocationsAnomalyDetectionAlarm\"}},{\"type\":\"metric\",\"width\":24,\"height\":5,\"x\":0,\"y\":13,\"properties\":{\"view\":\"timeSeries\",\"title\":\"",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  " Invocations\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[{\"label\":\"invocations\",\"expression\":\"ANOMALY_DETECTION_BAND(invocations,3)\"}],[\"AWS/Lambda\",\"Invocations\",\"FunctionName\",\"",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  "\",{\"label\":\"invocations\",\"stat\":\"Sum\",\"visible\":false,\"id\":\"invocations\"}]],\"yAxis\":{}}}]}"
+                                ]
+                              ]
+                            },
+                            "dashboardName": "BlogAppDashboards-CreateFunction-Alarms"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnDashboard",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Dashboard",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "CreateFunctionDashboardDetail": {
+                    "id": "CreateFunctionDashboardDetail",
+                    "path": "integ-create-post/CreatePostMonitor/Facade/CreateFunctionDashboardDetail",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-create-post/CreatePostMonitor/Facade/CreateFunctionDashboardDetail/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Dashboard",
+                          "aws:cdk:cloudformation:props": {
+                            "dashboardBody": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "{\"widgets\":[{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"blogApp\",\"ColdStart\",\"service\",\"CreateFunction\"]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"blogApp\",\"createPostFailure\",\"service\",\"CreateFunction\"]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"blogApp\",\"createPostSuccess\",\"service\",\"CreateFunction\"]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Invocations\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/Lambda\",\"Invocations\",\"FunctionName\",\"",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  "\",{\"label\":\"invocations\",\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Duration\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/Lambda\",\"Duration\",\"FunctionName\",\"",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  "\",{\"label\":\"duration\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors\",\"region\":\"",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  "\",\"metrics\":[[\"AWS/Lambda\",\"Errors\",\"FunctionName\",\"",
+                                  {
+                                    "Ref": "CreatePostD3E67D61"
+                                  },
+                                  "\",{\"label\":\"errors\",\"stat\":\"Sum\"}]],\"yAxis\":{}}}]}"
+                                ]
+                              ]
+                            },
+                            "dashboardName": "BlogAppDashboards-CreateFunction-Detail"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnDashboard",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Dashboard",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Facade-ErrorsAlarm-errors-Critical": {
+                    "id": "Facade-ErrorsAlarm-errors-Critical",
+                    "path": "integ-create-post/CreatePostMonitor/Facade/Facade-ErrorsAlarm-errors-Critical",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-create-post/CreatePostMonitor/Facade/Facade-ErrorsAlarm-errors-Critical/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                          "aws:cdk:cloudformation:props": {
+                            "comparisonOperator": "GreaterThanOrEqualToThreshold",
+                            "evaluationPeriods": 3,
+                            "actionsEnabled": true,
+                            "alarmDescription": "Threshold of 3 has been breached.",
+                            "alarmName": "Facade-ErrorsAlarm-errors-Critical",
+                            "datapointsToAlarm": 3,
+                            "metrics": [
+                              {
+                                "metricStat": {
+                                  "metric": {
+                                    "metricName": "Errors",
+                                    "namespace": "AWS/Lambda",
+                                    "dimensions": [
+                                      {
+                                        "name": "FunctionName",
+                                        "value": {
+                                          "Ref": "CreatePostD3E67D61"
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "period": 300,
+                                  "stat": "Sum"
+                                },
+                                "id": "m1",
+                                "label": "errors",
+                                "returnData": true
+                              }
+                            ],
+                            "threshold": 3,
+                            "treatMissingData": "missing"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "cdk-monitoring-constructs.MonitoringFacade",
+                  "version": "5.2.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.54"
+            }
+          },
+          "CreatePostIntegApi": {
+            "id": "CreatePostIntegApi",
+            "path": "integ-create-post/CreatePostIntegApi",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "integ-create-post/CreatePostIntegApi/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Api",
+                  "aws:cdk:cloudformation:props": {
+                    "name": "CreatePostIntegApi",
+                    "protocolType": "HTTP",
+                    "tags": {
+                      "dir": "/home/hallcor/personal/cdk-example-app/test/components",
+                      "repoName": "cdk-example-app"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnApi",
+                  "version": "2.86.0"
+                }
+              },
+              "DefaultStage": {
+                "id": "DefaultStage",
+                "path": "integ-create-post/CreatePostIntegApi/DefaultStage",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "integ-create-post/CreatePostIntegApi/DefaultStage/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "CreatePostIntegApi110FE779"
+                        },
+                        "stageName": "$default",
+                        "autoDeploy": true,
+                        "tags": {
+                          "dir": "/home/hallcor/personal/cdk-example-app/test/components",
+                          "repoName": "cdk-example-app"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnStage",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpStage",
+                  "version": "2.86.0-alpha.0"
+                }
+              },
+              "POST--posts": {
+                "id": "POST--posts",
+                "path": "integ-create-post/CreatePostIntegApi/POST--posts",
+                "children": {
+                  "createPost": {
+                    "id": "createPost",
+                    "path": "integ-create-post/CreatePostIntegApi/POST--posts/createPost",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-create-post/CreatePostIntegApi/POST--posts/createPost/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "CreatePostIntegApi110FE779"
+                            },
+                            "integrationType": "AWS_PROXY",
+                            "integrationUri": {
+                              "Fn::GetAtt": [
+                                "CreatePostD3E67D61",
+                                "Arn"
+                              ]
+                            },
+                            "payloadFormatVersion": "2.0"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                      "version": "2.86.0-alpha.0"
+                    }
+                  },
+                  "createPost-Permission": {
+                    "id": "createPost-Permission",
+                    "path": "integ-create-post/CreatePostIntegApi/POST--posts/createPost-Permission",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                      "aws:cdk:cloudformation:props": {
+                        "action": "lambda:InvokeFunction",
+                        "functionName": {
+                          "Fn::GetAtt": [
+                            "CreatePostD3E67D61",
+                            "Arn"
+                          ]
+                        },
+                        "principal": "apigateway.amazonaws.com",
+                        "sourceArn": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "arn:",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              ":execute-api:",
+                              {
+                                "Ref": "AWS::Region"
+                              },
+                              ":",
+                              {
+                                "Ref": "AWS::AccountId"
+                              },
+                              ":",
+                              {
+                                "Ref": "CreatePostIntegApi110FE779"
+                              },
+                              "/*/*/posts"
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "integ-create-post/CreatePostIntegApi/POST--posts/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "CreatePostIntegApi110FE779"
+                        },
+                        "routeKey": "POST /posts",
+                        "authorizationType": "NONE",
+                        "target": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "integrations/",
+                              {
+                                "Ref": "CreatePostIntegApiPOSTpostscreatePost6009CEC0"
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                  "version": "2.86.0-alpha.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpApi",
+              "version": "2.86.0-alpha.0"
+            }
+          },
+          "CreatePostIntegTable": {
+            "id": "CreatePostIntegTable",
+            "path": "integ-create-post/CreatePostIntegTable",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "integ-create-post/CreatePostIntegTable/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "keySchema": [
+                      {
+                        "attributeName": "pk",
+                        "keyType": "HASH"
+                      }
+                    ],
+                    "attributeDefinitions": [
+                      {
+                        "attributeName": "pk",
+                        "attributeType": "S"
+                      }
+                    ],
+                    "provisionedThroughput": {
+                      "readCapacityUnits": 5,
+                      "writeCapacityUnits": 5
+                    },
+                    "tags": [
+                      {
+                        "key": "dir",
+                        "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                      },
+                      {
+                        "key": "repoName",
+                        "value": "cdk-example-app"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                  "version": "2.86.0"
+                }
+              },
+              "ScalingRole": {
+                "id": "ScalingRole",
+                "path": "integ-create-post/CreatePostIntegTable/ScalingRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+              "version": "2.86.0"
+            }
+          },
+          "CreatePost": {
+            "id": "CreatePost",
+            "path": "integ-create-post/CreatePost",
+            "children": {
+              "PowertoolsLayer": {
+                "id": "PowertoolsLayer",
+                "path": "integ-create-post/CreatePost/PowertoolsLayer",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.86.0"
+                }
+              },
+              "CreatePost": {
+                "id": "CreatePost",
+                "path": "integ-create-post/CreatePost/CreatePost",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "integ-create-post/CreatePost/CreatePost/ServiceRole",
+                    "children": {
+                      "ImportServiceRole": {
+                        "id": "ImportServiceRole",
+                        "path": "integ-create-post/CreatePost/CreatePost/ServiceRole/ImportServiceRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "integ-create-post/CreatePost/CreatePost/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                  ]
+                                ]
+                              }
+                            ],
+                            "tags": [
+                              {
+                                "key": "dir",
+                                "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                              },
+                              {
+                                "key": "repoName",
+                                "value": "cdk-example-app"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "integ-create-post/CreatePost/CreatePost/ServiceRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "integ-create-post/CreatePost/CreatePost/ServiceRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "xray:PutTelemetryRecords",
+                                        "xray:PutTraceSegments"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": "*"
+                                    },
+                                    {
+                                      "Action": [
+                                        "dynamodb:BatchWriteItem",
+                                        "dynamodb:DeleteItem",
+                                        "dynamodb:DescribeTable",
+                                        "dynamodb:PutItem",
+                                        "dynamodb:UpdateItem"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "CreatePostIntegTable49E0F01B",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Ref": "AWS::NoValue"
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "CreatePostServiceRoleDefaultPolicy45EA3357",
+                                "roles": [
+                                  {
+                                    "Ref": "CreatePostServiceRole3F6FFE7F"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Code": {
+                    "id": "Code",
+                    "path": "integ-create-post/CreatePost/CreatePost/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "integ-create-post/CreatePost/CreatePost/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "integ-create-post/CreatePost/CreatePost/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "integ-create-post/CreatePost/CreatePost/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "code": {
+                          "s3Bucket": {
+                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                          },
+                          "s3Key": "b01ecc79cf0ed2f5b2a3eb3b398a15d441568ef55e73cf86bd3bbe69db266e08.zip"
+                        },
+                        "role": {
+                          "Fn::GetAtt": [
+                            "CreatePostServiceRole3F6FFE7F",
+                            "Arn"
+                          ]
+                        },
+                        "architectures": [
+                          "arm64"
+                        ],
+                        "description": "src/posts/create.lambda.ts",
+                        "environment": {
+                          "variables": {
+                            "LOG_LEVEL": "DEBUG",
+                            "POWERTOOLS_LOGGER_LOG_EVENT": "true",
+                            "POWERTOOLS_SERVICE_NAME": "CreateFunction",
+                            "POWERTOOLS_METRICS_NAMESPACE": "blogApp",
+                            "ENV": "dev",
+                            "TABLE_NAME": {
+                              "Ref": "CreatePostIntegTable49E0F01B"
+                            },
+                            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+                          }
+                        },
+                        "handler": "index.handler",
+                        "layers": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":lambda:",
+                                {
+                                  "Ref": "AWS::Region"
+                                },
+                                ":094274105915:layer:AWSLambdaPowertoolsTypeScript:15"
+                              ]
+                            ]
+                          }
+                        ],
+                        "memorySize": 256,
+                        "runtime": "nodejs18.x",
+                        "tags": [
+                          {
+                            "key": "dir",
+                            "value": "/home/hallcor/personal/cdk-example-app/test/components"
+                          },
+                          {
+                            "key": "repoName",
+                            "value": "cdk-example-app"
+                          }
+                        ],
+                        "tracingConfig": {
+                          "mode": "Active"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.54"
+            }
+          },
+          "Exports": {
+            "id": "Exports",
+            "path": "integ-create-post/Exports",
+            "children": {
+              "Output{\"Ref\":\"CreatePostIntegApi110FE779\"}": {
+                "id": "Output{\"Ref\":\"CreatePostIntegApi110FE779\"}",
+                "path": "integ-create-post/Exports/Output{\"Ref\":\"CreatePostIntegApi110FE779\"}",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.86.0"
+                }
+              },
+              "Output{\"Ref\":\"CreatePostIntegTable49E0F01B\"}": {
+                "id": "Output{\"Ref\":\"CreatePostIntegTable49E0F01B\"}",
+                "path": "integ-create-post/Exports/Output{\"Ref\":\"CreatePostIntegTable49E0F01B\"}",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.54"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "integ-create-post/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.86.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "integ-create-post/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.86.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.86.0"
+        }
+      },
+      "integ-test": {
+        "id": "integ-test",
+        "path": "integ-test",
+        "children": {
+          "DefaultTest": {
+            "id": "DefaultTest",
+            "path": "integ-test/DefaultTest",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "integ-test/DefaultTest/Default",
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              },
+              "DeployAssert": {
+                "id": "DeployAssert",
+                "path": "integ-test/DefaultTest/DeployAssert",
+                "children": {
+                  "HttpApiCall8252f3a02d209ef8430bc3c6ac20aca7": {
+                    "id": "HttpApiCall8252f3a02d209ef8430bc3c6ac20aca7",
+                    "path": "integ-test/DefaultTest/DeployAssert/HttpApiCall8252f3a02d209ef8430bc3c6ac20aca7",
+                    "children": {
+                      "HttpProvider": {
+                        "id": "HttpProvider",
+                        "path": "integ-test/DefaultTest/DeployAssert/HttpApiCall8252f3a02d209ef8430bc3c6ac20aca7/HttpProvider",
+                        "children": {
+                          "AssertionsProvider": {
+                            "id": "AssertionsProvider",
+                            "path": "integ-test/DefaultTest/DeployAssert/HttpApiCall8252f3a02d209ef8430bc3c6ac20aca7/HttpProvider/AssertionsProvider",
+                            "constructInfo": {
+                              "fqn": "constructs.Construct",
+                              "version": "10.2.54"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/integ-tests-alpha.AssertionsProvider",
+                          "version": "2.86.0-alpha.0"
+                        }
+                      },
+                      "Default": {
+                        "id": "Default",
+                        "path": "integ-test/DefaultTest/DeployAssert/HttpApiCall8252f3a02d209ef8430bc3c6ac20aca7/Default",
+                        "children": {
+                          "Default": {
+                            "id": "Default",
+                            "path": "integ-test/DefaultTest/DeployAssert/HttpApiCall8252f3a02d209ef8430bc3c6ac20aca7/Default/Default",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.CfnResource",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CustomResource",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/integ-tests-alpha.HttpApiCall",
+                      "version": "2.86.0-alpha.0"
+                    }
+                  },
+                  "SingletonFunction1488541a7b23466481b69b4408076b81": {
+                    "id": "SingletonFunction1488541a7b23466481b69b4408076b81",
+                    "path": "integ-test/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81",
+                    "children": {
+                      "Staging": {
+                        "id": "Staging",
+                        "path": "integ-test/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Staging",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "Role": {
+                        "id": "Role",
+                        "path": "integ-test/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Role",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnResource",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "Handler": {
+                        "id": "Handler",
+                        "path": "integ-test/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Handler",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnResource",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.2.54"
+                    }
+                  },
+                  "AwsApiCallDynamoDBgetItem4ac8f8b5adf699f07b0bcbba84b9ab77": {
+                    "id": "AwsApiCallDynamoDBgetItem4ac8f8b5adf699f07b0bcbba84b9ab77",
+                    "path": "integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBgetItem4ac8f8b5adf699f07b0bcbba84b9ab77",
+                    "children": {
+                      "SdkProvider": {
+                        "id": "SdkProvider",
+                        "path": "integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBgetItem4ac8f8b5adf699f07b0bcbba84b9ab77/SdkProvider",
+                        "children": {
+                          "AssertionsProvider": {
+                            "id": "AssertionsProvider",
+                            "path": "integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBgetItem4ac8f8b5adf699f07b0bcbba84b9ab77/SdkProvider/AssertionsProvider",
+                            "constructInfo": {
+                              "fqn": "constructs.Construct",
+                              "version": "10.2.54"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/integ-tests-alpha.AssertionsProvider",
+                          "version": "2.86.0-alpha.0"
+                        }
+                      },
+                      "Default": {
+                        "id": "Default",
+                        "path": "integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBgetItem4ac8f8b5adf699f07b0bcbba84b9ab77/Default",
+                        "children": {
+                          "Default": {
+                            "id": "Default",
+                            "path": "integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBgetItem4ac8f8b5adf699f07b0bcbba84b9ab77/Default/Default",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.CfnResource",
+                              "version": "2.86.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CustomResource",
+                          "version": "2.86.0"
+                        }
+                      },
+                      "AssertionResults": {
+                        "id": "AssertionResults",
+                        "path": "integ-test/DefaultTest/DeployAssert/AwsApiCallDynamoDBgetItem4ac8f8b5adf699f07b0bcbba84b9ab77/AssertionResults",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnOutput",
+                          "version": "2.86.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/integ-tests-alpha.AwsApiCall",
+                      "version": "2.86.0-alpha.0"
+                    }
+                  },
+                  "BootstrapVersion": {
+                    "id": "BootstrapVersion",
+                    "path": "integ-test/DefaultTest/DeployAssert/BootstrapVersion",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnParameter",
+                      "version": "2.86.0"
+                    }
+                  },
+                  "CheckBootstrapVersion": {
+                    "id": "CheckBootstrapVersion",
+                    "path": "integ-test/DefaultTest/DeployAssert/CheckBootstrapVersion",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnRule",
+                      "version": "2.86.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Stack",
+                  "version": "2.86.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/integ-tests-alpha.IntegTestCase",
+              "version": "2.86.0-alpha.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/integ-tests-alpha.IntegTest",
+          "version": "2.86.0-alpha.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.2.54"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "hall-constructs.HallApp",
+      "version": "0.0.2"
+    }
+  }
+}

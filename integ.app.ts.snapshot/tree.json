@@ -1,0 +1,2288 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "IntegStage": {
+        "id": "IntegStage",
+        "path": "IntegStage",
+        "children": {
+          "AppStack": {
+            "id": "AppStack",
+            "path": "IntegStage/AppStack",
+            "children": {
+              "Api": {
+                "id": "Api",
+                "path": "IntegStage/AppStack/Api",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "IntegStage/AppStack/Api/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                      "aws:cdk:cloudformation:props": {
+                        "name": "Api"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnRestApi",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "Deployment": {
+                    "id": "Deployment",
+                    "path": "IntegStage/AppStack/Api/Deployment",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "IntegStage/AppStack/Api/Deployment/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                          "aws:cdk:cloudformation:props": {
+                            "restApiId": {
+                              "Ref": "ApiF70053CD"
+                            },
+                            "description": "Automatically created by the RestApi construct"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnDeployment",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Deployment",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "DeploymentStage.prod": {
+                    "id": "DeploymentStage.prod",
+                    "path": "IntegStage/AppStack/Api/DeploymentStage.prod",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "IntegStage/AppStack/Api/DeploymentStage.prod/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                          "aws:cdk:cloudformation:props": {
+                            "restApiId": {
+                              "Ref": "ApiF70053CD"
+                            },
+                            "deploymentId": {
+                              "Ref": "ApiDeploymentB17BE62D3528be9b91ea465a1a8c9a8d462b7702"
+                            },
+                            "stageName": "prod"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnStage",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Stage",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "Endpoint": {
+                    "id": "Endpoint",
+                    "path": "IntegStage/AppStack/Api/Endpoint",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "Default": {
+                    "id": "Default",
+                    "path": "IntegStage/AppStack/Api/Default",
+                    "children": {
+                      "dogs": {
+                        "id": "dogs",
+                        "path": "IntegStage/AppStack/Api/Default/dogs",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "IntegStage/AppStack/Api/Default/dogs/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                              "aws:cdk:cloudformation:props": {
+                                "parentId": {
+                                  "Fn::GetAtt": [
+                                    "ApiF70053CD",
+                                    "RootResourceId"
+                                  ]
+                                },
+                                "pathPart": "dogs",
+                                "restApiId": {
+                                  "Ref": "ApiF70053CD"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "GET": {
+                            "id": "GET",
+                            "path": "IntegStage/AppStack/Api/Default/dogs/GET",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "IntegStage/AppStack/Api/Default/dogs/GET/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                                  "aws:cdk:cloudformation:props": {
+                                    "httpMethod": "GET",
+                                    "resourceId": {
+                                      "Ref": "Apidogs69626E87"
+                                    },
+                                    "restApiId": {
+                                      "Ref": "ApiF70053CD"
+                                    },
+                                    "authorizationType": "NONE",
+                                    "integration": {
+                                      "type": "HTTP_PROXY",
+                                      "uri": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "http://",
+                                            {
+                                              "Fn::GetAtt": [
+                                                "DogsServiceNLB07D1DCE0",
+                                                "DNSName"
+                                              ]
+                                            }
+                                          ]
+                                        ]
+                                      },
+                                      "integrationHttpMethod": "GET",
+                                      "connectionType": "VPC_LINK",
+                                      "connectionId": {
+                                        "Ref": "VpcLink42ED6FF0"
+                                      }
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                                  "version": "2.84.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "cats": {
+                        "id": "cats",
+                        "path": "IntegStage/AppStack/Api/Default/cats",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "IntegStage/AppStack/Api/Default/cats/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                              "aws:cdk:cloudformation:props": {
+                                "parentId": {
+                                  "Fn::GetAtt": [
+                                    "ApiF70053CD",
+                                    "RootResourceId"
+                                  ]
+                                },
+                                "pathPart": "cats",
+                                "restApiId": {
+                                  "Ref": "ApiF70053CD"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "GET": {
+                            "id": "GET",
+                            "path": "IntegStage/AppStack/Api/Default/cats/GET",
+                            "children": {
+                              "ApiPermission.IntegStageAppStackApi27B3D87B.GET..cats": {
+                                "id": "ApiPermission.IntegStageAppStackApi27B3D87B.GET..cats",
+                                "path": "IntegStage/AppStack/Api/Default/cats/GET/ApiPermission.IntegStageAppStackApi27B3D87B.GET..cats",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                                  "aws:cdk:cloudformation:props": {
+                                    "action": "lambda:InvokeFunction",
+                                    "functionName": {
+                                      "Fn::GetAtt": [
+                                        "CatsServiceHandler5509C977",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "principal": "apigateway.amazonaws.com",
+                                    "sourceArn": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:aws:execute-api:us-east-2:",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":",
+                                          {
+                                            "Ref": "ApiF70053CD"
+                                          },
+                                          "/",
+                                          {
+                                            "Ref": "ApiDeploymentStageprod3EB9684E"
+                                          },
+                                          "/GET/cats"
+                                        ]
+                                      ]
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                                  "version": "2.84.0"
+                                }
+                              },
+                              "ApiPermission.Test.IntegStageAppStackApi27B3D87B.GET..cats": {
+                                "id": "ApiPermission.Test.IntegStageAppStackApi27B3D87B.GET..cats",
+                                "path": "IntegStage/AppStack/Api/Default/cats/GET/ApiPermission.Test.IntegStageAppStackApi27B3D87B.GET..cats",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                                  "aws:cdk:cloudformation:props": {
+                                    "action": "lambda:InvokeFunction",
+                                    "functionName": {
+                                      "Fn::GetAtt": [
+                                        "CatsServiceHandler5509C977",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "principal": "apigateway.amazonaws.com",
+                                    "sourceArn": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:aws:execute-api:us-east-2:",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":",
+                                          {
+                                            "Ref": "ApiF70053CD"
+                                          },
+                                          "/test-invoke-stage/GET/cats"
+                                        ]
+                                      ]
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                                  "version": "2.84.0"
+                                }
+                              },
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "IntegStage/AppStack/Api/Default/cats/GET/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                                  "aws:cdk:cloudformation:props": {
+                                    "httpMethod": "GET",
+                                    "resourceId": {
+                                      "Ref": "ApicatsC0DF3637"
+                                    },
+                                    "restApiId": {
+                                      "Ref": "ApiF70053CD"
+                                    },
+                                    "authorizationType": "NONE",
+                                    "integration": {
+                                      "type": "AWS_PROXY",
+                                      "uri": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/",
+                                            {
+                                              "Fn::GetAtt": [
+                                                "CatsServiceHandler5509C977",
+                                                "Arn"
+                                              ]
+                                            },
+                                            "/invocations"
+                                          ]
+                                        ]
+                                      },
+                                      "integrationHttpMethod": "POST"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                                  "version": "2.84.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.ResourceBase",
+                      "version": "2.84.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.RestApi",
+                  "version": "2.84.0"
+                }
+              },
+              "DogsService": {
+                "id": "DogsService",
+                "path": "IntegStage/AppStack/DogsService",
+                "children": {
+                  "Vpc": {
+                    "id": "Vpc",
+                    "path": "IntegStage/AppStack/DogsService/Vpc",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "IntegStage/AppStack/DogsService/Vpc/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                          "aws:cdk:cloudformation:props": {
+                            "cidrBlock": "10.0.0.0/16",
+                            "enableDnsHostnames": true,
+                            "enableDnsSupport": true,
+                            "instanceTenancy": "default",
+                            "tags": [
+                              {
+                                "key": "Name",
+                                "value": "IntegStage/AppStack/DogsService/Vpc"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "PublicSubnet1": {
+                        "id": "PublicSubnet1",
+                        "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet1",
+                        "children": {
+                          "Subnet": {
+                            "id": "Subnet",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/Subnet",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                },
+                                "availabilityZone": "test-region-1a",
+                                "cidrBlock": "10.0.0.0/19",
+                                "mapPublicIpOnLaunch": true,
+                                "tags": [
+                                  {
+                                    "key": "aws-cdk:subnet-name",
+                                    "value": "Public"
+                                  },
+                                  {
+                                    "key": "aws-cdk:subnet-type",
+                                    "value": "Public"
+                                  },
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet1"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "Acl": {
+                            "id": "Acl",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/Acl",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "RouteTable": {
+                            "id": "RouteTable",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/RouteTable",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet1"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "RouteTableAssociation": {
+                            "id": "RouteTableAssociation",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/RouteTableAssociation",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet1RouteTable3FF7F73D"
+                                },
+                                "subnetId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet1SubnetB325755A"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "DefaultRoute": {
+                            "id": "DefaultRoute",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/DefaultRoute",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet1RouteTable3FF7F73D"
+                                },
+                                "destinationCidrBlock": "0.0.0.0/0",
+                                "gatewayId": {
+                                  "Ref": "DogsServiceVpcIGW1D454B1F"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "EIP": {
+                            "id": "EIP",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/EIP",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                              "aws:cdk:cloudformation:props": {
+                                "domain": "vpc",
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet1"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "NATGateway": {
+                            "id": "NATGateway",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet1/NATGateway",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                              "aws:cdk:cloudformation:props": {
+                                "subnetId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet1SubnetB325755A"
+                                },
+                                "allocationId": {
+                                  "Fn::GetAtt": [
+                                    "DogsServiceVpcPublicSubnet1EIPDE531ACB",
+                                    "AllocationId"
+                                  ]
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet1"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "PublicSubnet2": {
+                        "id": "PublicSubnet2",
+                        "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet2",
+                        "children": {
+                          "Subnet": {
+                            "id": "Subnet",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet2/Subnet",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                },
+                                "availabilityZone": "test-region-1b",
+                                "cidrBlock": "10.0.32.0/19",
+                                "mapPublicIpOnLaunch": true,
+                                "tags": [
+                                  {
+                                    "key": "aws-cdk:subnet-name",
+                                    "value": "Public"
+                                  },
+                                  {
+                                    "key": "aws-cdk:subnet-type",
+                                    "value": "Public"
+                                  },
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet2"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "Acl": {
+                            "id": "Acl",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet2/Acl",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "RouteTable": {
+                            "id": "RouteTable",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet2/RouteTable",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet2"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "RouteTableAssociation": {
+                            "id": "RouteTableAssociation",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet2/RouteTableAssociation",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet2RouteTable32F15A8E"
+                                },
+                                "subnetId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet2Subnet1252E6FC"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "DefaultRoute": {
+                            "id": "DefaultRoute",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet2/DefaultRoute",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet2RouteTable32F15A8E"
+                                },
+                                "destinationCidrBlock": "0.0.0.0/0",
+                                "gatewayId": {
+                                  "Ref": "DogsServiceVpcIGW1D454B1F"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "PublicSubnet3": {
+                        "id": "PublicSubnet3",
+                        "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet3",
+                        "children": {
+                          "Subnet": {
+                            "id": "Subnet",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet3/Subnet",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                },
+                                "availabilityZone": "test-region-1c",
+                                "cidrBlock": "10.0.64.0/19",
+                                "mapPublicIpOnLaunch": true,
+                                "tags": [
+                                  {
+                                    "key": "aws-cdk:subnet-name",
+                                    "value": "Public"
+                                  },
+                                  {
+                                    "key": "aws-cdk:subnet-type",
+                                    "value": "Public"
+                                  },
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet3"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "Acl": {
+                            "id": "Acl",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet3/Acl",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "RouteTable": {
+                            "id": "RouteTable",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet3/RouteTable",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet3"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "RouteTableAssociation": {
+                            "id": "RouteTableAssociation",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet3/RouteTableAssociation",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet3RouteTable56D38303"
+                                },
+                                "subnetId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet3SubnetED10EC9E"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "DefaultRoute": {
+                            "id": "DefaultRoute",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PublicSubnet3/DefaultRoute",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet3RouteTable56D38303"
+                                },
+                                "destinationCidrBlock": "0.0.0.0/0",
+                                "gatewayId": {
+                                  "Ref": "DogsServiceVpcIGW1D454B1F"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "PrivateSubnet1": {
+                        "id": "PrivateSubnet1",
+                        "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet1",
+                        "children": {
+                          "Subnet": {
+                            "id": "Subnet",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet1/Subnet",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                },
+                                "availabilityZone": "test-region-1a",
+                                "cidrBlock": "10.0.96.0/19",
+                                "mapPublicIpOnLaunch": false,
+                                "tags": [
+                                  {
+                                    "key": "aws-cdk:subnet-name",
+                                    "value": "Private"
+                                  },
+                                  {
+                                    "key": "aws-cdk:subnet-type",
+                                    "value": "Private"
+                                  },
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet1"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "Acl": {
+                            "id": "Acl",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet1/Acl",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "RouteTable": {
+                            "id": "RouteTable",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet1/RouteTable",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet1"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "RouteTableAssociation": {
+                            "id": "RouteTableAssociation",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet1/RouteTableAssociation",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "DogsServiceVpcPrivateSubnet1RouteTable5FD5F134"
+                                },
+                                "subnetId": {
+                                  "Ref": "DogsServiceVpcPrivateSubnet1Subnet07B12260"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "DefaultRoute": {
+                            "id": "DefaultRoute",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet1/DefaultRoute",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "DogsServiceVpcPrivateSubnet1RouteTable5FD5F134"
+                                },
+                                "destinationCidrBlock": "0.0.0.0/0",
+                                "natGatewayId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet1NATGateway7B6A309A"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "PrivateSubnet2": {
+                        "id": "PrivateSubnet2",
+                        "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet2",
+                        "children": {
+                          "Subnet": {
+                            "id": "Subnet",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet2/Subnet",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                },
+                                "availabilityZone": "test-region-1b",
+                                "cidrBlock": "10.0.128.0/19",
+                                "mapPublicIpOnLaunch": false,
+                                "tags": [
+                                  {
+                                    "key": "aws-cdk:subnet-name",
+                                    "value": "Private"
+                                  },
+                                  {
+                                    "key": "aws-cdk:subnet-type",
+                                    "value": "Private"
+                                  },
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet2"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "Acl": {
+                            "id": "Acl",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet2/Acl",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "RouteTable": {
+                            "id": "RouteTable",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet2/RouteTable",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet2"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "RouteTableAssociation": {
+                            "id": "RouteTableAssociation",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet2/RouteTableAssociation",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "DogsServiceVpcPrivateSubnet2RouteTable7CEA1B20"
+                                },
+                                "subnetId": {
+                                  "Ref": "DogsServiceVpcPrivateSubnet2SubnetAFAE28F5"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "DefaultRoute": {
+                            "id": "DefaultRoute",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet2/DefaultRoute",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "DogsServiceVpcPrivateSubnet2RouteTable7CEA1B20"
+                                },
+                                "destinationCidrBlock": "0.0.0.0/0",
+                                "natGatewayId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet1NATGateway7B6A309A"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "PrivateSubnet3": {
+                        "id": "PrivateSubnet3",
+                        "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet3",
+                        "children": {
+                          "Subnet": {
+                            "id": "Subnet",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet3/Subnet",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                },
+                                "availabilityZone": "test-region-1c",
+                                "cidrBlock": "10.0.160.0/19",
+                                "mapPublicIpOnLaunch": false,
+                                "tags": [
+                                  {
+                                    "key": "aws-cdk:subnet-name",
+                                    "value": "Private"
+                                  },
+                                  {
+                                    "key": "aws-cdk:subnet-type",
+                                    "value": "Private"
+                                  },
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet3"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "Acl": {
+                            "id": "Acl",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet3/Acl",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "RouteTable": {
+                            "id": "RouteTable",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet3/RouteTable",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                              "aws:cdk:cloudformation:props": {
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet3"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "RouteTableAssociation": {
+                            "id": "RouteTableAssociation",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet3/RouteTableAssociation",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "DogsServiceVpcPrivateSubnet3RouteTable7A3D2FC4"
+                                },
+                                "subnetId": {
+                                  "Ref": "DogsServiceVpcPrivateSubnet3Subnet05A4329C"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "DefaultRoute": {
+                            "id": "DefaultRoute",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/PrivateSubnet3/DefaultRoute",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "routeTableId": {
+                                  "Ref": "DogsServiceVpcPrivateSubnet3RouteTable7A3D2FC4"
+                                },
+                                "destinationCidrBlock": "0.0.0.0/0",
+                                "natGatewayId": {
+                                  "Ref": "DogsServiceVpcPublicSubnet1NATGateway7B6A309A"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "IGW": {
+                        "id": "IGW",
+                        "path": "IntegStage/AppStack/DogsService/Vpc/IGW",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                          "aws:cdk:cloudformation:props": {
+                            "tags": [
+                              {
+                                "key": "Name",
+                                "value": "IntegStage/AppStack/DogsService/Vpc"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "VPCGW": {
+                        "id": "VPCGW",
+                        "path": "IntegStage/AppStack/DogsService/Vpc/VPCGW",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                          "aws:cdk:cloudformation:props": {
+                            "vpcId": {
+                              "Ref": "DogsServiceVpc38F99C35"
+                            },
+                            "internetGatewayId": {
+                              "Ref": "DogsServiceVpcIGW1D454B1F"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "RestrictDefaultSecurityGroupCustomResource": {
+                        "id": "RestrictDefaultSecurityGroupCustomResource",
+                        "path": "IntegStage/AppStack/DogsService/Vpc/RestrictDefaultSecurityGroupCustomResource",
+                        "children": {
+                          "Default": {
+                            "id": "Default",
+                            "path": "IntegStage/AppStack/DogsService/Vpc/RestrictDefaultSecurityGroupCustomResource/Default",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.CfnResource",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CustomResource",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "NLB": {
+                    "id": "NLB",
+                    "path": "IntegStage/AppStack/DogsService/NLB",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "IntegStage/AppStack/DogsService/NLB/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+                          "aws:cdk:cloudformation:props": {
+                            "loadBalancerAttributes": [
+                              {
+                                "key": "deletion_protection.enabled",
+                                "value": "false"
+                              },
+                              {
+                                "key": "load_balancing.cross_zone.enabled",
+                                "value": "true"
+                              }
+                            ],
+                            "scheme": "internal",
+                            "subnets": [
+                              {
+                                "Ref": "DogsServiceVpcPrivateSubnet1Subnet07B12260"
+                              },
+                              {
+                                "Ref": "DogsServiceVpcPrivateSubnet2SubnetAFAE28F5"
+                              },
+                              {
+                                "Ref": "DogsServiceVpcPrivateSubnet3Subnet05A4329C"
+                              }
+                            ],
+                            "type": "network"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnLoadBalancer",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "app": {
+                        "id": "app",
+                        "path": "IntegStage/AppStack/DogsService/NLB/app",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "IntegStage/AppStack/DogsService/NLB/app/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::Listener",
+                              "aws:cdk:cloudformation:props": {
+                                "defaultActions": [
+                                  {
+                                    "type": "forward",
+                                    "targetGroupArn": {
+                                      "Ref": "DogsServiceNLBappserviceGroup80D6F9C8"
+                                    }
+                                  }
+                                ],
+                                "loadBalancerArn": {
+                                  "Ref": "DogsServiceNLB07D1DCE0"
+                                },
+                                "port": 8080,
+                                "protocol": "TCP"
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListener",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "serviceGroup": {
+                            "id": "serviceGroup",
+                            "path": "IntegStage/AppStack/DogsService/NLB/app/serviceGroup",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "IntegStage/AppStack/DogsService/NLB/app/serviceGroup/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                                  "aws:cdk:cloudformation:props": {
+                                    "healthCheckIntervalSeconds": 11,
+                                    "healthyThresholdCount": 2,
+                                    "port": 8080,
+                                    "protocol": "TCP",
+                                    "targetType": "ip",
+                                    "vpcId": {
+                                      "Ref": "DogsServiceVpc38F99C35"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                                  "version": "2.84.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.NetworkTargetGroup",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.NetworkListener",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.NetworkLoadBalancer",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "Cluster": {
+                    "id": "Cluster",
+                    "path": "IntegStage/AppStack/DogsService/Cluster",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "IntegStage/AppStack/DogsService/Cluster/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ECS::Cluster",
+                          "aws:cdk:cloudformation:props": {}
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.CfnCluster",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "Cluster": {
+                        "id": "Cluster",
+                        "path": "IntegStage/AppStack/DogsService/Cluster/Cluster",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ECS::ClusterCapacityProviderAssociations",
+                          "aws:cdk:cloudformation:props": {
+                            "capacityProviders": [
+                              "FARGATE",
+                              "FARGATE_SPOT"
+                            ],
+                            "cluster": {
+                              "Ref": "DogsServiceCluster50DB5F75"
+                            },
+                            "defaultCapacityProviderStrategy": []
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.CfnClusterCapacityProviderAssociations",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecs.Cluster",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "TaskDef": {
+                    "id": "TaskDef",
+                    "path": "IntegStage/AppStack/DogsService/TaskDef",
+                    "children": {
+                      "TaskRole": {
+                        "id": "TaskRole",
+                        "path": "IntegStage/AppStack/DogsService/TaskDef/TaskRole",
+                        "children": {
+                          "ImportTaskRole": {
+                            "id": "ImportTaskRole",
+                            "path": "IntegStage/AppStack/DogsService/TaskDef/TaskRole/ImportTaskRole",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "IntegStage/AppStack/DogsService/TaskDef/TaskRole/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "ecs-tasks.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "IntegStage/AppStack/DogsService/TaskDef/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ECS::TaskDefinition",
+                          "aws:cdk:cloudformation:props": {
+                            "containerDefinitions": [
+                              {
+                                "essential": true,
+                                "image": {
+                                  "Fn::Sub": "${AWS::AccountId}.dkr.ecr.us-east-2.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-us-east-2:477424ba4946a5a7bbc8236405355e5d1df254811731806ea5d1a3227ff633d0"
+                                },
+                                "name": "app",
+                                "portMappings": [
+                                  {
+                                    "containerPort": 8080,
+                                    "protocol": "tcp"
+                                  }
+                                ],
+                                "logConfiguration": {
+                                  "logDriver": "awslogs",
+                                  "options": {
+                                    "awslogs-group": {
+                                      "Ref": "DogsServiceTaskDefappLogGroup7D0EBCAA"
+                                    },
+                                    "awslogs-stream-prefix": "dogs",
+                                    "awslogs-region": "us-east-2"
+                                  }
+                                }
+                              }
+                            ],
+                            "cpu": "256",
+                            "executionRoleArn": {
+                              "Fn::GetAtt": [
+                                "DogsServiceTaskDefExecutionRoleEF8541E7",
+                                "Arn"
+                              ]
+                            },
+                            "family": "IntegStageAppStackDogsServiceTaskDefCAC46794",
+                            "memory": "512",
+                            "networkMode": "awsvpc",
+                            "requiresCompatibilities": [
+                              "FARGATE"
+                            ],
+                            "taskRoleArn": {
+                              "Fn::GetAtt": [
+                                "DogsServiceTaskDefTaskRole52A5D426",
+                                "Arn"
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.CfnTaskDefinition",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "app": {
+                        "id": "app",
+                        "path": "IntegStage/AppStack/DogsService/TaskDef/app",
+                        "children": {
+                          "AssetImage": {
+                            "id": "AssetImage",
+                            "path": "IntegStage/AppStack/DogsService/TaskDef/app/AssetImage",
+                            "children": {
+                              "Staging": {
+                                "id": "Staging",
+                                "path": "IntegStage/AppStack/DogsService/TaskDef/app/AssetImage/Staging",
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.AssetStaging",
+                                  "version": "2.84.0"
+                                }
+                              },
+                              "Repository": {
+                                "id": "Repository",
+                                "path": "IntegStage/AppStack/DogsService/TaskDef/app/AssetImage/Repository",
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_ecr.RepositoryBase",
+                                  "version": "2.84.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ecr_assets.DockerImageAsset",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "LogGroup": {
+                            "id": "LogGroup",
+                            "path": "IntegStage/AppStack/DogsService/TaskDef/app/LogGroup",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "IntegStage/AppStack/DogsService/TaskDef/app/LogGroup/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                                  "aws:cdk:cloudformation:props": {}
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                                  "version": "2.84.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.ContainerDefinition",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "ExecutionRole": {
+                        "id": "ExecutionRole",
+                        "path": "IntegStage/AppStack/DogsService/TaskDef/ExecutionRole",
+                        "children": {
+                          "ImportExecutionRole": {
+                            "id": "ImportExecutionRole",
+                            "path": "IntegStage/AppStack/DogsService/TaskDef/ExecutionRole/ImportExecutionRole",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "IntegStage/AppStack/DogsService/TaskDef/ExecutionRole/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "ecs-tasks.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "DefaultPolicy": {
+                            "id": "DefaultPolicy",
+                            "path": "IntegStage/AppStack/DogsService/TaskDef/ExecutionRole/DefaultPolicy",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "IntegStage/AppStack/DogsService/TaskDef/ExecutionRole/DefaultPolicy/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                  "aws:cdk:cloudformation:props": {
+                                    "policyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": [
+                                            "ecr:BatchCheckLayerAvailability",
+                                            "ecr:BatchGetImage",
+                                            "ecr:GetDownloadUrlForLayer"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Fn::Join": [
+                                              "",
+                                              [
+                                                "arn:aws:ecr:us-east-2:",
+                                                {
+                                                  "Ref": "AWS::AccountId"
+                                                },
+                                                ":repository/",
+                                                {
+                                                  "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-us-east-2"
+                                                }
+                                              ]
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "Action": "ecr:GetAuthorizationToken",
+                                          "Effect": "Allow",
+                                          "Resource": "*"
+                                        },
+                                        {
+                                          "Action": [
+                                            "logs:CreateLogStream",
+                                            "logs:PutLogEvents"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Fn::GetAtt": [
+                                              "DogsServiceTaskDefappLogGroup7D0EBCAA",
+                                              "Arn"
+                                            ]
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "policyName": "DogsServiceTaskDefExecutionRoleDefaultPolicy3A99609A",
+                                    "roles": [
+                                      {
+                                        "Ref": "DogsServiceTaskDefExecutionRoleEF8541E7"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                  "version": "2.84.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Policy",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecs.FargateTaskDefinition",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "Service": {
+                    "id": "Service",
+                    "path": "IntegStage/AppStack/DogsService/Service",
+                    "children": {
+                      "Service": {
+                        "id": "Service",
+                        "path": "IntegStage/AppStack/DogsService/Service/Service",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ECS::Service",
+                          "aws:cdk:cloudformation:props": {
+                            "cluster": {
+                              "Ref": "DogsServiceCluster50DB5F75"
+                            },
+                            "deploymentConfiguration": {
+                              "maximumPercent": 200,
+                              "minimumHealthyPercent": 50,
+                              "deploymentCircuitBreaker": {
+                                "enable": true,
+                                "rollback": true
+                              }
+                            },
+                            "deploymentController": {
+                              "type": "ECS"
+                            },
+                            "enableEcsManagedTags": false,
+                            "healthCheckGracePeriodSeconds": 60,
+                            "launchType": "FARGATE",
+                            "loadBalancers": [
+                              {
+                                "targetGroupArn": {
+                                  "Ref": "DogsServiceNLBappserviceGroup80D6F9C8"
+                                },
+                                "containerName": "app",
+                                "containerPort": 8080
+                              }
+                            ],
+                            "networkConfiguration": {
+                              "awsvpcConfiguration": {
+                                "assignPublicIp": "DISABLED",
+                                "subnets": [
+                                  {
+                                    "Ref": "DogsServiceVpcPrivateSubnet1Subnet07B12260"
+                                  },
+                                  {
+                                    "Ref": "DogsServiceVpcPrivateSubnet2SubnetAFAE28F5"
+                                  },
+                                  {
+                                    "Ref": "DogsServiceVpcPrivateSubnet3Subnet05A4329C"
+                                  }
+                                ],
+                                "securityGroups": [
+                                  {
+                                    "Fn::GetAtt": [
+                                      "DogsServiceSecurityGroup32CFF59D",
+                                      "GroupId"
+                                    ]
+                                  }
+                                ]
+                              }
+                            },
+                            "taskDefinition": {
+                              "Ref": "DogsServiceTaskDefBC18B6C7"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecs.CfnService",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "SecurityGroup": {
+                        "id": "SecurityGroup",
+                        "path": "IntegStage/AppStack/DogsService/Service/SecurityGroup",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "IntegStage/AppStack/DogsService/Service/SecurityGroup/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                              "aws:cdk:cloudformation:props": {
+                                "groupDescription": "IntegStage/AppStack/DogsService/Service/SecurityGroup",
+                                "securityGroupEgress": [
+                                  {
+                                    "cidrIp": "0.0.0.0/0",
+                                    "description": "Allow all outbound traffic by default",
+                                    "ipProtocol": "-1"
+                                  }
+                                ],
+                                "securityGroupIngress": [
+                                  {
+                                    "cidrIp": {
+                                      "Fn::GetAtt": [
+                                        "DogsServiceVpc38F99C35",
+                                        "CidrBlock"
+                                      ]
+                                    },
+                                    "ipProtocol": "tcp",
+                                    "fromPort": 8080,
+                                    "toPort": 8080,
+                                    "description": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "from ",
+                                          {
+                                            "Fn::GetAtt": [
+                                              "DogsServiceVpc38F99C35",
+                                              "CidrBlock"
+                                            ]
+                                          },
+                                          ":8080"
+                                        ]
+                                      ]
+                                    }
+                                  }
+                                ],
+                                "vpcId": {
+                                  "Ref": "DogsServiceVpc38F99C35"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecs.FargateService",
+                      "version": "2.84.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              },
+              "Custom::VpcRestrictDefaultSGCustomResourceProvider": {
+                "id": "Custom::VpcRestrictDefaultSGCustomResourceProvider",
+                "path": "IntegStage/AppStack/Custom::VpcRestrictDefaultSGCustomResourceProvider",
+                "children": {
+                  "Staging": {
+                    "id": "Staging",
+                    "path": "IntegStage/AppStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Staging",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "Role": {
+                    "id": "Role",
+                    "path": "IntegStage/AppStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "Handler": {
+                    "id": "Handler",
+                    "path": "IntegStage/AppStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.84.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CustomResourceProvider",
+                  "version": "2.84.0"
+                }
+              },
+              "VpcLink": {
+                "id": "VpcLink",
+                "path": "IntegStage/AppStack/VpcLink",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "IntegStage/AppStack/VpcLink/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::VpcLink",
+                      "aws:cdk:cloudformation:props": {
+                        "name": "IntegStageAppStackVpcLink93B1C478",
+                        "targetArns": [
+                          {
+                            "Ref": "DogsServiceNLB07D1DCE0"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnVpcLink",
+                      "version": "2.84.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.VpcLink",
+                  "version": "2.84.0"
+                }
+              },
+              "CatsService": {
+                "id": "CatsService",
+                "path": "IntegStage/AppStack/CatsService",
+                "children": {
+                  "Handler": {
+                    "id": "Handler",
+                    "path": "IntegStage/AppStack/CatsService/Handler",
+                    "children": {
+                      "ServiceRole": {
+                        "id": "ServiceRole",
+                        "path": "IntegStage/AppStack/CatsService/Handler/ServiceRole",
+                        "children": {
+                          "ImportServiceRole": {
+                            "id": "ImportServiceRole",
+                            "path": "IntegStage/AppStack/CatsService/Handler/ServiceRole/ImportServiceRole",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "IntegStage/AppStack/CatsService/Handler/ServiceRole/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "lambda.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "managedPolicyArns": [
+                                  {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "Code": {
+                        "id": "Code",
+                        "path": "IntegStage/AppStack/CatsService/Handler/Code",
+                        "children": {
+                          "Stage": {
+                            "id": "Stage",
+                            "path": "IntegStage/AppStack/CatsService/Handler/Code/Stage",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.AssetStaging",
+                              "version": "2.84.0"
+                            }
+                          },
+                          "AssetBucket": {
+                            "id": "AssetBucket",
+                            "path": "IntegStage/AppStack/CatsService/Handler/Code/AssetBucket",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                              "version": "2.84.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "IntegStage/AppStack/CatsService/Handler/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                          "aws:cdk:cloudformation:props": {
+                            "code": {
+                              "s3Bucket": {
+                                "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-2"
+                              },
+                              "s3Key": "68b2df8c71bab0bcfb29b222c52df6e0a11f8e85e6b65489005ba3de1f5df734.zip"
+                            },
+                            "role": {
+                              "Fn::GetAtt": [
+                                "CatsServiceHandlerServiceRole03686F1F",
+                                "Arn"
+                              ]
+                            },
+                            "environment": {
+                              "variables": {
+                                "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+                              }
+                            },
+                            "handler": "index.handler",
+                            "runtime": "nodejs18.x"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda_nodejs.NodejsFunction",
+                      "version": "2.84.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              },
+              "Exports": {
+                "id": "Exports",
+                "path": "IntegStage/AppStack/Exports",
+                "children": {
+                  "Output{\"Ref\":\"ApiF70053CD\"}": {
+                    "id": "Output{\"Ref\":\"ApiF70053CD\"}",
+                    "path": "IntegStage/AppStack/Exports/Output{\"Ref\":\"ApiF70053CD\"}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "Output{\"Ref\":\"ApiDeploymentStageprod3EB9684E\"}": {
+                    "id": "Output{\"Ref\":\"ApiDeploymentStageprod3EB9684E\"}",
+                    "path": "IntegStage/AppStack/Exports/Output{\"Ref\":\"ApiDeploymentStageprod3EB9684E\"}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.84.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "IntegStage/AppStack/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.84.0"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "IntegStage/AppStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.84.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.84.0"
+            }
+          },
+          "IntegAssertionsStack": {
+            "id": "IntegAssertionsStack",
+            "path": "IntegStage/IntegAssertionsStack",
+            "children": {
+              "Call": {
+                "id": "Call",
+                "path": "IntegStage/IntegAssertionsStack/Call",
+                "children": {
+                  "HttpProvider": {
+                    "id": "HttpProvider",
+                    "path": "IntegStage/IntegAssertionsStack/Call/HttpProvider",
+                    "children": {
+                      "AssertionsProvider": {
+                        "id": "AssertionsProvider",
+                        "path": "IntegStage/IntegAssertionsStack/Call/HttpProvider/AssertionsProvider",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.2.54"
+                        }
+                      },
+                      "AssertionsProvider2": {
+                        "id": "AssertionsProvider2",
+                        "path": "IntegStage/IntegAssertionsStack/Call/HttpProvider/AssertionsProvider2",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.SingletonFunction",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/integ-tests-alpha.AssertionsProvider",
+                      "version": "2.83.0-alpha.0"
+                    }
+                  },
+                  "Default": {
+                    "id": "Default",
+                    "path": "IntegStage/IntegAssertionsStack/Call/Default",
+                    "children": {
+                      "Default": {
+                        "id": "Default",
+                        "path": "IntegStage/IntegAssertionsStack/Call/Default/Default",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnResource",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CustomResource",
+                      "version": "2.84.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/integ-tests-alpha.ApiCallBase",
+                  "version": "2.83.0-alpha.0"
+                }
+              },
+              "SingletonFunction1488541a7b23466481b69b4408076b81": {
+                "id": "SingletonFunction1488541a7b23466481b69b4408076b81",
+                "path": "IntegStage/IntegAssertionsStack/SingletonFunction1488541a7b23466481b69b4408076b81",
+                "children": {
+                  "Staging": {
+                    "id": "Staging",
+                    "path": "IntegStage/IntegAssertionsStack/SingletonFunction1488541a7b23466481b69b4408076b81/Staging",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "Role": {
+                    "id": "Role",
+                    "path": "IntegStage/IntegAssertionsStack/SingletonFunction1488541a7b23466481b69b4408076b81/Role",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "Handler": {
+                    "id": "Handler",
+                    "path": "IntegStage/IntegAssertionsStack/SingletonFunction1488541a7b23466481b69b4408076b81/Handler",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.84.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              },
+              "SingletonLambda1488541a7b23466481b69b4408076b82": {
+                "id": "SingletonLambda1488541a7b23466481b69b4408076b82",
+                "path": "IntegStage/IntegAssertionsStack/SingletonLambda1488541a7b23466481b69b4408076b82",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "IntegStage/IntegAssertionsStack/SingletonLambda1488541a7b23466481b69b4408076b82/ServiceRole",
+                    "children": {
+                      "ImportServiceRole": {
+                        "id": "ImportServiceRole",
+                        "path": "IntegStage/IntegAssertionsStack/SingletonLambda1488541a7b23466481b69b4408076b82/ServiceRole/ImportServiceRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "IntegStage/IntegAssertionsStack/SingletonLambda1488541a7b23466481b69b4408076b82/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                  ]
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "Code": {
+                    "id": "Code",
+                    "path": "IntegStage/IntegAssertionsStack/SingletonLambda1488541a7b23466481b69b4408076b82/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "IntegStage/IntegAssertionsStack/SingletonLambda1488541a7b23466481b69b4408076b82/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.84.0"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "IntegStage/IntegAssertionsStack/SingletonLambda1488541a7b23466481b69b4408076b82/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.84.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.84.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "IntegStage/IntegAssertionsStack/SingletonLambda1488541a7b23466481b69b4408076b82/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "code": {
+                          "s3Bucket": {
+                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-2"
+                          },
+                          "s3Key": "853488613e2f9acaf78188e08dd0986068ca7f969b162f26753905f89d26569a.zip"
+                        },
+                        "role": {
+                          "Fn::GetAtt": [
+                            "SingletonLambda1488541a7b23466481b69b4408076b82ServiceRoleE7F690E5",
+                            "Arn"
+                          ]
+                        },
+                        "handler": "index.handler",
+                        "runtime": "nodejs16.x"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.84.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.84.0"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "IntegStage/IntegAssertionsStack/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.84.0"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "IntegStage/IntegAssertionsStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.84.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.84.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stage",
+          "version": "2.84.0"
+        }
+      },
+      "integ-tests": {
+        "id": "integ-tests",
+        "path": "integ-tests",
+        "children": {
+          "DefaultTest": {
+            "id": "DefaultTest",
+            "path": "integ-tests/DefaultTest",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "integ-tests/DefaultTest/Default",
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.54"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/integ-tests-alpha.IntegTestCase",
+              "version": "2.83.0-alpha.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/integ-tests-alpha.IntegTest",
+          "version": "2.83.0-alpha.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.2.54"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.84.0"
+    }
+  }
+}
