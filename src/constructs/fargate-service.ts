@@ -2,7 +2,6 @@ import { Duration } from 'aws-cdk-lib';
 import { Alarm, Metric, TreatMissingData, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SubnetType } from 'aws-cdk-lib/aws-ec2';
 import { DeploymentControllerType, FargatePlatformVersion, FargateTaskDefinition, ICluster, FargateService, IFargateTaskDefinition, CfnService } from 'aws-cdk-lib/aws-ecs';
-// import { CfnGroup } from 'aws-cdk-lib/aws-xray';
 import { Rule } from 'aws-cdk-lib/aws-events';
 import { LogGroup, RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { DnsRecordType } from 'aws-cdk-lib/aws-servicediscovery';
@@ -10,14 +9,37 @@ import { Construct } from 'constructs';
 import { Extensions } from './extensions';
 import { IContainer } from '../types';
 
+/**
+ * Options for configuring an ECS Service behind an API Gateway HTTP Api
+ */
 export interface ApiGatewayServiceProps {
+  /**
+   * The ECS Cluster to place the service in
+   */
   readonly cluster: ICluster;
+
+  /**
+   * The application container
+   */
   readonly appContainer: IContainer;
 }
 
+/**
+ * An ECS Service sitting behind an API Gateway HTTP Api
+ *
+ * Creates the LogGroup, TaskDefinition, and ECS Service
+ */
 export class ApiGatewayService extends Construct {
+  /**
+   * The ECS Fargate Service
+   */
   public readonly service: FargateService;
+
+  /**
+   * The Fargate Task Definition
+   */
   public readonly taskDefinition: IFargateTaskDefinition;
+  private readonly appContainer: IContainer;
 
   constructor(scope: Construct, id: string, props: ApiGatewayServiceProps) {
     super(scope, id);
@@ -46,18 +68,38 @@ export class ApiGatewayService extends Construct {
       }),
       taskDefinition,
     });
+
+
+    service.enableCloudMap({ containerPort: 8080, dnsRecordType: DnsRecordType.SRV });
+
+    this.service = service;
+    this.taskDefinition = taskDefinition;
+    this.appContainer = props.appContainer;
+    this.failDeploymentsFaster(props.cluster);
+  }
+
+  /**
+   * When using the ECS circuit breaker, the fastest that a failing deployment can trigger the
+   * circuit breaker is 10 minutes (which is insanely slow). This is an alternative method
+   * that uses a deployment alarm that triggers when tasks are stopped dur to health check failures
+   *
+   * This speeds it up to ~5 minutes which is about as good as you can get on ECS.
+   *
+   * @param cluster - ECS Cluster the service is deployed to
+   */
+  private failDeploymentsFaster(cluster: ICluster): void {
     const rule = new Rule(this, 'Rule', {
       eventPattern: {
         detailType: ['ECS Task State Change'],
         source: ['aws.ecs'],
         detail: {
           // taskDefinitionArn: [taskDefinition.taskDefinitionArn],
-          clusterArn: [props.cluster.clusterArn],
+          clusterArn: [cluster.clusterArn],
           desiredStatus: ['STOPPED'],
           stopCode: ['ServiceSchedulerInitiated'],
           stoppedReason: ['Task failed container health checks'],
           containers: {
-            name: [props.appContainer.id],
+            name: [this.appContainer.id],
           },
         },
       },
@@ -78,22 +120,11 @@ export class ApiGatewayService extends Construct {
       evaluationPeriods: 1,
       treatMissingData: TreatMissingData.NOT_BREACHING,
     });
-    const cfnService = service.node.defaultChild as CfnService;
+    const cfnService = this.service.node.defaultChild as CfnService;
     cfnService.addPropertyOverride('DeploymentConfiguration.Alarms', {
       AlarmNames: [alarm.alarmName],
       Enable: true,
       Rollback: true,
     });
-    service.enableCloudMap({ containerPort: 8080, dnsRecordType: DnsRecordType.SRV });
-    // new CfnGroup(this, 'XrayGroup', {
-    //   groupName: '',
-    //   filterExpression: '',
-    //   insightsConfiguration: {
-    //     insightsEnabled: true,
-    //   },
-    // });
-
-    this.service = service;
-    this.taskDefinition = taskDefinition;
   }
 }

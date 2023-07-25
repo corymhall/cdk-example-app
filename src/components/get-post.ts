@@ -9,13 +9,35 @@ import { Monitoring } from '../constructs/monitoring';
 import { EcsMonitor } from '../constructs/monitoring/ecs';
 import { GetPostService } from '../posts/get-post';
 
+/**
+ * Configuration for the GetPost component
+ */
 export interface GetPostProps {
+  /**
+   * The HTTP Api
+   */
   readonly api: Api;
+
+  /**
+   * The DynamoDB table that contains Post data
+   */
   readonly table: ITable;
+
+  /**
+   * The ECS Cluster to place the service in
+   */
   readonly cluster: ICluster;
+
+  /**
+   * Central monitoring construct that can be used to
+   * add monitoring for this construct
+   */
   readonly monitor: Monitoring;
 }
 
+/**
+ * Application component for retrieving a specific blog post by id
+ */
 export class GetPost extends Construct {
   constructor(scope: Construct, id: string, props: GetPostProps) {
     super(scope, id);
@@ -37,6 +59,9 @@ export class GetPost extends Construct {
 
     /**
      * Add specific component level metrics
+     * including metrics that are emitted by the application
+     *
+     * Depending on the metric I might also want to add alarms
      */
     ecsMonitor.addComponentMetric(
       new Metric({

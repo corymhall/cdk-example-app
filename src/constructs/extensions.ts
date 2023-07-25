@@ -3,10 +3,26 @@ import { AwsLogDriver, Protocol, ContainerImage, ITaskDefinitionExtension, TaskD
 import { ManagedPolicy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { ILogGroup } from 'aws-cdk-lib/aws-logs';
 
+/**
+ * Task Definition Extension that are useful for this application
+ */
 export abstract class Extensions {
+  /**
+   * Add a CloudWatch agent sidecar
+   *
+   * @param logGroup - CloudWatch LogGroup that the cloudwatch agent should log to
+   * @returns a TaskDefinitionExtension
+   */
   public static cloudWatchAgent(logGroup: ILogGroup): ITaskDefinitionExtension {
     return new CloudWatchAgentExtension(logGroup);
   }
+
+  /**
+   * Add an Xray agent sidecar enabling sending traces to xray
+   *
+   * @param logGroup - CloudWatch LogGroup that the xray agent should log to
+   * @returns a TaskDefinitionExtension
+   */
   public static xray(logGroup: ILogGroup): ITaskDefinitionExtension {
     return new XRayExtension(logGroup);
   }

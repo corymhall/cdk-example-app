@@ -6,12 +6,30 @@ import { Api } from '../constructs/api';
 import { Monitoring } from '../constructs/monitoring/monitoring';
 import { CreateFunction } from '../posts/create-function';
 
+/**
+ * Options for the CreatePost component
+ */
 export interface CreatePostProps {
+  /**
+   * The HTTP Api
+   */
   readonly api: Api;
+
+  /**
+   * The DynamoDB table containing post data
+   */
   readonly table: ITable;
+
+  /**
+   * Central monitoring construct that can be used to
+   * add monitoring for this construct
+   */
   readonly monitor: Monitoring;
 }
 
+/**
+ * Component for the CreatePost functionality
+ */
 export class CreatePost extends Construct {
   constructor(scope: Construct, id: string, props: CreatePostProps) {
     super(scope, id);
@@ -26,6 +44,7 @@ export class CreatePost extends Construct {
       methods: [HttpMethod.POST],
     });
 
+    // additional things we want to monitor for this specific component
     app.lambdaMonitor.addComponentMetric(
       new Metric({
         metricName: 'ColdStart',
@@ -34,6 +53,7 @@ export class CreatePost extends Construct {
         },
         namespace: 'blogApp',
       }),
+      // these are application level metrics that are emitted by the application
       new Metric({
         metricName: 'createPostFailure',
         dimensionsMap: {

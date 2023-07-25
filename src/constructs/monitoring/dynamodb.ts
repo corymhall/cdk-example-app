@@ -123,7 +123,6 @@ export class DynamoDBMonitor implements IMonitorComponent {
     const table = this.table;
     return {
       widgetsForDashboard(name: string): IWidget[] {
-        console.log(name);
         switch (name) {
           case 'Infrastructure':
             return [

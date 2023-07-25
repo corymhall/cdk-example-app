@@ -9,5 +9,20 @@
     "us-west-2b",
     "us-west-2c",
     "us-west-2d"
+  ],
+  "availability-zones:account=539334897376:region=us-east-2": [
+    "us-east-2a",
+    "us-east-2b",
+    "us-east-2c"
+  ],
+  "availability-zones:account=202865745565:region=us-east-2": [
+    "us-east-2a",
+    "us-east-2b",
+    "us-east-2c"
+  ],
+  "availability-zones:account=183533638597:region=us-east-2": [
+    "us-east-2a",
+    "us-east-2b",
+    "us-east-2c"
   ]
 }

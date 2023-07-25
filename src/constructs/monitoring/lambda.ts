@@ -140,7 +140,6 @@ export class LambdaMonitor implements IMonitorComponent {
     const fn = this.fn;
     return {
       widgetsForDashboard(name: string): IWidget[] {
-        console.log(name);
         switch (name) {
           case 'Infrastructure':
             return [

@@ -9,6 +9,7 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   projenrcTs: true,
   deps: [
     'express',
+    '@cdklabs/cdk-validator-cfnguard',
     'hall-constructs',
     `@aws-cdk/integ-tests-alpha@${alphaVersion}`,
     `@aws-cdk/aws-redshift-alpha@${alphaVersion}`,
@@ -21,6 +22,9 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   ],
   lambdaAutoDiscover: false,
   devDeps: [
+    '@swc/core',
+    '@swc/helpers',
+    'cdk-dia',
     'aws-sdk-client-mock',
     'supertest',
     '@types/supertest',
@@ -35,7 +39,7 @@ const project = new awscdk.AwsCdkTypeScriptApp({
     '@aws-lambda-powertools/metrics',
     '@aws-lambda-powertools/tracer',
   ],
-  buildCommand: 'yarn projen && yarn projen compile && yarn projen bundle',
+  buildCommand: undefined,
   jestOptions: {
     jestConfig: {
       transform: {
@@ -62,6 +66,27 @@ project.addTask('deploy', {
     {
       exec: 'npx cdk deploy --profile sandbox --method=direct --require-approval=never',
       receiveArgs: true,
+    },
+  ],
+});
+// project.cdkConfig.json.addOverride('app', 'npx ts-node -P tsconfig.json --prefer-ts-exts src/main.ts');
+// project.cdkConfig.json.addOverride('app', 'npx node -r ts-node/register --inspect-brk src/main.ts');
+const buildCommand = 'yarn projen && yarn projen compile && yarn projen bundle';
+// project.tsconfig?.file.addOverride('ts-node', {
+//   swc: true,
+// });
+project.tsconfigDev.file.addOverride('ts-node', {
+  swc: true,
+});
+project.cdkTasks.synthSilent.reset();
+project.cdkTasks.synthSilent.exec(`npx cdk synth -q --build "${buildCommand}"`);
+project.addTask('dia', {
+  steps: [
+    {
+      exec: 'npx cdk-dia --rendering cytoscape-html',
+    },
+    {
+      exec: 'npx http-server diagram -o',
     },
   ],
 });

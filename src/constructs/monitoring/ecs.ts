@@ -101,7 +101,6 @@ export class EcsMonitor implements IMonitorComponent {
     const service = this.service;
     return {
       widgetsForDashboard(name: string): IWidget[] {
-        console.log(name);
         switch (name) {
           case 'Infrastructure':
             return [

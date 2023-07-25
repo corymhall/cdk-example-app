@@ -8,12 +8,32 @@ import { Network } from './components/network';
 import { Api } from './constructs/api';
 import { Monitoring } from './constructs/monitoring';
 
+/**
+ * My main application stage this contains all of the stack/resources
+ * for my application and can be deployed as a single unit
+ */
 export class AppStage extends Stage {
+  /**
+   * The public facing Http API
+   */
   public readonly api: Api;
-  public readonly stack: Stack;
+
+  /**
+   * The stack containing the application
+   */
+  public readonly appStack: Stack;
+
+  /**
+   * The stack containing the monitoring resources
+   */
   public readonly monitoringStack: Stack;
+
+  /**
+   * This contains the route urls that is supported by the API
+   * this allows for accessing the needed URL with autocomplete
+   */
   public readonly routes: {
-    'GET /posts': (id: string) => string;
+    'GET /posts': (postId: string) => string;
     'POST /posts': string;
   };
 
@@ -23,12 +43,14 @@ export class AppStage extends Stage {
     // -------------------------------------------------------------------
     // ---------------------Monitoring Stack------------------------------
     // -------------------------------------------------------------------
+    // This is separate from the other stacks to avoid circular dependencies
     const monitoringStack = new Stack(this, 'MonitoringStack');
     const monitor = new Monitoring(monitoringStack, 'Monitoring');
 
     // -------------------------------------------------------------------
     // -------------------------Data Stack-------------------------------
     // -------------------------------------------------------------------
+    // Stack containing my stateful resources. Enabled extra protection
     const datastore = new Stack(this, 'DataStack', {
       terminationProtection: true,
     });
@@ -38,6 +60,8 @@ export class AppStage extends Stage {
     // -----------------------------------------------------------
     // --------------------App Stack------------------------------
     // -----------------------------------------------------------
+    // Contains resources for my application. This includes the VPC, but could also
+    // not include the VPC
     const appStack = new Stack(this, 'AppStack');
     const network = new Network(appStack, 'Network', { });
 
@@ -60,7 +84,7 @@ export class AppStage extends Stage {
     });
 
     this.api = api;
-    this.stack = appStack;
+    this.appStack = appStack;
     this.monitoringStack = monitoringStack;
 
     this.routes = {

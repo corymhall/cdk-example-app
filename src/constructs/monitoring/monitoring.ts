@@ -1,7 +1,6 @@
 import { DynamicDashboardFactory, IDynamicDashboardSegment, MonitoringFacade } from 'cdk-monitoring-constructs';
 import { Construct } from 'constructs';
 
-
 /**
   * Dashboards needed
   * 1. Customer experience dashboard
@@ -34,7 +33,13 @@ import { Construct } from 'constructs';
   *  8. Infrastructure dashboards
   *  9. Dependency dashboards
   */
+
 export const DASH_NAME_PREFIX = 'BlogAppDashboards';
+
+/**
+ * Central monitoring construct for this application
+ * This adds specific functionality on top of the cdk-monitoring-constructs
+ */
 export class Monitoring extends Construct {
   public readonly facade: MonitoringFacade;
   private readonly factory: DynamicDashboardFactory;
@@ -46,9 +51,6 @@ export class Monitoring extends Construct {
         {
           name: 'Infrastructure',
         },
-        // {
-        //   name: 'Detail',
-        // },
       ],
     });
     this.facade = new MonitoringFacade(this, 'Facade', {
@@ -60,7 +62,17 @@ export class Monitoring extends Construct {
   }
 }
 
+/**
+ * A application component that can be monitored
+ */
 export interface IMonitorComponent {
+  /**
+   * The identifier of the component
+   */
   readonly id: string;
+
+  /**
+   * Bind the component to the central monitoring facade
+   */
   bind(facade: MonitoringFacade): IDynamicDashboardSegment;
 }

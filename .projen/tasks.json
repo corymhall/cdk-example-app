@@ -139,6 +139,17 @@
         }
       ]
     },
+    "dia": {
+      "name": "dia",
+      "steps": [
+        {
+          "exec": "npx cdk-dia --rendering cytoscape-html"
+        },
+        {
+          "exec": "npx http-server diagram -o"
+        }
+      ]
+    },
     "diff": {
       "name": "diff",
       "description": "Diffs the currently deployed app against your code",
@@ -230,7 +241,7 @@
       "description": "Synthesizes your cdk app into cdk.out and suppresses the template in stdout (part of \"yarn build\")",
       "steps": [
         {
-          "exec": "cdk synth -q"
+          "exec": "npx cdk synth -q --build \"yarn projen && yarn projen compile && yarn projen bundle\""
         }
       ]
     },

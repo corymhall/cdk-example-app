@@ -25,6 +25,14 @@
       "type": "build"
     },
     {
+      "name": "@swc/core",
+      "type": "build"
+    },
+    {
+      "name": "@swc/helpers",
+      "type": "build"
+    },
+    {
       "name": "@types/aws-lambda",
       "type": "build"
     },
@@ -70,6 +78,10 @@
     },
     {
       "name": "case",
+      "type": "build"
+    },
+    {
+      "name": "cdk-dia",
       "type": "build"
     },
     {
@@ -155,6 +167,10 @@
     {
       "name": "@aws-cdk/integ-tests-alpha",
       "version": "^2.86.0-alpha.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@cdklabs/cdk-validator-cfnguard",
       "type": "runtime"
     },
     {

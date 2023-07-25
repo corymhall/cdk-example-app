@@ -1,10 +1,30 @@
+import { CfnGuardValidator } from '@cdklabs/cdk-validator-cfnguard';
 import { LinuxBuildImage } from 'aws-cdk-lib/aws-codebuild';
 import { App, Stack } from 'aws-cdk-lib/core';
 import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
 import { AppStage } from './app';
 
-const app = new App();
+const app = new App({
+  policyValidationBeta1: [new CfnGuardValidator({
+    controlTowerRulesEnabled: true,
+    // rules: [
+    //   '/home/hallcor/work/cdklabs/cdk-validator-cfnguard/main/rules/control-tower/cfn-guard/ecs/ct-ecs-pr-1.guard',
+    // ],
+  })],
+  postCliContext: {
+    '@aws-cdk/core:validationReportJson': true,
+  },
+});
 
+/**
+ * Create my dev stage. This is the exact same construct that I use for
+ * the pre-prod and prod environments so I can ensure that I don't have any big differences
+ *
+ * I set the account to CDK_DEFAULT_ACCOUNT so that anyone that deploys this stage can just
+ * use whatever AWS account they are authorized for locally.
+ *
+ * cdk deploy 'DevStage/*'
+ */
 new AppStage(app, 'DevStage', {
   env: {
     region: 'us-east-2',
@@ -19,6 +39,9 @@ const pipelineStack = new Stack(app, 'BlogPost-PipelineStack', {
   },
 });
 
+/**
+ * Create a deployment pipeline in a shared services account
+ */
 const pipeline = new CodePipeline(pipelineStack, 'DeliveryPipeline', {
   synth: new ShellStep('synth', {
     input: CodePipelineSource.connection('corymhall/cdk-example-app', 'main', {
@@ -37,6 +60,9 @@ const pipeline = new CodePipeline(pipelineStack, 'DeliveryPipeline', {
   useChangeSets: false,
 });
 
+/**
+ * Add a stage to the deployment pipeline for my pre-prod environment
+ */
 pipeline.addStage(new AppStage(app, 'PreProdStage', {
   env: {
     region: 'us-east-2',
@@ -44,9 +70,14 @@ pipeline.addStage(new AppStage(app, 'PreProdStage', {
   },
 }));
 
+/**
+ * Add a stage to the deployment pipeline for my pre-prod environment
+ */
 pipeline.addStage(new AppStage(app, 'ProdStage', {
   env: {
     region: 'us-east-2',
     account: '202865745565', // prod account
   },
 }));
+
+app.synth();

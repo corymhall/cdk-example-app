@@ -3,6 +3,9 @@ import { Dashboard, GraphWidget, IMetric, IWidget, Metric } from 'aws-cdk-lib/aw
 import { AnomalyDetectingAlarmFactory, CustomMonitoring, HeaderLevel, HeaderWidget, IDynamicDashboardSegment, MonitoringFacade } from 'cdk-monitoring-constructs';
 import { IMonitorComponent, DASH_NAME_PREFIX } from './monitoring';
 
+/**
+ * Application specific construct for monitoring an HTTP Api
+ */
 export class ApiMonitor implements IMonitorComponent {
   private readonly commonWidgets: IWidget[] = [];
   private readonly integrationLatencyMetric: Metric;
@@ -99,7 +102,6 @@ export class ApiMonitor implements IMonitorComponent {
     const api = this.api;
     return {
       widgetsForDashboard(name: string): IWidget[] {
-        console.log(name);
         switch (name) {
           case 'Infrastructure':
             return [
