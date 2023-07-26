@@ -4,6 +4,7 @@ import { ILogGroup } from 'aws-cdk-lib/aws-logs';
 import { IContainer } from '../src/types';
 
 export class TestAppContainer implements IContainer {
+  id = 'TestContainer';
   bind(logGroup: ILogGroup): ITaskDefinitionExtension {
     return {
       extend(taskDefinition) {

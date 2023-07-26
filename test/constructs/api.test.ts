@@ -2,14 +2,11 @@ import { HttpMethod } from '@aws-cdk/aws-apigatewayv2-alpha';
 import { Stack } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
 import { Vpc } from 'aws-cdk-lib/aws-ec2';
-import { AwsLogDriver, ContainerImage, ITaskDefinitionExtension, Protocol } from 'aws-cdk-lib/aws-ecs';
 import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
-import { ILogGroup, LogGroup } from 'aws-cdk-lib/aws-logs';
-import { MonitoringFacade } from 'cdk-monitoring-constructs';
 import { Network } from '../../src/components/network';
 import { Api } from '../../src/constructs/api';
 import { ApiGatewayService } from '../../src/constructs/fargate-service';
-import { IContainer } from '../../src/types';
+import { Monitoring } from '../../src/constructs/monitoring';
 import { TestAppContainer } from '../utils';
 
 /**
@@ -23,13 +20,12 @@ test('resources should not be replaced', () => {
   // WHEN
   const stack = new Stack();
   new Api(stack, 'Api', {
-    monitor: new MonitoringFacade(stack, 'Monitoring'),
+    monitor: new Monitoring(stack, 'Monitoring'),
   });
 
   // THEN
   Template.fromStack(stack).templateMatches({
     Resources: Match.objectLike({
-      MonitoringMonitoringDashboardsDashboard5649A1D9: Match.objectLike({ Type: 'AWS::CloudWatch::Dashboard' }),
       ApiF70053CD: Match.objectLike({ Type: 'AWS::ApiGatewayV2::Api' }),
       ApiDefaultStage189A7074: Match.objectLike({ Type: 'AWS::ApiGatewayV2::Stage' }),
     }),
@@ -47,7 +43,7 @@ test('will create a vpc link', () => {
   const vpc = new Vpc(stack, 'Vpc');
   new Api(stack, 'Api', {
     vpc,
-    monitor: new MonitoringFacade(stack, 'Monitoring'),
+    monitor: new Monitoring(stack, 'Monitoring'),
   });
 
   // THEN
@@ -65,7 +61,7 @@ test('can add a service route', () => {
   // GIVEN
   const stack = new Stack();
   const network = new Network(stack, 'Network');
-  const monitor = new MonitoringFacade(stack, 'Monitoring');
+  const monitor = new Monitoring(stack, 'Monitoring');
   const api = new Api(stack, 'Api', {
     monitor,
     vpc: network.cluster.vpc,
@@ -77,7 +73,6 @@ test('can add a service route', () => {
     methods: [HttpMethod.GET],
     app: new ApiGatewayService(stack, 'Service', {
       appContainer: new TestAppContainer(),
-      monitor,
       cluster: network.cluster,
     }),
   });
@@ -116,7 +111,7 @@ test('can add a service route', () => {
 test('can add a lambda route', () => {
   // GIVEN
   const stack = new Stack();
-  const monitor = new MonitoringFacade(stack, 'Monitoring');
+  const monitor = new Monitoring(stack, 'Monitoring');
   const api = new Api(stack, 'Api', {
     monitor,
   });

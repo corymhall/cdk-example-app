@@ -1,9 +1,9 @@
 import { Stack } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
 import { AttributeType, Table } from 'aws-cdk-lib/aws-dynamodb';
-import { MonitoringFacade } from 'cdk-monitoring-constructs';
 import { CreatePost } from '../../src/components/create-post';
 import { Api } from '../../src/constructs/api';
+import { Monitoring } from '../../src/constructs/monitoring';
 
 /**
  * In this test we are testing the "CreatePost" construct
@@ -11,7 +11,7 @@ import { Api } from '../../src/constructs/api';
  */
 test('resources are created with expected properties', () => {
   const stack = new Stack();
-  const monitor = new MonitoringFacade(stack, 'Monitor');
+  const monitor = new Monitoring(stack, 'Monitor');
   new CreatePost(stack, 'CreatePost', {
     api: new Api(stack, 'Api', {
       monitor,

@@ -1,6 +1,5 @@
 import { Stack } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
-import { MonitoringFacade } from 'cdk-monitoring-constructs';
 import { Network } from '../../src/components/network';
 import { ApiGatewayService } from '../../src/constructs/fargate-service';
 import { TestAppContainer } from '../utils';
@@ -18,7 +17,6 @@ test('resources should not be replaced', () => {
   new ApiGatewayService(stack, 'Service', {
     appContainer: new TestAppContainer(),
     cluster: network.cluster,
-    monitor: new MonitoringFacade(stack, 'Monitor'),
   });
 
   // THEN

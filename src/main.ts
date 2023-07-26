@@ -6,10 +6,7 @@ import { AppStage } from './app';
 
 const app = new App({
   policyValidationBeta1: [new CfnGuardValidator({
-    controlTowerRulesEnabled: true,
-    // rules: [
-    //   '/home/hallcor/work/cdklabs/cdk-validator-cfnguard/main/rules/control-tower/cfn-guard/ecs/ct-ecs-pr-1.guard',
-    // ],
+    controlTowerRulesEnabled: false,
   })],
   postCliContext: {
     '@aws-cdk/core:validationReportJson': true,

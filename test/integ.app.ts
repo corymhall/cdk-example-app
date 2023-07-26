@@ -16,7 +16,7 @@ const appStage = new AppStage(app, 'BlogAppIntegStage', {
   },
 });
 
-appStage.stack.exportValue(appStage.api.apiEndpoint);
+appStage.appStack.exportValue(appStage.api.apiEndpoint);
 const testStack = new Stack(appStage, 'BlogAppIntegAssertionsStack', {
   env: {
     region: 'us-west-2',
