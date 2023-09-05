@@ -1,13 +1,11 @@
-import { CfnGuardValidator } from '@cdklabs/cdk-validator-cfnguard';
+// import { CfnGuardValidator } from '@cdklabs/cdk-validator-cfnguard';
 import { LinuxBuildImage } from 'aws-cdk-lib/aws-codebuild';
 import { App, Stack } from 'aws-cdk-lib/core';
+import * as cr from 'aws-cdk-lib/custom-resources';
 import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
 import { AppStage } from './app';
 
 const app = new App({
-  policyValidationBeta1: [new CfnGuardValidator({
-    controlTowerRulesEnabled: false,
-  })],
   postCliContext: {
     '@aws-cdk/core:validationReportJson': true,
   },
@@ -55,6 +53,14 @@ const pipeline = new CodePipeline(pipelineStack, 'DeliveryPipeline', {
   },
   crossAccountKeys: true,
   useChangeSets: false,
+});
+new cr.AwsCustomResource(pipelineStack, 'CR', {
+  onUpdate: {
+    action: 'some',
+    service: 'service',
+    physicalResourceId: cr.PhysicalResourceId.of('abc'),
+  },
+  policy: cr.AwsCustomResourcePolicy.fromSdkCalls({ resources: cr.AwsCustomResourcePolicy.ANY_RESOURCE }),
 });
 
 /**

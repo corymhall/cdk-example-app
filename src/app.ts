@@ -65,6 +65,7 @@ export class AppStage extends Stage {
     const appStack = new Stack(this, 'AppStack');
     const network = new Network(appStack, 'Network', { });
 
+
     // ------------Create Rest API-------------------
     const api = new Api(appStack, 'Api', { monitor, vpc: network.cluster.vpc });
 

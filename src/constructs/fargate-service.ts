@@ -1,7 +1,7 @@
 import { Duration } from 'aws-cdk-lib';
 import { Alarm, Metric, TreatMissingData, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SubnetType } from 'aws-cdk-lib/aws-ec2';
-import { DeploymentControllerType, FargatePlatformVersion, FargateTaskDefinition, ICluster, FargateService, IFargateTaskDefinition, CfnService } from 'aws-cdk-lib/aws-ecs';
+import { DeploymentControllerType, FargatePlatformVersion, FargateTaskDefinition, ICluster, FargateService, IFargateTaskDefinition, CfnService, LaunchType } from 'aws-cdk-lib/aws-ecs';
 import { Rule } from 'aws-cdk-lib/aws-events';
 import { LogGroup, RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { DnsRecordType } from 'aws-cdk-lib/aws-servicediscovery';
@@ -46,7 +46,9 @@ export class ApiGatewayService extends Construct {
     const logGroup = new LogGroup(this, 'LogGroup', {
       retention: RetentionDays.ONE_MONTH,
     });
-    const taskDefinition = new FargateTaskDefinition(this, 'TaskDef', { });
+    const taskDefinition = new FargateTaskDefinition(this, 'TaskDef', {
+      memoryLimitMiB: 1024,
+    });
 
     taskDefinition.addExtension(props.appContainer.bind(logGroup));
     taskDefinition.addExtension(Extensions.xray(logGroup));
@@ -55,7 +57,6 @@ export class ApiGatewayService extends Construct {
     const service = new FargateService(this, 'AppService', {
       enableECSManagedTags: true,
       minHealthyPercent: 50,
-      platformVersion: FargatePlatformVersion.VERSION1_4,
       cluster: props.cluster,
       circuitBreaker: {
         rollback: true,

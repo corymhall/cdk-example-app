@@ -1,9 +1,9 @@
 import { awscdk } from 'projen';
 import { Transform } from 'projen/lib/javascript';
 import { EcsAutoDiscover, LambdaAutoDiscover } from './projenrc/auto-discover';
-const alphaVersion = '^2.86.0-alpha.0';
+const alphaVersion = '^2.87.0-alpha.0';
 const project = new awscdk.AwsCdkTypeScriptApp({
-  cdkVersion: '2.83.0',
+  cdkVersion: '2.87.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-example-app',
   projenrcTs: true,
@@ -72,9 +72,9 @@ project.addTask('deploy', {
 // project.cdkConfig.json.addOverride('app', 'npx ts-node -P tsconfig.json --prefer-ts-exts src/main.ts');
 // project.cdkConfig.json.addOverride('app', 'npx node -r ts-node/register --inspect-brk src/main.ts');
 const buildCommand = 'yarn projen && yarn projen compile && yarn projen bundle';
-// project.tsconfig?.file.addOverride('ts-node', {
-//   swc: true,
-// });
+project.tsconfig?.file.addOverride('ts-node', {
+  swc: true,
+});
 project.tsconfigDev.file.addOverride('ts-node', {
   swc: true,
 });

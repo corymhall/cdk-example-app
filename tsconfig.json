@@ -32,5 +32,8 @@
   ],
   "exclude": [
     "cdk.out"
-  ]
+  ],
+  "ts-node": {
+    "swc": true
+  }
 }

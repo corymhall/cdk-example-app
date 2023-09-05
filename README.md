@@ -430,3 +430,84 @@ pipeline.addStage(new AppStage(app, 'ProdStage', {
   },
 }));
 ```
+
+## Operating the application
+
+Everything described above helps you get an application deployed to production,
+but it doesn't help very much with operating the application. I haven't set up
+any monitoring or observability, there are no metrics, alarms, or dashboards.
+
+### Monitoring
+
+Monitoring/observability can be broadly split between two layers; the
+Infrastructure layer, and the application layer.
+
+#### Application layer
+
+At the application layer we need to determine what our business metrics are.
+This is very specific to the individual components in our application. If we
+take the `GetPost` component, we might say the metric we care about is the
+number of `getPost` requests we receive. For that we will need to update our
+application logic to emit this metric.
+
+Using the [Lambda Powertools]() library we can do this using `Metrics`
+[src/posts/get-post.ecs-task.ts](./src/posts/get-post.ecs-task.ts)
+```ts
+const metrics = new Metrics();
+
+app.get('/posts/:id', async (req: Request, res: Response) => {
+  try {
+    // get the item
+    metrics.addMetric('getItemSuccess', Metrics.Count, 1);
+  } catch (e) {
+    metrics.addMetric('getItemFailure', Metrics.Count, 1);
+  }
+});
+```
+
+Then we can monitor that metric, add it to a dashboard and setup alarms based on
+what we expect it to be.
+
+```ts
+const getItemSuccessMetric = new Metric({
+  metricName: 'getItemSuccess',
+  dimensionsMap: { service: 'GetPost' },
+  namespace: 'blogApp',
+});
+
+new GraphWidget({
+  left: [getItemSuccessMetric],
+});
+```
+
+Using the [ecs-monitoring-constructs]() I might setup anomaly detection for this
+metric since I expect to have different levels depending on the time of day or
+day of the week.
+
+```ts
+const getItemSuccessMetric = new Metric({...});
+const facade = new MonitoringFacade();
+const metricFactory = facade.createMetricFactory();
+const alarmFactory = facade.createAlarmFactory();
+const getItemAnomalyMetric = metricFactory.createMetricAnomalyDetection(
+  getItemSuccessMetric,
+  3, // standard deviation
+  'getItemSuccess', // label
+  undefined, // color
+  'getItemSuccess', // expressionId
+);
+alarmFactory.addAlarmWhenOutOfBand(
+  getItemAnomalyMetric,
+  'getItemSuccess-Anomaly', // alarm name suffix
+  'Warning', // disambiguator
+  {
+    alarmWhenAboveBand: false,
+    alarmWhenBelowBand: true,
+    standardDeviationForAlarm: 4,
+  },
+);
+```
+
+#### Infrastructure layer
+
+
