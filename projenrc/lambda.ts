@@ -130,20 +130,24 @@ export class LambdaFunction extends Component {
     }
     src.line("import * as path from 'path';");
     src.line('// eslint-disable-next-line import/no-extraneous-dependencies');
-    src.line("import { LogLevel } from '@aws-lambda-powertools/logger/lib/types';");
+    src.line(
+      "import { LogLevel } from '@aws-lambda-powertools/logger/lib/types';",
+    );
 
     src.line("import * as lambda from 'aws-cdk-lib/aws-lambda';");
     src.line("import { Stack, ArnFormat } from 'aws-cdk-lib/core';");
     src.line("import { Construct } from 'constructs';");
-    src.line(`import { LambdaMonitor } from '${path.relative(path.dirname(constructAbs), path.join(project.outdir, 'src/constructs/monitoring'))}';`);
-    src.line(`import { Env } from '${path.relative(path.dirname(constructAbs), path.join(project.outdir, 'src/types'))}';`);
+    src.line(
+      `import { LambdaMonitor } from '${path.relative(path.dirname(constructAbs), path.join(project.outdir, 'src/constructs/monitoring'))}';`,
+    );
+    src.line(
+      `import { Env } from '${path.relative(path.dirname(constructAbs), path.join(project.outdir, 'src/types'))}';`,
+    );
     src.line();
     src.line('/**');
     src.line(` * Props for ${constructName}`);
     src.line(' */');
-    src.open(
-      `export interface ${propsType} extends lambda.FunctionOptions {`,
-    );
+    src.open(`export interface ${propsType} extends lambda.FunctionOptions {`);
     src.line('readonly logLevel?: LogLevel;');
     src.line('readonly env?: Env;');
     src.close('}');
@@ -173,7 +177,9 @@ export class LambdaFunction extends Component {
     src.line('...props?.environment,');
     src.close('},');
     src.open('layers: [');
-    src.open("lambda.LayerVersion.fromLayerVersionArn(scope, 'PowertoolsLayer', Stack.of(scope).formatArn({");
+    src.open(
+      "lambda.LayerVersion.fromLayerVersionArn(scope, 'PowertoolsLayer', Stack.of(scope).formatArn({",
+    );
     src.line("resource: 'layer',");
     src.line("service: 'lambda',");
     src.line('arnFormat: ArnFormat.COLON_RESOURCE_NAME,');
@@ -201,7 +207,9 @@ export class LambdaFunction extends Component {
         "this.addEnvironment('AWS_NODEJS_CONNECTION_REUSE_ENABLED', '1', { removeInEdge: true });",
       );
     }
-    src.line(`this.lambdaMonitor = new LambdaMonitor('${constructName}', this);`);
+    src.line(
+      `this.lambdaMonitor = new LambdaMonitor('${constructName}', this);`,
+    );
     src.close('}');
     src.close('}');
 

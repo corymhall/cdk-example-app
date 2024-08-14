@@ -48,28 +48,27 @@ export class TestCase extends Stack {
   }
 }
 
-const testCase = new TestCase(app, 'integ-get-post', { });
+const testCase = new TestCase(app, 'integ-get-post', {});
 
 const integ = new IntegTest(app, 'integ-test', {
   testCases: [testCase],
   diffAssets: true,
 });
 
-
 // ---------------------------------------------
 // --------------Test Cases----------------------
 // ---------------------------------------------
 
 for (const test of testCases) {
-  integ.assertions.awsApiCall('DynamoDB', 'putItem', {
-    Item: marshall(test),
-    TableName: testCase.table.tableName,
-  }).next(
-    integ.assertions.httpApiCall(`${testCase.api.url!}posts/1`),
-  ).expect(
-    ExpectedResult.objectLike({
-      body: test,
-    }),
-  );
+  integ.assertions
+    .awsApiCall('DynamoDB', 'putItem', {
+      Item: marshall(test),
+      TableName: testCase.table.tableName,
+    })
+    .next(integ.assertions.httpApiCall(`${testCase.api.url!}posts/1`))
+    .expect(
+      ExpectedResult.objectLike({
+        body: test,
+      }),
+    );
 }
-

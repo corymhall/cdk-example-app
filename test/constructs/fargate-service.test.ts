@@ -23,13 +23,27 @@ test('resources should not be replaced', () => {
   const template = Template.fromStack(stack);
   template.templateMatches({
     Resources: Match.objectLike({
-      ServiceLogGroupB910EE76: Match.objectLike({ Type: 'AWS::Logs::LogGroup' }),
-      ServiceTaskDefTaskRole0CFE2F57: Match.objectLike({ Type: 'AWS::IAM::Role' }),
-      ServiceTaskDefTaskRoleDefaultPolicy9CCB4F8E: Match.objectLike({ Type: 'AWS::IAM::Policy' }),
-      ServiceTaskDefExecutionRole919F7BE3: Match.objectLike({ Type: 'AWS::IAM::Role' }),
-      ServiceTaskDefExecutionRoleDefaultPolicy3073559D: Match.objectLike({ Type: 'AWS::IAM::Policy' }),
-      ServiceAppService43155DA6: Match.objectLike({ Type: 'AWS::ECS::Service' }),
-      ServiceAppServiceSecurityGroup3948D0B5: Match.objectLike({ Type: 'AWS::EC2::SecurityGroup' }),
+      ServiceLogGroupB910EE76: Match.objectLike({
+        Type: 'AWS::Logs::LogGroup',
+      }),
+      ServiceTaskDefTaskRole0CFE2F57: Match.objectLike({
+        Type: 'AWS::IAM::Role',
+      }),
+      ServiceTaskDefTaskRoleDefaultPolicy9CCB4F8E: Match.objectLike({
+        Type: 'AWS::IAM::Policy',
+      }),
+      ServiceTaskDefExecutionRole919F7BE3: Match.objectLike({
+        Type: 'AWS::IAM::Role',
+      }),
+      ServiceTaskDefExecutionRoleDefaultPolicy3073559D: Match.objectLike({
+        Type: 'AWS::IAM::Policy',
+      }),
+      ServiceAppService43155DA6: Match.objectLike({
+        Type: 'AWS::ECS::Service',
+      }),
+      ServiceAppServiceSecurityGroup3948D0B5: Match.objectLike({
+        Type: 'AWS::EC2::SecurityGroup',
+      }),
     }),
   });
 
@@ -57,4 +71,3 @@ test('resources should not be replaced', () => {
   });
   template.resourceCountIs('AWS::Logs::LogGroup', 1);
 });
-

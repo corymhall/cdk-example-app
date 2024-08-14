@@ -1,6 +1,6 @@
-import { HttpMethod } from '@aws-cdk/aws-apigatewayv2-alpha';
 import { Stack } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
+import { HttpMethod } from 'aws-cdk-lib/aws-apigatewayv2';
 import { Vpc } from 'aws-cdk-lib/aws-ec2';
 import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { Network } from '../../src/components/network';
@@ -27,7 +27,9 @@ test('resources should not be replaced', () => {
   Template.fromStack(stack).templateMatches({
     Resources: Match.objectLike({
       ApiF70053CD: Match.objectLike({ Type: 'AWS::ApiGatewayV2::Api' }),
-      ApiDefaultStage189A7074: Match.objectLike({ Type: 'AWS::ApiGatewayV2::Stage' }),
+      ApiDefaultStage189A7074: Match.objectLike({
+        Type: 'AWS::ApiGatewayV2::Stage',
+      }),
     }),
   });
 
@@ -47,14 +49,17 @@ test('will create a vpc link', () => {
   });
 
   // THEN
-  Template.fromStack(stack).hasResourceProperties('AWS::ApiGatewayV2::VpcLink', {
-    Name: 'ApiVpcLink623DC6E4',
-    SecurityGroupIds: [{ 'Fn::GetAtt': ['ApiVpcLinkSg585A62E1', 'GroupId'] }],
-    SubnetIds: [
-      { Ref: 'VpcPrivateSubnet1Subnet536B997A' },
-      { Ref: 'VpcPrivateSubnet2Subnet3788AAA1' },
-    ],
-  });
+  Template.fromStack(stack).hasResourceProperties(
+    'AWS::ApiGatewayV2::VpcLink',
+    {
+      Name: 'ApiVpcLink623DC6E4',
+      SecurityGroupIds: [{ 'Fn::GetAtt': ['ApiVpcLinkSg585A62E1', 'GroupId'] }],
+      SubnetIds: [
+        { Ref: 'VpcPrivateSubnet1Subnet536B997A' },
+        { Ref: 'VpcPrivateSubnet2Subnet3788AAA1' },
+      ],
+    },
+  );
 });
 
 test('can add a service route', () => {
@@ -101,9 +106,13 @@ test('can add a service route', () => {
   template.hasResourceProperties('AWS::EC2::SecurityGroupIngress', {
     Description: 'from ApiVpcLinkSgA7E93302:8080',
     FromPort: 8080,
-    GroupId: { 'Fn::GetAtt': ['ServiceAppServiceSecurityGroup3948D0B5', 'GroupId'] },
+    GroupId: {
+      'Fn::GetAtt': ['ServiceAppServiceSecurityGroup3948D0B5', 'GroupId'],
+    },
     IpProtocol: 'tcp',
-    SourceSecurityGroupId: { 'Fn::GetAtt': ['ApiVpcLinkSg585A62E1', 'GroupId'] },
+    SourceSecurityGroupId: {
+      'Fn::GetAtt': ['ApiVpcLinkSg585A62E1', 'GroupId'],
+    },
     ToPort: 8080,
   });
 });
@@ -138,4 +147,3 @@ test('can add a lambda route', () => {
   });
   template.resourceCountIs('AWS::Lambda::Function', 1);
 });
-

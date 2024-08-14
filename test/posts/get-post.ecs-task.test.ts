@@ -29,9 +29,7 @@ afterAll(() => {
 });
 
 describe('get post', () => {
-  test.each([
-    testCases,
-  ])('successful', async (testCase) => {
+  test.each([testCases])('successful', async (testCase) => {
     // GIVEN
     ddbMock.on(GetItemCommand).resolves({
       Item: marshall(testCase),
@@ -45,11 +43,9 @@ describe('get post', () => {
     expect(res.body).toEqual(testCase);
   });
 
-  test.each([
-    testCases,
-  ])('failure', async (testCase) => {
+  test.each([testCases])('failure', async (testCase) => {
     // GIVEN
-    ddbMock.on(GetItemCommand).rejects({ });
+    ddbMock.on(GetItemCommand).rejects({});
 
     // WHEN
     const res = await request(app).get(`/posts/${testCase.pk}`);
@@ -59,4 +55,3 @@ describe('get post', () => {
     expect(res.body).toEqual({ message: 'Post not found' });
   });
 });
-

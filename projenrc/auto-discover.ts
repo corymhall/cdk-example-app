@@ -44,4 +44,3 @@ export class EcsAutoDiscover extends AutoDiscoverBase {
     }
   }
 }
-

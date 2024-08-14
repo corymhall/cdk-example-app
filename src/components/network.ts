@@ -13,9 +13,11 @@ export class Network extends Construct {
   constructor(scope: Construct, id: string, props?: NetworkProps) {
     super(scope, id);
 
-    const vpc = props?.vpc ?? new Vpc(this, 'Vpc', {
-      maxAzs: 3,
-    });
+    const vpc =
+      props?.vpc ??
+      new Vpc(this, 'Vpc', {
+        maxAzs: 3,
+      });
 
     const name = props?.env === Env.PROD ? 'blog.com' : 'blog-dev.com';
     this.cluster = new Cluster(this, 'Cluster', {

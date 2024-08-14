@@ -25,13 +25,15 @@ AWSXRay.middleware.setSamplingRules({
     fixed_target: 0,
     rate: 0,
   },
-  rules: [{
-    host: '*',
-    fixed_target: 1,
-    http_method: 'GET',
-    rate: 1,
-    url_path: '/posts/*',
-  }],
+  rules: [
+    {
+      host: '*',
+      fixed_target: 1,
+      http_method: 'GET',
+      rate: 1,
+      url_path: '/posts/*',
+    },
+  ],
 });
 app.use(AWSXRay.express.openSegment(serviceName!));
 app.use(express.json());
@@ -51,7 +53,9 @@ app.get('/posts/:id', async (req: Request, res: Response) => {
     const item = await client.send(getItem);
     logger.info({ message: JSON.stringify(item.Item) });
     const result = unmarshall(item.Item ?? {});
-    logger.info({ message: JSON.stringify({ item: item.Item, result: result }) });
+    logger.info({
+      message: JSON.stringify({ item: item.Item, result: result }),
+    });
     metrics.addMetric('getItemSuccess', MetricUnits.Count, 1);
     res.status(200).json(result);
   } catch (e) {

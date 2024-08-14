@@ -1,6 +1,20 @@
-import { Dashboard, GraphWidget, IMetric, IWidget, Metric } from 'aws-cdk-lib/aws-cloudwatch';
+import {
+  Dashboard,
+  GraphWidget,
+  IMetric,
+  IWidget,
+  Metric,
+} from 'aws-cdk-lib/aws-cloudwatch';
 import { FargateService } from 'aws-cdk-lib/aws-ecs';
-import { AnomalyDetectingAlarmFactory, CustomMonitoring, HeaderLevel, HeaderWidget, IDynamicDashboardSegment, MetricStatistic, MonitoringFacade } from 'cdk-monitoring-constructs';
+import {
+  AnomalyDetectingAlarmFactory,
+  CustomMonitoring,
+  HeaderLevel,
+  HeaderWidget,
+  IDynamicDashboardSegment,
+  MetricStatistic,
+  MonitoringFacade,
+} from 'cdk-monitoring-constructs';
 import { IMonitorComponent, DASH_NAME_PREFIX } from './monitoring';
 
 export class EcsMonitor implements IMonitorComponent {
@@ -12,9 +26,11 @@ export class EcsMonitor implements IMonitorComponent {
     public readonly id: string,
     private readonly service: FargateService,
   ) {
-    this.memoryUtilizationMetric = service.metricMemoryUtilization({ label: 'memory' });
+    this.memoryUtilizationMetric = service.metricMemoryUtilization({
+      label: 'memory',
+    });
     this.cpuUtilizationMetric = service.metricCpuUtilization({ label: 'cpu' });
-  };
+  }
   bind(facade: MonitoringFacade): IDynamicDashboardSegment {
     facade.monitorSimpleFargateService({
       fargateService: this.service,
@@ -39,16 +55,22 @@ export class EcsMonitor implements IMonitorComponent {
       undefined,
       'ECS/ContainerInsights',
     );
-    const runningTaskAnomalyMetric = metricFactory
-      .createMetricAnomalyDetection(
-        runTaskMetric,
-        3,
-        'runningTasks',
-        undefined,
-        'runningTasks',
-      );
-    anomalyFactory.addAlarmWhenOutOfBand(runningTaskAnomalyMetric, 'RunningTasks-Anomaly', 'Critical',
-      { alarmWhenAboveTheBand: true, alarmWhenBelowTheBand: true, standardDeviationForAlarm: 4 },
+    const runningTaskAnomalyMetric = metricFactory.createMetricAnomalyDetection(
+      runTaskMetric,
+      3,
+      'runningTasks',
+      undefined,
+      'runningTasks',
+    );
+    anomalyFactory.addAlarmWhenOutOfBand(
+      runningTaskAnomalyMetric,
+      'RunningTasks-Anomaly',
+      'Critical',
+      {
+        alarmWhenAboveTheBand: true,
+        alarmWhenBelowTheBand: true,
+        standardDeviationForAlarm: 4,
+      },
     );
     const dashboardName = `${DASH_NAME_PREFIX}-${this.id}`;
     const alarmsDash = new Dashboard(facade, `${this.id}Dashboard`, {
@@ -58,42 +80,47 @@ export class EcsMonitor implements IMonitorComponent {
       dashboardName: `${dashboardName}-Detail`,
     });
     componentDash.addWidgets(
-      ...this.componentMetrics.map(metric =>
-        new GraphWidget({
-          left: [metric],
-        }),
+      ...this.componentMetrics.map(
+        (metric) =>
+          new GraphWidget({
+            left: [metric],
+          }),
       ),
     );
-    this.commonWidgets.push(...[
-      new GraphWidget({
-        left: [this.cpuUtilizationMetric],
-        title: 'Cpu Utilization',
-      }),
-      new GraphWidget({
-        left: [this.memoryUtilizationMetric],
-        title: 'Memory Utilization',
-      }),
-    ]);
+    this.commonWidgets.push(
+      ...[
+        new GraphWidget({
+          left: [this.cpuUtilizationMetric],
+          title: 'Cpu Utilization',
+        }),
+        new GraphWidget({
+          left: [this.memoryUtilizationMetric],
+          title: 'Memory Utilization',
+        }),
+      ],
+    );
     componentDash.addWidgets(...this.commonWidgets);
     const durationMonitor = new CustomMonitoring(facade, {
       alarmFriendlyName: 'RunningTasksAnomalyDetectionAlarm',
-      metricGroups: [{
-        title: `${this.service.serviceName} Running Tasks`,
-        metrics: [
-          {
-            metric: runningTaskAnomalyMetric,
-            alarmFriendlyName: 'Anomaly-RunningTasks',
-            addAlarm: {},
-            addAlarmOnAnomaly: {
-              Warning: {
-                alarmWhenAboveTheBand: true,
-                alarmWhenBelowTheBand: true,
-                standardDeviationForAlarm: 4,
+      metricGroups: [
+        {
+          title: `${this.service.serviceName} Running Tasks`,
+          metrics: [
+            {
+              metric: runningTaskAnomalyMetric,
+              alarmFriendlyName: 'Anomaly-RunningTasks',
+              addAlarm: {},
+              addAlarmOnAnomaly: {
+                Warning: {
+                  alarmWhenAboveTheBand: true,
+                  alarmWhenBelowTheBand: true,
+                  standardDeviationForAlarm: 4,
+                },
               },
             },
-          },
-        ],
-      }],
+          ],
+        },
+      ],
     });
     alarmsDash.addWidgets(...durationMonitor.widgets());
 

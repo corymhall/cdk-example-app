@@ -1,8 +1,11 @@
 // import { CfnGuardValidator } from '@cdklabs/cdk-validator-cfnguard';
 import { LinuxBuildImage } from 'aws-cdk-lib/aws-codebuild';
 import { App, Stack } from 'aws-cdk-lib/core';
-import * as cr from 'aws-cdk-lib/custom-resources';
-import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
+import {
+  CodePipeline,
+  CodePipelineSource,
+  ShellStep,
+} from 'aws-cdk-lib/pipelines';
 import { AppStage } from './app';
 
 const app = new App({
@@ -40,12 +43,10 @@ const pipelineStack = new Stack(app, 'BlogPost-PipelineStack', {
 const pipeline = new CodePipeline(pipelineStack, 'DeliveryPipeline', {
   synth: new ShellStep('synth', {
     input: CodePipelineSource.connection('corymhall/cdk-example-app', 'main', {
-      connectionArn: 'arn:aws:codestar-connections:us-east-2:183533638597:connection/ca65d486-ca6e-41cb-aab2-645db37fdb2c',
+      connectionArn:
+        'arn:aws:codestar-connections:us-east-2:183533638597:connection/ca65d486-ca6e-41cb-aab2-645db37fdb2c',
     }),
-    commands: [
-      'yarn install --frozen-lockfile',
-      'npx cdk synth',
-    ],
+    commands: ['yarn install --frozen-lockfile', 'npx cdk synth'],
     primaryOutputDirectory: 'cdk.out',
   }),
   codeBuildDefaults: {
@@ -54,33 +55,29 @@ const pipeline = new CodePipeline(pipelineStack, 'DeliveryPipeline', {
   crossAccountKeys: true,
   useChangeSets: false,
 });
-new cr.AwsCustomResource(pipelineStack, 'CR', {
-  onUpdate: {
-    action: 'some',
-    service: 'service',
-    physicalResourceId: cr.PhysicalResourceId.of('abc'),
-  },
-  policy: cr.AwsCustomResourcePolicy.fromSdkCalls({ resources: cr.AwsCustomResourcePolicy.ANY_RESOURCE }),
-});
 
 /**
  * Add a stage to the deployment pipeline for my pre-prod environment
  */
-pipeline.addStage(new AppStage(app, 'PreProdStage', {
-  env: {
-    region: 'us-east-2',
-    account: '539334897376', // pre-prod account
-  },
-}));
+pipeline.addStage(
+  new AppStage(app, 'PreProdStage', {
+    env: {
+      region: 'us-east-2',
+      account: '539334897376', // pre-prod account
+    },
+  }),
+);
 
 /**
  * Add a stage to the deployment pipeline for my pre-prod environment
  */
-pipeline.addStage(new AppStage(app, 'ProdStage', {
-  env: {
-    region: 'us-east-2',
-    account: '202865745565', // prod account
-  },
-}));
+pipeline.addStage(
+  new AppStage(app, 'ProdStage', {
+    env: {
+      region: 'us-east-2',
+      account: '202865745565', // prod account
+    },
+  }),
+);
 
 app.synth();

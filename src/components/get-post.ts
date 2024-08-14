@@ -1,4 +1,4 @@
-import { HttpMethod } from '@aws-cdk/aws-apigatewayv2-alpha';
+import { HttpMethod } from 'aws-cdk-lib/aws-apigatewayv2';
 import { Metric } from 'aws-cdk-lib/aws-cloudwatch';
 import { ITable } from 'aws-cdk-lib/aws-dynamodb';
 import { ICluster } from 'aws-cdk-lib/aws-ecs';

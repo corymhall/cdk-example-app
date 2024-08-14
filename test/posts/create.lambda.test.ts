@@ -1,4 +1,8 @@
-import { ConditionalCheckFailedException, DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb';
+import {
+  ConditionalCheckFailedException,
+  DynamoDBClient,
+  PutItemCommand,
+} from '@aws-sdk/client-dynamodb';
 import { marshall } from '@aws-sdk/util-dynamodb';
 import { APIGatewayProxyEventV2, Context } from 'aws-lambda';
 import { mockClient } from 'aws-sdk-client-mock';
@@ -24,9 +28,7 @@ afterAll(() => {
 });
 
 describe('create post', () => {
-  test.each([
-    testCases,
-  ])('successful', async (testCase) => {
+  test.each([testCases])('successful', async (testCase) => {
     // GIVEN
     ddbMock.on(PutItemCommand).resolves({});
     const body = JSON.stringify({
@@ -47,11 +49,8 @@ describe('create post', () => {
       statusCode: 200,
       body: 'OK',
     });
-
   });
-  test.each([
-    testCases,
-  ])('failure', async (testCase) => {
+  test.each([testCases])('failure', async (testCase) => {
     // GIVEN
     const body = JSON.stringify({
       ...testCase,
@@ -62,7 +61,9 @@ describe('create post', () => {
     ddbMock.on(PutItemCommand).rejects({});
 
     // THEN
-    await expect(handler(req.event, req.context)).rejects.toThrow(/failed creating post/);
+    await expect(handler(req.event, req.context)).rejects.toThrow(
+      /failed creating post/,
+    );
     ddbMock.commandCalls(PutItemCommand, {
       TableName: TABLE_NAME,
       ConditionExpression: 'attribute_not_exists(pk)',
@@ -78,7 +79,12 @@ describe('create post', () => {
     const req = createEvent(body);
 
     // WHEN
-    ddbMock.on(PutItemCommand).rejects(new ConditionalCheckFailedException({ message: 'error', $metadata: {} as any }));
+    ddbMock.on(PutItemCommand).rejects(
+      new ConditionalCheckFailedException({
+        message: 'error',
+        $metadata: {} as any,
+      }),
+    );
     const res = await handler(req.event, req.context);
 
     // THEN
@@ -94,7 +100,10 @@ describe('create post', () => {
   });
 });
 
-function createEvent(body: string): { event: APIGatewayProxyEventV2; context: Context } {
+function createEvent(body: string): {
+  event: APIGatewayProxyEventV2;
+  context: Context;
+} {
   return {
     event: {
       version: '2.0',
@@ -102,11 +111,11 @@ function createEvent(body: string): { event: APIGatewayProxyEventV2; context: Co
       rawPath: '/posts',
       rawQueryString: '',
       headers: {
-        'accept': '*/*',
+        accept: '*/*',
         'accept-encoding': 'gzip,deflate',
         'content-length': '143',
         'content-type': 'text/plain;charset=UTF-8',
-        'host': 'hxzls0fu8c.execute-api.us-west-2.amazonaws.com',
+        host: 'hxzls0fu8c.execute-api.us-west-2.amazonaws.com',
         'user-agent': 'node-fetch/1.0 (+https://github.com/bitinn/node-fetch)',
         'x-amzn-trace-id': 'Root=1-64ad9aec-0afc754f0069c3f0151d05da',
         'x-forwarded-for': '34.220.207.9',

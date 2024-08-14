@@ -40,7 +40,7 @@ export class TestCase extends Stack {
   }
 }
 
-const testCase = new TestCase(app, 'integ-create-post', { });
+const testCase = new TestCase(app, 'integ-create-post', {});
 
 const integ = new IntegTest(app, 'integ-test', {
   testCases: [testCase],
@@ -54,33 +54,34 @@ const integ = new IntegTest(app, 'integ-test', {
   },
 });
 
-
 // ---------------------------------------------
 // --------------Test Cases----------------------
 // ---------------------------------------------
 
-
 for (const test of testCases) {
-  integ.assertions.httpApiCall(`${testCase.api.url!}posts`, {
-    method: 'POST',
-    body: JSON.stringify(test),
-  }).next(
-    integ.assertions.awsApiCall('DynamoDB', 'getItem', {
-      Key: {
-        pk: { S: test.pk },
-      },
-      TableName: testCase.table.tableName,
-    }).expect(
-      ExpectedResult.objectLike({
-        Item: marshall({
-          author: test.author,
-          content: test.content,
-          pk: test.pk,
-          status: test.status,
-          summary: test.summary,
-        }),
-      }),
-    ),
-  );
+  integ.assertions
+    .httpApiCall(`${testCase.api.url!}posts`, {
+      method: 'POST',
+      body: JSON.stringify(test),
+    })
+    .next(
+      integ.assertions
+        .awsApiCall('DynamoDB', 'getItem', {
+          Key: {
+            pk: { S: test.pk },
+          },
+          TableName: testCase.table.tableName,
+        })
+        .expect(
+          ExpectedResult.objectLike({
+            Item: marshall({
+              author: test.author,
+              content: test.content,
+              pk: test.pk,
+              status: test.status,
+              summary: test.summary,
+            }),
+          }),
+        ),
+    );
 }
-

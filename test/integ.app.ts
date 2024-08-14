@@ -4,7 +4,6 @@ import { HallApp } from 'hall-constructs';
 import { testCases } from './components/test-cases';
 import { AppStage } from '../src/app';
 
-
 const app = new HallApp({
   repoName: 'cdk-example-app',
 });
@@ -36,20 +35,25 @@ const integ = new IntegTest(app, 'integ-tests', {
   testCases: [appStage.monitoringStack],
 });
 
-testCases.forEach(test => {
-  integ.assertions.httpApiCall(`${appStage.api.url!}posts`, {
-    method: 'POST',
-    body: JSON.stringify(test),
-  }).next(
-    integ.assertions.httpApiCall(`${appStage.api.url!}posts/${test.pk}`, {
-    }).expect(ExpectedResult.objectLike({
-      body: {
-        author: test.author,
-        content: test.content,
-        pk: test.pk,
-        status: test.status,
-        summary: test.summary,
-      },
-    })),
-  );
+testCases.forEach((test) => {
+  integ.assertions
+    .httpApiCall(`${appStage.api.url!}posts`, {
+      method: 'POST',
+      body: JSON.stringify(test),
+    })
+    .next(
+      integ.assertions
+        .httpApiCall(`${appStage.api.url!}posts/${test.pk}`, {})
+        .expect(
+          ExpectedResult.objectLike({
+            body: {
+              author: test.author,
+              content: test.content,
+              pk: test.pk,
+              status: test.status,
+              summary: test.summary,
+            },
+          }),
+        ),
+    );
 });

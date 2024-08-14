@@ -38,20 +38,13 @@ export class EcsService extends Component {
 
     const entrypoint = options.entrypoint;
 
-    if (
-      !entrypoint.endsWith(TYPESCRIPT_ECS_EXT)
-    ) {
-      throw new Error(
-        `${entrypoint} must have a ${TYPESCRIPT_ECS_EXT}`,
-      );
+    if (!entrypoint.endsWith(TYPESCRIPT_ECS_EXT)) {
+      throw new Error(`${entrypoint} must have a ${TYPESCRIPT_ECS_EXT}`);
     }
 
     const basePath = path.posix.join(
       path.dirname(entrypoint),
-      path.basename(
-        entrypoint,
-        TYPESCRIPT_ECS_EXT,
-      ),
+      path.basename(entrypoint, TYPESCRIPT_ECS_EXT),
     );
     const constructFile = options.constructFile ?? `${basePath}.ts`;
 
@@ -86,7 +79,10 @@ export class EcsService extends Component {
       path.dirname(constructAbs),
       path.dirname(outfileAbs),
     );
-    const dockerfile = path.join(path.relative(project.outdir, path.dirname(outfileAbs)), 'Dockerfile');
+    const dockerfile = path.join(
+      path.relative(project.outdir, path.dirname(outfileAbs)),
+      'Dockerfile',
+    );
 
     const src = new SourceCode(project, constructFile);
     if (src.marker) {
@@ -94,22 +90,31 @@ export class EcsService extends Component {
     }
     src.line("import * as path from 'path';");
     src.line('// eslint-disable-next-line import/no-extraneous-dependencies');
-    src.line("import { LogLevel } from '@aws-lambda-powertools/logger/lib/types';");
-    src.line("import { AwsLogDriver, TaskDefinition, ContainerImage, ITaskDefinitionExtension, ContainerDefinitionOptions } from 'aws-cdk-lib/aws-ecs';");
+    src.line(
+      "import { LogLevel } from '@aws-lambda-powertools/logger/lib/types';",
+    );
+    src.line(
+      "import { AwsLogDriver, TaskDefinition, ContainerImage, ITaskDefinitionExtension, ContainerDefinitionOptions } from 'aws-cdk-lib/aws-ecs';",
+    );
     src.line("import { ILogGroup } from 'aws-cdk-lib/aws-logs';");
     src.line("import { Duration } from 'aws-cdk-lib/core';");
-    src.line(`import { Env, IContainer } from '${path.relative(path.dirname(constructAbs), path.join(project.outdir, 'src/types'))}';`);
+    src.line(
+      `import { Env, IContainer } from '${path.relative(path.dirname(constructAbs), path.join(project.outdir, 'src/types'))}';`,
+    );
     src.line('');
 
-    src.open(`export interface ${propsType} extends Omit<ContainerDefinitionOptions, 'image'> {`);
+    src.open(
+      `export interface ${propsType} extends Omit<ContainerDefinitionOptions, 'image'> {`,
+    );
     src.line('readonly logLevel?: LogLevel;');
     src.line('readonly env?: Env;');
     src.close('}');
     src.line('');
 
-
     src.open(`export class ${constructName} implements IContainer {`);
-    src.line(`constructor(public readonly id: string, private readonly props?: ${propsType}) {}`);
+    src.line(
+      `constructor(public readonly id: string, private readonly props?: ${propsType}) {}`,
+    );
     src.open('public bind(logGroup: ILogGroup): ITaskDefinitionExtension {');
     src.line('const id = this.id;');
     src.line('const props = this.props;');
@@ -165,7 +170,6 @@ export class EcsService extends Component {
     df.line('COPY . /bundle');
     df.line('EXPOSE 8080');
     df.line('CMD ["node", "/bundle/index.js"]');
-
 
     this.project.logger.verbose(
       `${basePath}: construct "${constructName}" generated under "${constructFile}"`,

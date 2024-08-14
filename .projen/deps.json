@@ -65,7 +65,7 @@
     },
     {
       "name": "aws-cdk",
-      "version": "^2.87.0",
+      "version": "^2.151.0",
       "type": "build"
     },
     {
@@ -89,6 +89,10 @@
       "type": "build"
     },
     {
+      "name": "eslint-config-prettier",
+      "type": "build"
+    },
+    {
       "name": "eslint-import-resolver-node",
       "type": "build"
     },
@@ -98,6 +102,10 @@
     },
     {
       "name": "eslint-plugin-import",
+      "type": "build"
+    },
+    {
+      "name": "eslint-plugin-prettier",
       "type": "build"
     },
     {
@@ -117,6 +125,10 @@
     {
       "name": "npm-check-updates",
       "version": "^16",
+      "type": "build"
+    },
+    {
+      "name": "prettier",
       "type": "build"
     },
     {
@@ -140,33 +152,18 @@
       "type": "build"
     },
     {
-      "name": "@aws-cdk/aws-apigatewayv2-alpha",
-      "version": "^2.87.0-alpha.0",
-      "type": "runtime"
-    },
-    {
-      "name": "@aws-cdk/aws-apigatewayv2-integrations-alpha",
-      "version": "^2.87.0-alpha.0",
-      "type": "runtime"
-    },
-    {
       "name": "@aws-cdk/aws-redshift-alpha",
-      "version": "^2.87.0-alpha.0",
-      "type": "runtime"
-    },
-    {
-      "name": "@aws-cdk/aws-synthetics-alpha",
-      "version": "^2.87.0-alpha.0",
+      "version": "^2.151.0-alpha.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/integ-runner",
-      "version": "^2.87.0-alpha.0",
+      "version": "^2.151.0-alpha.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/integ-tests-alpha",
-      "version": "^2.87.0-alpha.0",
+      "version": "^2.151.0-alpha.0",
       "type": "runtime"
     },
     {
@@ -175,7 +172,7 @@
     },
     {
       "name": "aws-cdk-lib",
-      "version": "^2.87.0",
+      "version": "^2.151.0",
       "type": "runtime"
     },
     {

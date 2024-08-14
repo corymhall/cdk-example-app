@@ -1,22 +1,30 @@
 import { awscdk } from 'projen';
-import { Transform } from 'projen/lib/javascript';
+import { NodePackageManager, Transform } from 'projen/lib/javascript';
 import { EcsAutoDiscover, LambdaAutoDiscover } from './projenrc/auto-discover';
-const alphaVersion = '^2.87.0-alpha.0';
+const alphaVersion = '^2.151.0-alpha.0';
 const project = new awscdk.AwsCdkTypeScriptApp({
-  cdkVersion: '2.87.0',
+  cdkVersion: '2.151.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-example-app',
   projenrcTs: true,
+  prettier: true,
+  prettierOptions: {
+    settings: {
+      singleQuote: true,
+    },
+  },
+  eslintOptions: {
+    dirs: [],
+    prettier: true,
+  },
+  packageManager: NodePackageManager.NPM,
   deps: [
     'express',
     '@cdklabs/cdk-validator-cfnguard',
     'hall-constructs',
     `@aws-cdk/integ-tests-alpha@${alphaVersion}`,
     `@aws-cdk/aws-redshift-alpha@${alphaVersion}`,
-    `@aws-cdk/aws-synthetics-alpha@${alphaVersion}`,
     `@aws-cdk/integ-runner@${alphaVersion}`,
-    `@aws-cdk/aws-apigatewayv2-alpha@${alphaVersion}`,
-    `@aws-cdk/aws-apigatewayv2-integrations-alpha@${alphaVersion}`,
     'cdk-monitoring-constructs',
     'node-fetch',
   ],
@@ -56,6 +64,10 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   // devDeps: [],             /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */
 });
+const eslint = project.tryFindObjectFile('.eslintrc.json');
+// I don't want to show linting errors for things that get auto fixed
+eslint?.addOverride('extends', ['plugin:import/typescript']);
+
 project.tryFindObjectFile('package.json')?.addDeletionOverride('jest.globals');
 project.removeTask('deploy');
 project.addTask('deploy', {
@@ -108,4 +120,3 @@ new LambdaAutoDiscover(project, autoDiscoverOptions);
 new EcsAutoDiscover(project, autoDiscoverOptions);
 
 project.synth();
-

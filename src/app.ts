@@ -63,8 +63,7 @@ export class AppStage extends Stage {
     // Contains resources for my application. This includes the VPC, but could also
     // not include the VPC
     const appStack = new Stack(this, 'AppStack');
-    const network = new Network(appStack, 'Network', { });
-
+    const network = new Network(appStack, 'Network', {});
 
     // ------------Create Rest API-------------------
     const api = new Api(appStack, 'Api', { monitor, vpc: network.cluster.vpc });
@@ -89,9 +88,9 @@ export class AppStage extends Stage {
     this.monitoringStack = monitoringStack;
 
     this.routes = {
-      ['GET /posts']: ((path: string) => {
+      ['GET /posts']: (path: string) => {
         return `${api.url!}/post/${path}`;
-      }),
+      },
       ['POST /posts']: `${api.url!}/post`,
     };
   }
