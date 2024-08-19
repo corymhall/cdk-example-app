@@ -5,6 +5,13 @@ const alphaVersion = '^2.151.0-alpha.0';
 const project = new awscdk.AwsCdkTypeScriptApp({
   cdkVersion: '2.151.0',
   defaultReleaseBranch: 'main',
+  release: false,
+  buildWorkflow: false,
+  depsUpgrade: false,
+  githubOptions: {
+    mergify: false,
+    pullRequestLint: false,
+  },
   name: 'cdk-example-app',
   projenrcTs: true,
   prettier: true,
